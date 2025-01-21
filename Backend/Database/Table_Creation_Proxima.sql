@@ -108,7 +108,7 @@ CREATE TABLE TaskAssignments (
     UserID INT FOREIGN KEY REFERENCES Users(UserID),
     RoleID INT FOREIGN KEY REFERENCES UserRoles(RoleID),
     AssignedAt DATETIME NOT NULL DEFAULT GETDATE()
-);
+);	
 
 -- Table: TaskAttachments
 CREATE TABLE TaskAttachments (
@@ -161,6 +161,56 @@ CREATE TABLE SprintTasks (
     SprintID INT FOREIGN KEY REFERENCES Sprints(SprintID),
     TaskID INT FOREIGN KEY REFERENCES Tasks(TaskID)
 );
+
+CREATE TABLE Permissions (
+    PermissionID INT PRIMARY KEY IDENTITY(1, 1),
+    PermissionName NVARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE RolePermissions (
+    RolePermissionID INT PRIMARY KEY IDENTITY(1, 1),
+    RoleID INT NOT NULL FOREIGN KEY REFERENCES UserRoles(RoleID),
+    PermissionID INT NOT NULL FOREIGN KEY REFERENCES Permissions(PermissionID)
+);
+
+INSERT INTO Permissions (PermissionName) VALUES 
+('AddProject'), 
+('UpdateProject'), 
+('DeleteProject'), 
+('AssignProject'),
+('AddTask'),
+('UpdateTask'),
+('AssignTask'),
+('DeleteTask'),
+('ViewProject');
+
+DELETE FROM Permissions
+
+select * from Permissions
+
+INSERT INTO RolePermissions (RoleID, PermissionID)
+SELECT 1, PermissionID FROM Permissions;
+DELETE FROM RolePermissions
+where RoleID = 2
+select * from RolePermissions
+
+INSERT INTO RolePermissions(RoleID, PermissionID)
+VALUES
+(2, 8), -- UpdateProject
+(2,11), --AddTask
+(2,10), --AssignProject
+(2,12), --UpdateTask
+(2,14), --DeleteTask
+(2, 13), -- AssignTask
+(2,15); --ViewProjects
+
+INSERT INTO RolePermissions (RoleID, PermissionID)
+VALUES
+(3, 15);
+
+INSERT INTO RolePermissions (RoleID, PermissionID)
+VALUES
+(4, 15); -- ViewProject
 
 
 ------------------------------------------Record Insertion---------------------------------------------
