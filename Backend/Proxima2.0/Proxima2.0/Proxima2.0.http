@@ -1,6 +1,0 @@
-@Proxima2._0_HostAddress = http://localhost:5207
-
-GET {{Proxima2._0_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
