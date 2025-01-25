@@ -9,3 +9,4 @@ BEGIN
 END;
 
 [PR_TeamMembers_GetTeamMembersByTeamID] 1
+select * from Teams

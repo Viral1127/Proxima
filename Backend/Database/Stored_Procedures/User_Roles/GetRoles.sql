@@ -9,7 +9,7 @@ BEGIN
 END
 
 exec [PR_UserRoles_GetAll]
-
+	
 ------------------------------Get UserRole by ID-----------------------
 
 CREATE PROCEDURE [Dbo].[PR_UserRoles_GetByID]

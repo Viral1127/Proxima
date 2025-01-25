@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[PR_Projects.SelectByPK]
+CREATE PROCEDURE [dbo].[PR_Projects_SelectByPK]
     @ProjectID INT
 AS
 BEGIN
@@ -6,4 +6,6 @@ BEGIN
     WHERE [ProjectID] = @ProjectID;
 END;
 
-exec [PR_Projects.SelectByPK] 1
+exec [PR_Projects_SelectByPK] 1
+
+drop procedure [PR_Projects.SelectByPK]

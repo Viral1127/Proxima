@@ -1,0 +1,164 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\data\\milestonesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\data\\milestonesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\data\\teamsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\data\\teamsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\models\\milestonesmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\models\\milestonesmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 285,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MilestonesModel.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Models\\MilestonesModel.cs",
+              "RelativeDocumentMoniker": "Proxima\\Models\\MilestonesModel.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Models\\MilestonesModel.cs",
+              "RelativeToolTip": "Proxima\\Models\\MilestonesModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T18:09:02.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MilestonesRepository.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Data\\MilestonesRepository.cs",
+              "RelativeDocumentMoniker": "Proxima\\Data\\MilestonesRepository.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Data\\MilestonesRepository.cs",
+              "RelativeToolTip": "Proxima\\Data\\MilestonesRepository.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAQwKAAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T18:08:45.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MilestonesController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\MilestonesController.cs",
+              "RelativeDocumentMoniker": "Proxima\\Controllers\\MilestonesController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\MilestonesController.cs*",
+              "RelativeToolTip": "Proxima\\Controllers\\MilestonesController.cs*",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwGkAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T18:08:30.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TeamsController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\TeamsController.cs",
+              "RelativeDocumentMoniker": "Proxima\\Controllers\\TeamsController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\TeamsController.cs",
+              "RelativeToolTip": "Proxima\\Controllers\\TeamsController.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAswFkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:36:39.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TeamsRepository.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Data\\TeamsRepository.cs",
+              "RelativeDocumentMoniker": "Proxima\\Data\\TeamsRepository.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Data\\TeamsRepository.cs",
+              "RelativeToolTip": "Proxima\\Data\\TeamsRepository.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAswI8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:36:44.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Program.cs",
+              "RelativeDocumentMoniker": "Proxima\\Program.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Program.cs",
+              "RelativeToolTip": "Proxima\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:48:31.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "Proxima\\Controllers\\ProjectController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "Proxima\\Controllers\\ProjectController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAcwGQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:32:28.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProjectModel.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Models\\ProjectModel.cs",
+              "RelativeDocumentMoniker": "Proxima\\Models\\ProjectModel.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Models\\ProjectModel.cs",
+              "RelativeToolTip": "Proxima\\Models\\ProjectModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T14:32:55.469Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

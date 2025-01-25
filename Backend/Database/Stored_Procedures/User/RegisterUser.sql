@@ -43,5 +43,5 @@ EXEC RegisterUser
     @RoleName = 'Project Manager', 
     @Status = 1;
 
-	SELECT * FROM Users
+		SELECT * FROM Users
 

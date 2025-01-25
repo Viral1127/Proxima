@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Stored_Procedures"
+    "\\Stored_Procedures",
+    "\\Stored_Procedures\\Milestones"
   ],
-  "SelectedNode": "\\Stored_Procedures\\Permissions",
+  "SelectedNode": "\\Stored_Procedures\\Milestones\\DeleteMilestone.sql",
   "PreviewInSolutionExplorer": false
 }

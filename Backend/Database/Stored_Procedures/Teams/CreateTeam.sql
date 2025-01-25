@@ -13,3 +13,4 @@ EXEC [PR_Teams_CreateTeam]
     @TeamName = 'Development Team', 
     @Description = 'Handles all development tasks';
 
+	select * from Teams

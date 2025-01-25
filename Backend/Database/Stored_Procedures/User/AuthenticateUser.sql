@@ -24,11 +24,6 @@ BEGIN
             THROW 50001, 'Invalid email or password.', 1;
         END
 
-        IF @Status = 0
-        BEGIN
-            THROW 50002, 'Your account is inactive. Please contact admin.', 1;
-        END
-
         SELECT 
             @UserID AS UserID,
             @Name AS Name,
@@ -43,7 +38,7 @@ BEGIN
     END CATCH
 END;
 
-EXEC AuthenticateUser 'bhoran@example.com' ,'12'
+EXEC AuthenticateUser 'john.smith@example.com' ,'encryptedPassword1'
 
 SELECT * FROM Users
 

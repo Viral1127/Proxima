@@ -10,6 +10,6 @@ BEGIN
     PRINT 'User deactivated successfully.';
 END;
 
-[PR_User_DeleteUser] 1
+[PR_User_DeleteUser] 5
 
 select * from Users
