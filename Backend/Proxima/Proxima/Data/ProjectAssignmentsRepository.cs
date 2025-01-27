@@ -31,6 +31,7 @@ namespace Proxima.Data
             }
         }
         #endregion
+
         #region GetUserByProjectID
         public List<ProjectAssignmentsModel> GetUserByProjectID(int ProjectID)
         {
@@ -61,6 +62,7 @@ namespace Proxima.Data
             return users;
         }
         #endregion
+
         #region RemoveUserFromProject
 
         #endregion

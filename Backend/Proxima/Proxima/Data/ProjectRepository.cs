@@ -177,6 +177,5 @@ namespace Proxima.Data
         }
 
         #endregion
-
     }
 }

@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "Proxima.Controllers.AuthController",
+    "Method": "AuthenticateUser",
+    "RelativePath": "api/Auth/AuthenticateUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "Proxima.Models.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.AuthController",
+    "Method": "RegisterUser",
+    "RelativePath": "api/Auth/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Proxima.Models.UserModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proxima.Controllers.MilestonesController",
     "Method": "GetMilestones",
     "RelativePath": "api/Milestones",
@@ -280,6 +312,228 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "GetTasks",
+    "RelativePath": "api/Task",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "CreateTasks",
+    "RelativePath": "api/Task",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tasks",
+        "Type": "Proxima.Models.TaskModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "GetTaskByID",
+    "RelativePath": "api/Task/{taskID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "UpdateTask",
+    "RelativePath": "api/Task/{taskID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tasks",
+        "Type": "Proxima.Models.TaskModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "DeleteTask",
+    "RelativePath": "api/Task/{taskID}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "GettasksByProjectID",
+    "RelativePath": "api/Task/TasksByProjectID/{projectID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
+    "Method": "AssignTaskToUser",
+    "RelativePath": "api/TaskAssignment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskAssignments",
+        "Type": "Proxima.Models.TaskAssignmentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
+    "Method": "DeleteTaskAssignment",
+    "RelativePath": "api/TaskAssignment/{assignmentID}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignmentID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
+    "Method": "GetTaskAssignmentsByTaskID",
+    "RelativePath": "api/TaskAssignment/{taskID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
+    "Method": "GetTaskAssignmentsByUserID",
+    "RelativePath": "api/TaskAssignment/TaskAssignmentByUserID/{userID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskTypeController",
+    "Method": "GetMilestones",
+    "RelativePath": "api/TaskType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskTypeController",
+    "Method": "AddTaskTypes",
+    "RelativePath": "api/TaskType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskType",
+        "Type": "Proxima.Models.TaskTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskTypeController",
+    "Method": "UpdateMilestone",
+    "RelativePath": "api/TaskType/{taskTypeID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskTypeID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskType",
+        "Type": "Proxima.Models.TaskTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskTypeController",
+    "Method": "DeleteMilestone",
+    "RelativePath": "api/TaskType/{taskTypeID}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskTypeID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proxima.Controllers.TeamsController",
     "Method": "GetTeamByUserID",
     "RelativePath": "api/Teams/Team/{userID}",
@@ -434,22 +688,6 @@
   },
   {
     "ContainingType": "Proxima.Controllers.UserController",
-    "Method": "AuthenticateUser",
-    "RelativePath": "api/User/AuthenticateUser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "login",
-        "Type": "Proxima.Models.LoginModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Proxima.Controllers.UserController",
     "Method": "DeactivateUser",
     "RelativePath": "api/User/DeactivateUser/{userID}",
     "HttpMethod": "DELETE",
@@ -525,22 +763,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "Proxima.Controllers.UserController",
-    "Method": "RegisterUser",
-    "RelativePath": "api/User/Register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "Proxima.Models.UserModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "Proxima.Controllers.UserController",

@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int RoleID { get; set; }
+        public int? RoleID { get; set; }
         public string RoleName { get; set; }
         public Boolean Status {  get; set; }
         public DateTime CreatedAt { get; set; }

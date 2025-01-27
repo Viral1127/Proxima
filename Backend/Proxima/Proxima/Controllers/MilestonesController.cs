@@ -29,7 +29,7 @@ namespace Proxima.Controllers
         [HttpGet("{milestoneID}")]
         public IActionResult GetMilestoneByID(int milestoneID)
         {
-            var milestone = _milestonesRepository.GetTeamByID(milestoneID);
+            var milestone = _milestonesRepository.GetMilestoneByID(milestoneID);
             if (milestone == null)
             {
                 NotFound();

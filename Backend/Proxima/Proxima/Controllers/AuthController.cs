@@ -1,0 +1,76 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Proxima.Data;
+using Proxima.Models;
+
+namespace Proxima.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly AuthRepository _authRepository;
+        public AuthController(AuthRepository authRepository)
+        {
+            _authRepository = authRepository;
+        }
+        #region Register User
+        [HttpPost("Register")]
+        public IActionResult RegisterUser(UserModel user)
+        {
+            try
+            {
+                if (user == null)
+                {
+                    return BadRequest();
+                }
+
+                bool isInserted = _authRepository.Register(user);
+                if (isInserted)
+                {
+                    return Ok(new { Message = "User registered successfully" });
+                }
+                return StatusCode(500, "An unexpected error occurred.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = $"An error occurred: {ex.Message}" });
+            }
+
+
+        }
+        #endregion
+
+        #region Authenticate User
+        [HttpPost("AuthenticateUser")]
+        public IActionResult AuthenticateUser([FromBody] LoginModel login)
+        {
+            if (login == null || string.IsNullOrWhiteSpace(login.Email) || string.IsNullOrWhiteSpace(login.Password))
+            {
+                return BadRequest(new { Message = "Invalid Data Provided" });
+            }
+
+            try
+            {
+                var user = _authRepository.AuthenticateUser(login.Email, login.Password);
+
+                if (user == null)
+                {
+                    return Unauthorized(new { Message = "Invalide Email or Password" });
+                }
+
+                if (user.Status == false)
+                {
+                    return Unauthorized(new { Message = "Your account is inactive. Please contact admin." });
+                }
+
+                return Ok(new { Message = "Login Successfull", userID = user.UserID, Name = user.Name, Email = user.Email, RoleName = user.RoleName, Status = user.Status });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = $"An error occured:{ex.Message}" });
+            }
+        }
+        #endregion
+    }
+}

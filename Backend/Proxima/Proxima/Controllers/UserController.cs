@@ -13,6 +13,8 @@ namespace Proxima.Controllers
         public UserController(UserRepository userRepository) {
             _userRepository = userRepository;
         }
+
+        #region GetAllUsers
         [HttpGet("GetAllUsers")]
         public ActionResult<IEnumerable<UserModel>> GetAllUsers()
         {
@@ -21,7 +23,9 @@ namespace Proxima.Controllers
             return Ok(users);
 
         }
+        #endregion
 
+        #region GetUserByUserID
         [HttpGet("GetUserByID/{userID}")]
         public ActionResult<UserModel> GetUserById(int userID)
         {
@@ -34,7 +38,9 @@ namespace Proxima.Controllers
 
             return Ok(user);
         }
+        #endregion
 
+        #region UserByRole
         [HttpGet("UserByRole/{roleID}")]
         public ActionResult<UserModel> GetUserByRole(int roleID)
         {
@@ -47,60 +53,9 @@ namespace Proxima.Controllers
 
             return Ok(user);
         }
+        #endregion
 
-        [HttpPost("Register")]
-        public IActionResult RegisterUser(UserModel user)
-        {
-            try
-            {
-                if (user == null)
-                {
-                    return BadRequest();
-                }
-
-                bool isInserted = _userRepository.Register(user);
-                if (isInserted)
-                {
-                    return Ok(new { Message = "User registered successfully" });
-                }
-                return StatusCode(500, "An unexpected error occurred.");
-            }
-            catch (Exception ex) {
-                return StatusCode(500, new { Message = $"An error occurred: {ex.Message}" });
-            }
-            
-            
-        }
-
-        [HttpPost("AuthenticateUser")]
-        public IActionResult AuthenticateUser([FromBody] LoginModel login)
-        {
-            if (login == null || string.IsNullOrWhiteSpace(login.Email) || string.IsNullOrWhiteSpace(login.Password))
-            {
-                return BadRequest(new { Message = "Invalid Data Provided" });
-            }
-
-            try
-            {
-                var user = _userRepository.AuthenticateUser(login.Email, login.Password);
-
-                if (user == null)
-                {
-                    return Unauthorized(new { Message = "Invalide Email or Password" });
-                }
-
-                if (user.Status == false)
-                {
-                    return Unauthorized(new { Message = "Your account is inactive. Please contact admin." });
-                }
-
-                return Ok(new { Message = "Login Successfull", userID = user.UserID, Name = user.Name, Email = user.Email, RoleName = user.RoleName, Status = user.Status });
-            }
-            catch (Exception ex) {
-                return StatusCode(500, new { Message = $"An error occured:{ex.Message}" });
-            }
-        }
-
+        #region UpdateUser
         [HttpPut("/UpdateUser{userID}")]
         public IActionResult UpdateUser(int userID, UserModel user)
         {
@@ -120,7 +75,9 @@ namespace Proxima.Controllers
                 return NotFound(new { Message = "User not found or update failed." });
             }
         }
+        #endregion
 
+        #region DeactivateUser
         [HttpDelete("DeactivateUser/{userID}")]
         public IActionResult DeactivateUser(int userID) { 
             var isDeactivated = _userRepository.DeactivateUser(userID);
@@ -132,7 +89,9 @@ namespace Proxima.Controllers
                 return NotFound(new { Message = "User not found or deactivation failed." });
             }
         }
+        #endregion
 
+        #region DeleteUser
         [HttpDelete("DeleteUser/{userID}")]
         public IActionResult DeleteUser(int userID)
         {
@@ -146,7 +105,7 @@ namespace Proxima.Controllers
                 return NotFound(new { Message = "User not found or delete failed." });
             }
         }
-
+        #endregion
 
     }
 }

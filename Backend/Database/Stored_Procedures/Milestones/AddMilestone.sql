@@ -21,4 +21,3 @@ EXEC [PR_Milestone_AddMilestone]
 
 	select * from Milestones
 	select * from Projects
-

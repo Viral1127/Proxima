@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using Proxima.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,15 @@ builder.Services.AddScoped<TeamsRepository>();
 builder.Services.AddScoped<ProjectRepository>();
 builder.Services.AddScoped<ProjectAssignmentsRepository>();
 builder.Services.AddScoped<MilestonesRepository>();
+builder.Services.AddScoped<TaskRepository>();
+builder.Services.AddScoped<TaskAssignmentRepository>();
+builder.Services.AddScoped<TaskTypeRepository>();
+builder.Services.AddScoped<AuthRepository>();
+
+builder.Services.AddControllers()
+    .AddFluentValidation(fv =>
+        fv.RegisterValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() }));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

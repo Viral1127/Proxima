@@ -23,4 +23,5 @@ END;
 EXEC [PR_ProjectAssignments_AssignUserToProject] @ProjectID = 1, @UserID = 2, @RoleID = 3;
 
 select * from ProjectAssignments
+select * from Projects
 

@@ -16,13 +16,16 @@ namespace Proxima.Controllers
             _rolesRepository = rolesRepository;
         }
 
+        #region GetAllRoles
         [HttpGet("GetAllRoles")]
         public IActionResult GetRoles()
         {
             var roles = _rolesRepository.GetRoles();
             return Ok(roles);
         }
+        #endregion
 
+        #region GetRoleByID
         [HttpGet("GetRoleByID/{roleID}")]
         public IActionResult GetRoleByID(int roleID)
         {
@@ -33,7 +36,9 @@ namespace Proxima.Controllers
             }
             return Ok(role);
         }
+        #endregion
 
+        #region AddRole
         [HttpPost("CreateRole")]
         public IActionResult CreateRoles([FromBody] RolesModel roles)
         {
@@ -49,9 +54,12 @@ namespace Proxima.Controllers
             }
             return StatusCode(500, "An error occured while creating role or role already exist");
         }
+        #endregion
 
+        #region RemoveRole
         [HttpDelete("RemoveRole{roleID}")]
-        public IActionResult DeleteRoles(int roleID) {
+        public IActionResult DeleteRoles(int roleID) 
+        {
             var isDeleted = _rolesRepository.DeleteRole(roleID);
             if (isDeleted) { 
                 return Ok(new {Message = "Role Deleted successfully"});
@@ -62,7 +70,6 @@ namespace Proxima.Controllers
             }
             return NoContent();
         }
-
-        
+        #endregion
     }
 }

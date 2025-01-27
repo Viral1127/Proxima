@@ -12,6 +12,7 @@ namespace Proxima.Data
             _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
+        #region GetRoles
         public List<RolesModel> GetRoles()
         {
             var roles = new List<RolesModel>();
@@ -38,7 +39,9 @@ namespace Proxima.Data
             }
             return roles;
         }
+        #endregion
 
+        #region GetRoleByID
         public RolesModel GetRoleByID(int RoleID)
         {
             RolesModel roles = null;
@@ -64,7 +67,9 @@ namespace Proxima.Data
             }
             return roles;
         }
+        #endregion
 
+        #region CreateRole
         public bool CreateRole(RolesModel roles)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -80,6 +85,9 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
+
+        #region DeleteRole
 
         public bool DeleteRole(int RoleID)
         {
@@ -95,5 +103,6 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
     }
 }

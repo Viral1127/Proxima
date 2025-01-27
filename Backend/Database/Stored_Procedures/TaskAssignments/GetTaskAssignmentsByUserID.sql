@@ -19,3 +19,4 @@ BEGIN
 END;
 
 [PR_TaskAssignments_GetTaskAssignmentsByUserID] 1
+select * from TaskAssignments

@@ -46,7 +46,7 @@ namespace Proxima.Data
         #endregion
 
         #region GetMilestoneByID
-        public MilestonesModel GetTeamByID(int MilestoneID)
+        public MilestonesModel GetMilestoneByID(int MilestoneID)
         {
             MilestonesModel milestones = null;
 

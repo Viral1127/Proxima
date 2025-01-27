@@ -14,7 +14,9 @@ namespace Proxima.Data
             _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
-        public List<UserModel> GetUsers() { 
+        #region GetUsers
+        public List<UserModel> GetUsers()
+        {
             var users = new List<UserModel>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -24,9 +26,11 @@ namespace Proxima.Data
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "PR_Users_GetAllUsers";
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read()) {
+                while (reader.Read())
+                {
                     users.Add(new UserModel
                     {
+                        UserID = Convert.ToInt32(reader["UserID"]),
                         Name = reader["Name"].ToString(),
                         Email = reader["Email"].ToString(),
                         Password = reader["Password"].ToString(),
@@ -41,7 +45,9 @@ namespace Proxima.Data
 
             }
         }
+        #endregion
 
+        #region GetUserByID
         public UserModel GetUserByID(int UserID)
         {
             UserModel user = null;
@@ -59,6 +65,7 @@ namespace Proxima.Data
                 {
                     user = new UserModel
                     {
+                        UserID = Convert.ToInt32(reader["UserID"]),
                         Name = reader["Name"].ToString(),
                         Email = reader["Email"].ToString(),
                         RoleID = Convert.ToInt32(reader["RoleID"]),
@@ -72,6 +79,9 @@ namespace Proxima.Data
 
             return user;
         }
+        #endregion
+
+        #region GetUserByRole
 
         public List<UserModel> GetUserByRole(int RoleID)
         {
@@ -99,25 +109,9 @@ namespace Proxima.Data
 
             return users;
         }
-        public bool Register(UserModel user)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "RegisterUser";
-                cmd.Parameters.AddWithValue("@Name", user.Name);
-                cmd.Parameters.AddWithValue("@Email",user.Email);
-                cmd.Parameters.AddWithValue("@Password",user.Password);
-                cmd.Parameters.AddWithValue("@RoleName",user.RoleName);
-                cmd.Parameters.AddWithValue("@Status", user.Status);
+        #endregion
 
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                return rowsAffected > 0;
-            }
-        }
+        #region UpdateUser
 
         public bool UpdateUser(UserModel user)
         {
@@ -140,15 +134,20 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
-        public bool DeactivateUser(int UserID) {
-            using (SqlConnection connection = new SqlConnection(_connectionString)) { 
-                connection.Open ();
+        #region DeactivateUser
+
+        public bool DeactivateUser(int UserID)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "PR_User_DeleteUser";
 
-                cmd.Parameters.AddWithValue ("@UserID", UserID);
+                cmd.Parameters.AddWithValue("@UserID", UserID);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected > 0;
@@ -156,56 +155,24 @@ namespace Proxima.Data
 
             }
         }
+        #endregion
 
-        public bool DeleteUser(int UserID) { 
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+        #region DeleteUser
+
+        public bool DeleteUser(int UserID)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Open ();
+                connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandType= CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "PR_Users_DeleteUser";
-                cmd.Parameters.AddWithValue("@UserID",UserID);
+                cmd.Parameters.AddWithValue("@UserID", UserID);
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
-        public UserModel AuthenticateUser(string Email, string Password) {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "AuthenticateUser";
-
-                cmd.Parameters.AddWithValue("@Email", Email);
-                cmd.Parameters.AddWithValue("@Password", Password);
-
-                try
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        return new UserModel
-                        {
-                            UserID = reader.GetInt32(reader.GetOrdinal("UserID")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            RoleName = reader.GetString(reader.GetOrdinal("Role")),
-                            Status = reader.GetBoolean(reader.GetOrdinal("Status"))
-                        };
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 50000 || ex.Number == 50001 || ex.Number == 50002)
-                    {
-                        throw new Exception(ex.Message);
-                    }
-                    throw;
-                }
-            }
-            return null;
-        }
-    }   
+    }
 }

@@ -13,6 +13,7 @@ namespace Proxima.Data
             _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
+        #region GetTeams
         public List<TeamsModel> GetTeams()
         {
             var teams = new List<TeamsModel>();
@@ -41,7 +42,9 @@ namespace Proxima.Data
             }
             return teams;
         }
+        #endregion
 
+        #region GetTeamByID
         public TeamsModel GetTeamByID(int TeamID)
         {
             TeamsModel teams = null;
@@ -69,7 +72,9 @@ namespace Proxima.Data
             }
             return teams;
         }
+        #endregion
 
+        #region GetTeamByUserID
         public TeamsModel GetTeamByUserID(int UserID)
         {
             TeamsModel teams = null;
@@ -94,7 +99,9 @@ namespace Proxima.Data
             }
             return teams;
         }
+        #endregion
 
+        #region Create Team
         public bool CreateTeam(TeamsModel teams)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -110,7 +117,9 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
+        #region Update Team
         public bool UpdateTeam(TeamsModel teams)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -127,7 +136,9 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
+        #region Delete Team
         public bool DeleteTeam(int TeamID)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -142,7 +153,9 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
+        #region Add Team Member
         public bool AddTeamMember(TeamMemberModel teamMember)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -158,7 +171,9 @@ namespace Proxima.Data
                 return rowsAffected > 0;
             }
         }
+        #endregion
 
+        #region GetTeamMember By TeamID
         public List<TeamMemberModel> GetTeamMembersByTeamID(int TeamID)
         {
             var teamMembers = new List<TeamMemberModel>();
@@ -185,7 +200,9 @@ namespace Proxima.Data
 
             return teamMembers;
         }
+        #endregion
 
+        #region Remove TeamMember
         public bool RemoveTeamMember(int TeamMemberID)
         {
             using(SqlConnection connection = new SqlConnection(_connectionString))
@@ -202,5 +219,6 @@ namespace Proxima.Data
                 
             }
         }
+        #endregion
     }
 }

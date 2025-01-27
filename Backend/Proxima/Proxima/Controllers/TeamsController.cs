@@ -14,14 +14,16 @@ namespace Proxima.Controllers
         public TeamsController(TeamsRepository teamsRepository) { 
             _teamsRepository = teamsRepository;
         }
-
+        #region Teams
         [HttpGet("Teams")]
         public IActionResult GetTeams()
         {
             var teams = _teamsRepository.GetTeams();
             return Ok(teams);
         }
+        #endregion
 
+        #region TeamByID
         [HttpGet("Teams/{teamID}")]
         public IActionResult GetTeamByID(int teamID)
         { 
@@ -31,6 +33,9 @@ namespace Proxima.Controllers
             }
             return Ok(teams);
         }
+        #endregion
+
+        #region TeamsByUserID
         [HttpGet("Team/{userID}")]
         
         public IActionResult GetTeamByUserID(int userID)
@@ -42,7 +47,9 @@ namespace Proxima.Controllers
             }
             return Ok(teams);
         }
+        #endregion
 
+        #region Create Team
         [HttpPost("Teams")]
         public IActionResult CreateTeam([FromBody] TeamsModel teams)
         {
@@ -58,7 +65,9 @@ namespace Proxima.Controllers
             }
             return StatusCode(500, "An error occured while creating Team");
         }
+        #endregion
 
+        #region Update Team
         [HttpPut("Teams/{teamID}")]
         public IActionResult UpdateTeam(int teamID, [FromBody] TeamsModel teams) { 
             if(teams == null || teamID != teams.TeamID)
@@ -74,7 +83,9 @@ namespace Proxima.Controllers
                 return StatusCode(500, "An error occured while updating Team");
             }
         }
+        #endregion
 
+        #region Delete Team
         [HttpDelete("Teams/{teamID}")]
 
         public IActionResult DeleteTeam(int teamID) { 
@@ -88,7 +99,9 @@ namespace Proxima.Controllers
             }
             return NoContent();
         }
+        #endregion
 
+        #region Add TeamMember
         [HttpPost("Teams/AddTeamMember")]
         public IActionResult AddTeamMember([FromBody] TeamMemberModel teamMember)
         {
@@ -104,7 +117,9 @@ namespace Proxima.Controllers
             }
             return StatusCode(500, "An error occured while adding Team member");
         }
+        #endregion
 
+        #region TeamMembers By TeamID
         [HttpGet("TeamMembers/{teamID}")]
         public ActionResult<UserModel> GetUserByRole(int teamID)
         {
@@ -117,7 +132,9 @@ namespace Proxima.Controllers
 
             return Ok(teamMembers);
         }
+        #endregion
 
+        #region Remove TeamMember From Team
         [HttpDelete("TeamMembers/{teamMemberID}")]
 
         public IActionResult RemoveTeamMember(int teamMemberID) { 
@@ -132,5 +149,6 @@ namespace Proxima.Controllers
             }
             return NoContent();
         }
+        #endregion
     }
 }

@@ -1,7 +1,8 @@
 ALTER PROCEDURE [dbo].[PR_Users_GetAllUsers]
 AS
 BEGIN
-	SELECT	[Name],
+	SELECT	[UserID],
+			[Name],
 			[Email],
 			[Password],
 			UserRoles.RoleID,
