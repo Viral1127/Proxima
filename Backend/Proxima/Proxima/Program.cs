@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Proxima.Data;
 using System.Reflection;
 
@@ -19,13 +20,30 @@ builder.Services.AddScoped<MilestonesRepository>();
 builder.Services.AddScoped<TaskRepository>();
 builder.Services.AddScoped<TaskAssignmentRepository>();
 builder.Services.AddScoped<TaskTypeRepository>();
-builder.Services.AddScoped<AuthRepository>();
+
 
 builder.Services.AddControllers()
     .AddFluentValidation(fv =>
         fv.RegisterValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() }));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "UserAuthCookie";
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+    });
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<AuthRepository>();
+
 var app = builder.Build();
+
+
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

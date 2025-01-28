@@ -67,6 +67,18 @@
         }
       }
     },
+    "/api/Auth/GetUserInfo": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Milestones": {
       "get": {
         "tags": [

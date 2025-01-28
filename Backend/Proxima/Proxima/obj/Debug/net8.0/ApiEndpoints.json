@@ -17,6 +17,16 @@
   },
   {
     "ContainingType": "Proxima.Controllers.AuthController",
+    "Method": "GetUserInfo",
+    "RelativePath": "api/Auth/GetUserInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.AuthController",
     "Method": "RegisterUser",
     "RelativePath": "api/Auth/Register",
     "HttpMethod": "POST",
@@ -191,7 +201,7 @@
   },
   {
     "ContainingType": "Proxima.Controllers.ProjectController",
-    "Method": "DeleteTeam",
+    "Method": "ArchiveProject",
     "RelativePath": "api/Project/ArchiveProject/{projectID}",
     "HttpMethod": "DELETE",
     "IsController": true,

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proxima.Data;
 using Proxima.Models;
@@ -21,6 +22,10 @@ namespace Proxima.Controllers
         [HttpGet]
         public IActionResult GetAllProjects()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can see all projects");
+            }
             var projects = _projectRepository.GetProjects();
             return Ok(projects);
 
@@ -33,10 +38,14 @@ namespace Proxima.Controllers
         [HttpGet("{projectID}")]
         public IActionResult GetProjectByID(int projectID)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager") || User.IsInRole("Team Member")))
+            {
+                return StatusCode(500, "Only Admin, Project Manager, and Team Member can see project details.");
+            }
             var project = _projectRepository.GetProjectByID(projectID);
             if (project == null)
             {
-                return NotFound(new { Message = "given ProjectID not found" });
+                return NotFound(new { Message = "Given ProjectID not found" });
             }
             return Ok(project);
         }
@@ -56,14 +65,27 @@ namespace Proxima.Controllers
         #endregion
 
         #region CreateProject
-
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CreateProject(ProjectModel project)
         {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Unauthorized(new { Message = "Please log in first to create a project." });
+            }
+
+            if (!User.IsInRole("Admin"))
+            {
+                //var response = new { Message = "You have no access to perform this action." };
+                return StatusCode(500 , "You have no access to Create project");
+            }
+
             if (project == null)
             {
                 BadRequest();
             }
+
             bool isInserted = _projectRepository.CreateProject(project);
             if (isInserted)
             {
@@ -80,6 +102,9 @@ namespace Proxima.Controllers
 
         public IActionResult UpdateProject(int projectID, [FromBody] ProjectModel project)
         {
+            if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager"))){
+                return StatusCode(500, "Only Admin, Project Manager can Update project details.");
+            }
             if (project == null || projectID != project.ProjectID)
             {
                 return BadRequest();
@@ -100,8 +125,12 @@ namespace Proxima.Controllers
         #region ArchiveProject
         [HttpDelete("ArchiveProject/{projectID}")]
 
-        public IActionResult DeleteTeam(int projectID)
+        public IActionResult ArchiveProject(int projectID)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "Only Admin, Project Manager can Update project details.");
+            }
             var isArchived = _projectRepository.ArchiveProject(projectID);
             if (isArchived)
             {

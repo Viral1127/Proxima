@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proxima.Data;
 using Proxima.Models;
@@ -43,7 +46,7 @@ namespace Proxima.Controllers
 
         #region Authenticate User
         [HttpPost("AuthenticateUser")]
-        public IActionResult AuthenticateUser([FromBody] LoginModel login)
+        public async Task<IActionResult> AuthenticateUser([FromBody] LoginModel login)
         {
             if (login == null || string.IsNullOrWhiteSpace(login.Email) || string.IsNullOrWhiteSpace(login.Password))
             {
@@ -64,7 +67,28 @@ namespace Proxima.Controllers
                     return Unauthorized(new { Message = "Your account is inactive. Please contact admin." });
                 }
 
-                return Ok(new { Message = "Login Successfull", userID = user.UserID, Name = user.Name, Email = user.Email, RoleName = user.RoleName, Status = user.Status });
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.RoleName)
+                };
+
+                var identity = new ClaimsIdentity(claims , CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                return Ok(new 
+                { 
+                    Message = "Login Successfull",
+                    userID = user.UserID,
+                    Name = user.Name,
+                    Email = user.Email,
+                    RoleName = user.RoleName,
+                    Status = user.Status 
+                });
             }
             catch (Exception ex)
             {
@@ -72,5 +96,33 @@ namespace Proxima.Controllers
             }
         }
         #endregion
+
+        #region Get Loggedin UserInfo
+        [HttpGet("GetUserInfo")]
+        public IActionResult GetUserInfo()
+        {
+            try
+            { 
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+                if (userEmail == null || userRole == null)
+                {
+                    return Unauthorized(new { Message = "User is not authenticated" });
+                }
+
+                return Ok(new
+                {
+                    Email = userEmail,
+                    Role = userRole
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = $"An error occurred: {ex.Message}" });
+            }
+        }
+        #endregion
+
     }
 }
