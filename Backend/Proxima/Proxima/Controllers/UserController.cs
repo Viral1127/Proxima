@@ -18,7 +18,10 @@ namespace Proxima.Controllers
         [HttpGet("GetAllUsers")]
         public ActionResult<IEnumerable<UserModel>> GetAllUsers()
         {
-
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can view List of users");
+            }
             var users = _userRepository.GetUsers();
             return Ok(users);
 
@@ -44,6 +47,10 @@ namespace Proxima.Controllers
         [HttpGet("UserByRole/{roleID}")]
         public ActionResult<UserModel> GetUserByRole(int roleID)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can view users by it's roles");
+            }
             var user = _userRepository.GetUserByRole(roleID);
 
             if (user == null)
@@ -79,7 +86,11 @@ namespace Proxima.Controllers
 
         #region DeactivateUser
         [HttpDelete("DeactivateUser/{userID}")]
-        public IActionResult DeactivateUser(int userID) { 
+        public IActionResult DeactivateUser(int userID) {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can deactivate User");
+            }
             var isDeactivated = _userRepository.DeactivateUser(userID);
             if (isDeactivated) {
                 return Ok(new { Message = "User deactivated successfully." });
@@ -95,6 +106,10 @@ namespace Proxima.Controllers
         [HttpDelete("DeleteUser/{userID}")]
         public IActionResult DeleteUser(int userID)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can delete user");
+            }
             var isDeleted = _userRepository.DeleteUser(userID);
             if (isDeleted)
             {

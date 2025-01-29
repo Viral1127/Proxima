@@ -20,6 +20,10 @@ namespace Proxima.Controllers
         [HttpPost]
         public IActionResult AssignTaskToUser([FromBody] TaskAssignmentModel taskAssignments)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "Only Admin and Project Manager can assign task to user");
+            }
             if (taskAssignments == null)
             {
                 return BadRequest();
@@ -67,7 +71,11 @@ namespace Proxima.Controllers
         #region RemoveTaskFromUser
         [HttpDelete("{assignmentID}")]
         public IActionResult DeleteTaskAssignment(int assignmentID)
-        { 
+        {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to Remove task from user");
+            }
             var isDeleted = _taskAssignmentRepository.DeleteTaskAssignments(assignmentID);
             if (isDeleted)
             {

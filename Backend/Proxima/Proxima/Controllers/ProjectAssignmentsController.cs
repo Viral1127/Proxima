@@ -20,6 +20,11 @@ namespace Proxima.Controllers
         [HttpPost]
         public IActionResult AssignUserToProject([FromBody] ProjectAssignmentsModel projectAssignments)
         {
+            if (User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can assign project to user");
+                
+            }
             if (projectAssignments == null)
             {
                 return BadRequest();
@@ -39,6 +44,10 @@ namespace Proxima.Controllers
         [HttpGet("{projectID}")]
         public IActionResult GetUserByProjectID(int projectID)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "only Admin can see the list of users by ProjectID");
+            }
             var users = _projectAssignmentsRepository.GetUserByProjectID(projectID);
             if (users == null)
             {

@@ -38,10 +38,7 @@ namespace Proxima.Controllers
         [HttpGet("{projectID}")]
         public IActionResult GetProjectByID(int projectID)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager") || User.IsInRole("Team Member")))
-            {
-                return StatusCode(500, "Only Admin, Project Manager, and Team Member can see project details.");
-            }
+            
             var project = _projectRepository.GetProjectByID(projectID);
             if (project == null)
             {
@@ -127,9 +124,9 @@ namespace Proxima.Controllers
 
         public IActionResult ArchiveProject(int projectID)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            if (!(User.IsInRole("Admin")))
             {
-                return StatusCode(500, "Only Admin, Project Manager can Update project details.");
+                return StatusCode(500, "Only Admin can Delete Project");
             }
             var isArchived = _projectRepository.ArchiveProject(projectID);
             if (isArchived)

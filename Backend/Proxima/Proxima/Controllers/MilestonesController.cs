@@ -55,6 +55,10 @@ namespace Proxima.Controllers
         [HttpPost]
         public IActionResult CreateMilestones([FromBody] MilestonesModel milestones)
         {
+            if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to create project's milestone");
+            }
             if (milestones == null)
             {
                 return BadRequest();
@@ -74,6 +78,10 @@ namespace Proxima.Controllers
         [HttpPut("{milestoneID}")]
         public IActionResult UpdateMilestone(int milestoneID, [FromBody] MilestonesModel milestones)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to update project's milestone");
+            }
             if (milestones == null || milestoneID != milestones.MilestoneID)
             {
                 return BadRequest();
@@ -96,6 +104,10 @@ namespace Proxima.Controllers
 
         public IActionResult DeleteMilestone(int milestoneID)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to delete project's milestone");
+            }
             var isDeleted = _milestonesRepository.DeleteMilestone(milestoneID);
             if (isDeleted)
             {

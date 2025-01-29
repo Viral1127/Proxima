@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\milestonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +35,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Proxima\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\UserController.cs*",
+              "RelativeToolTip": "Proxima\\Controllers\\UserController.cs*",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwG4AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T17:35:19.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ProjectController.cs",
               "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
               "RelativeDocumentMoniker": "Proxima\\Controllers\\ProjectController.cs",
               "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
               "RelativeToolTip": "Proxima\\Controllers\\ProjectController.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAswH8AAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwHkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-28T14:01:09.767Z",
+              "WhenOpened": "2025-01-29T15:52:28.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MilestonesController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\MilestonesController.cs",
+              "RelativeDocumentMoniker": "Proxima\\Controllers\\MilestonesController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\MilestonesController.cs",
+              "RelativeToolTip": "Proxima\\Controllers\\MilestonesController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAswG0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T15:45:19.154Z",
               "EditorCaption": ""
             }
           ]

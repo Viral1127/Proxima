@@ -42,6 +42,10 @@ namespace Proxima.Controllers
         [HttpPost("CreateRole")]
         public IActionResult CreateRoles([FromBody] RolesModel roles)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can create Role");
+            }
             if (roles == null)
             {
                 return BadRequest();
@@ -60,6 +64,10 @@ namespace Proxima.Controllers
         [HttpDelete("RemoveRole{roleID}")]
         public IActionResult DeleteRoles(int roleID) 
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can Delete Role");
+            }
             var isDeleted = _rolesRepository.DeleteRole(roleID);
             if (isDeleted) { 
                 return Ok(new {Message = "Role Deleted successfully"});

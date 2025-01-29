@@ -29,6 +29,10 @@ namespace Proxima.Controllers
         [HttpPost]
         public IActionResult AddTaskTypes([FromBody] TaskTypeModel taskType)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to perform this action");
+            }
             if (taskType == null)
             {
                 return BadRequest();
@@ -48,6 +52,10 @@ namespace Proxima.Controllers
         [HttpPut("{taskTypeID}")]
         public IActionResult UpdateMilestone(int taskTypeID, [FromBody] TaskTypeModel taskType)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to perform this action");
+            }
             if (taskType == null || taskTypeID != taskType.TaskTypeID)
             {
                 return BadRequest();
@@ -70,6 +78,10 @@ namespace Proxima.Controllers
 
         public IActionResult DeleteMilestone(int taskTypeID)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have not access to perform this action");
+            }
             var isDeleted = _taskTypeRepository.DeleteTaskType(taskTypeID);
             if (isDeleted)
             {

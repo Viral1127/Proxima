@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\filters\\exceptrolesattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\filters\\exceptrolesattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|d:\\darshan university\\projects\\proxima\\backend\\proxima\\proxima\\filters\\exceptrolesfilter .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37519062-6EB3-47E9-B49E-19F1537971F9}|Proxima\\Proxima.csproj|solutionrelative:proxima\\filters\\exceptrolesfilter .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 285,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,15 +30,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProjectController.cs",
-              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
-              "RelativeDocumentMoniker": "Proxima\\Controllers\\ProjectController.cs",
-              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Controllers\\ProjectController.cs",
-              "RelativeToolTip": "Proxima\\Controllers\\ProjectController.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAswH8AAAA6AAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ExceptRolesFilter .cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Filters\\ExceptRolesFilter .cs",
+              "RelativeDocumentMoniker": "Proxima\\Filters\\ExceptRolesFilter .cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Filters\\ExceptRolesFilter .cs",
+              "RelativeToolTip": "Proxima\\Filters\\ExceptRolesFilter .cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-28T14:01:09.767Z",
+              "WhenOpened": "2025-01-29T17:38:53.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExceptRolesAttribute.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Filters\\ExceptRolesAttribute.cs",
+              "RelativeDocumentMoniker": "Proxima\\Filters\\ExceptRolesAttribute.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\Filters\\ExceptRolesAttribute.cs",
+              "RelativeToolTip": "Proxima\\Filters\\ExceptRolesAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T17:38:52.494Z",
               "EditorCaption": ""
             }
           ]

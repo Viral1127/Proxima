@@ -53,6 +53,10 @@ namespace Proxima.Controllers
         [HttpPost("Teams")]
         public IActionResult CreateTeam([FromBody] TeamsModel teams)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can create team");
+            }
             if (teams == null)
             {
                 return BadRequest();
@@ -69,8 +73,13 @@ namespace Proxima.Controllers
 
         #region Update Team
         [HttpPut("Teams/{teamID}")]
-        public IActionResult UpdateTeam(int teamID, [FromBody] TeamsModel teams) { 
-            if(teams == null || teamID != teams.TeamID)
+        public IActionResult UpdateTeam(int teamID, [FromBody] TeamsModel teams) {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can Update team");
+            }
+
+            if (teams == null || teamID != teams.TeamID)
             {
                 return BadRequest();
             }
@@ -88,7 +97,12 @@ namespace Proxima.Controllers
         #region Delete Team
         [HttpDelete("Teams/{teamID}")]
 
-        public IActionResult DeleteTeam(int teamID) { 
+        public IActionResult DeleteTeam(int teamID) {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can delete team");
+            }
+
             var isDeleted = _teamsRepository.DeleteTeam(teamID);
             if (isDeleted) { 
                 return Ok(new {Message = "Team deleted successfully"});
@@ -105,6 +119,10 @@ namespace Proxima.Controllers
         [HttpPost("Teams/AddTeamMember")]
         public IActionResult AddTeamMember([FromBody] TeamMemberModel teamMember)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can Add TeamMembers");
+            }
             if (teamMember == null)
             {
                 return BadRequest();
@@ -136,8 +154,11 @@ namespace Proxima.Controllers
 
         #region Remove TeamMember From Team
         [HttpDelete("TeamMembers/{teamMemberID}")]
-
-        public IActionResult RemoveTeamMember(int teamMemberID) { 
+        public IActionResult RemoveTeamMember(int teamMemberID) {
+            if (!User.IsInRole("Admin"))
+            {
+                return StatusCode(500, "Only Admin can remove TeamMembers");
+            }
             var isDeleted = _teamsRepository.RemoveTeamMember(teamMemberID);
             if (isDeleted)
             {

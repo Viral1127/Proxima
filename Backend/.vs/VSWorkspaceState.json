@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Database",
+    "\\Database\\Stored_Procedures",
+    "\\Database\\Stored_Procedures\\Milestones",
+    "\\Database\\Stored_Procedures\\Projects",
+    "\\Database\\Stored_Procedures\\Project_Assignments",
+    "\\Database\\Stored_Procedures\\User"
+  ],
+  "SelectedNode": "\\Database\\Stored_Procedures\\Milestones\\AddMilestone.sql",
+  "PreviewInSolutionExplorer": false
+}

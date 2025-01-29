@@ -55,6 +55,10 @@ namespace Proxima.Controllers
         [HttpPost]
         public IActionResult CreateTasks([FromBody] TaskModel tasks)
         {
+            if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have no access to create task");
+            }
             if (tasks == null)
             {
                 return BadRequest();
@@ -74,6 +78,10 @@ namespace Proxima.Controllers
         [HttpPut("{taskID}")]
         public IActionResult UpdateTask(int taskID, [FromBody] TaskModel tasks)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have no access to Update task");
+            }
             if (tasks == null || taskID != tasks.TaskID)
             {
                 return BadRequest();
@@ -96,6 +104,10 @@ namespace Proxima.Controllers
 
         public IActionResult DeleteTask(int taskID)
         {
+            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            {
+                return StatusCode(500, "You have no access to delete task");
+            }
             var isDeleted = _taskRepository.DeleteTasks(taskID);
             if (isDeleted)
             {
