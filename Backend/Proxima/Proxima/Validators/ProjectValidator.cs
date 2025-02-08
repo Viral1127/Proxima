@@ -11,6 +11,7 @@ namespace Proxima.Validators
                 .GreaterThanOrEqualTo(0).WithMessage("Project ID must be a positive integer.");
 
             RuleFor(p => p.Title)
+                .NotNull()
                 .NotEmpty().WithMessage("Title is required.")
                 .Length(5, 100).WithMessage("Title must be between 5 and 100 characters.");
 
@@ -18,8 +19,8 @@ namespace Proxima.Validators
                 .Length(5, 500).When(p => !string.IsNullOrEmpty(p.Description))
                 .WithMessage("Description must be between 5 and 500 characters.");
 
-            RuleFor(p => p.ClientID)
-                .GreaterThan(0).WithMessage("Client ID must be a positive integer.");
+            //RuleFor(p => p.ClientID)
+            //    .GreaterThan(0).WithMessage("Client ID must be a positive integer.");
 
             RuleFor(p => p.StartDate)
                 .LessThanOrEqualTo(p => p.EndDate).WithMessage("Start Date must be before or equal to End Date.");
@@ -27,10 +28,10 @@ namespace Proxima.Validators
             RuleFor(p => p.EndDate)
                 .GreaterThanOrEqualTo(p => p.StartDate).WithMessage("End Date must be after or equal to Start Date.");
 
-            RuleFor(p => p.Status)
-                .NotEmpty().WithMessage("Status is required.")
-                .Must(status => new[] { "Ongoing", "Completed", "Upcoming", "Archived" }.Contains(status))
-                .WithMessage("Status must be one of the following: 'Ongoing', 'Completed','Upcoming' or 'Archived'.");
+            //RuleFor(p => p.Status)
+            //    .NotEmpty().WithMessage("Status is required.")
+            //    .Must(status => new[] { "Ongoing", "Completed", "Upcoming", "Archived" }.Contains(status))
+            //    .WithMessage("Status must be one of the following: 'Ongoing', 'Completed','Upcoming' or 'Archived'.");
 
             RuleFor(p => p.CreatedAt)
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("CreatedAt cannot be in the future.");

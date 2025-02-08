@@ -1,0 +1,109 @@
+﻿<div class="content-wrapper">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="page-title">Projects</h1>
+        <!-- Button to open the Create Project form -->
+        <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw" id="createProjectBtn">+ New Project</button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Projects</h4>
+            <table class="table table-hover">
+                <tbody>
+                    @foreach (var project in Model)
+                    {
+                        <tr>
+                            <td>@project.Title</td>
+                            <td>@project.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+
+<div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProjectModalLabel">Create New Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="createProjectForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="projectName" class="form-label">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="organization" class="form-label">Organization</label>
+                        <input type="text" class="form-control" id="organization" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="statusText" class="form-label">Status Text</label>
+                        <input type="text" class="form-control" id="statusText">
+                    </div>
+                    <div class="mb-3">
+                        <label for="statusPercentage" class="form-label">Status Percentage</label>
+                        <input type="number" class="form-control" id="statusPercentage" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="statusType" class="form-label">Status Type</label>
+                        <select class="form-select" id="statusType" required>
+                            <option value="success">Success</option>
+                            <option value="warning">Warning</option>
+                            <option value="danger">Danger</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    document.getElementById('createProjectBtn').addEventListener('click', function() {
+        // Open the modal when button is clicked
+        new bootstrap.Modal(document.getElementById('createProjectModal')).show();
+    });
+
+    document.getElementById('createProjectForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const projectName = document.getElementById('projectName').value;
+        const organization = document.getElementById('organization').value;
+        const statusText = document.getElementById('statusText').value;
+        const statusPercentage = document.getElementById('statusPercentage').value;
+        const statusType = document.getElementById('statusType').value;
+
+        // Send data to the controller
+        fetch('@Url.Action("AddProject", "Project")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Name: projectName,
+                Organization: organization,
+                StatusText: statusText,
+                StatusPercentage: statusPercentage,
+                StatusType: statusType
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();  // Reload the page to see the new project
+            } else {
+                alert("Error adding project!");
+            }
+        });
+    });
+</script>

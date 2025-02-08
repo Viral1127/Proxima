@@ -1,0 +1,83 @@
+﻿using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Proxima.Models;
+
+namespace Proxima.Controllers
+{
+    public class ProjectController : Controller
+    {
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
+        private readonly ApplicationDbContext _context;
+        public ProjectController(IConfiguration configuration,ApplicationDbContext context)
+        {
+            _configuration = configuration;
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new System.Uri(_configuration["WebApiBaseUrl"])
+            };
+            _context = context;
+        }
+
+        public async Task<IActionResult> ProjectList()
+        {
+
+            //var response = await _httpClient.GetAsync("api/Project");
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var data = await response.Content.ReadAsStringAsync();
+            //    var projects = JsonConvert.DeserializeObject<List<ProjectModel>>(data);
+            //    return View(projects);
+            //}
+            //return View(new List<ProjectModel>());
+            var projects = await _context.Projects.ToListAsync();
+            return View(projects);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SaveProject([FromBody] ProjectSave project)
+        {
+            HttpResponseMessage response;
+            
+            if (project.ProjectID > 0)
+            {
+                var jsonContent = JsonConvert.SerializeObject(project);
+                var content = new StringContent(jsonContent , Encoding.UTF8, "application/json");
+                response = await _httpClient.PutAsync($"api/Project/{project.ProjectID}", content);
+            }
+            else
+            {
+                var jsonContent = JsonConvert.SerializeObject(project);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                response = await _httpClient.PostAsync($"api/Project", content);
+            }
+            return Json(response.IsSuccessStatusCode);
+        }
+
+        public async Task<ActionResult> ProjectDetails(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Project/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    var project = JsonConvert.DeserializeObject<ProjectModel>(data);
+                    return View(project);
+                }
+            return View(new ProjectModel());
+        }
+
+        public async Task<ActionResult>  ProjectOverview(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Project/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                var project = JsonConvert.DeserializeObject<ProjectModel>(data);
+                return View(project);
+            }
+            return PartialView("_ProjectOverview",new ProjectModel());
+        }   
+    }
+}

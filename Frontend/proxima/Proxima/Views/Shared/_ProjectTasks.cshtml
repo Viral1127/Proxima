@@ -1,0 +1,324 @@
+﻿@model Proxima.Models.TaskModel
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Tasks</h1>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+            <i class="fas fa-plus"></i> New Task
+        </button>
+    </div>
+
+    <div class="row">
+        <!-- Todo Column -->
+        <div class="col-md-3">
+            <div class="task-column">
+                <h5 class="task-column-header">Todo</h5>
+                <div class="task-list" id="todo-list">
+                    @* @foreach (var task in Model.TodoTasks)
+                    {
+                        <div class="task-card" data-task-id="@task.Id">
+                            <div class="task-content">
+                                <h6>@task.Title</h6>
+                                <div class="task-actions">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                            Status
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+                    <div class="task-card" data-task-id="@@task.Id">
+                        <div class="task-content">
+                            <h6>hello</h6>
+                            <div class="task-actions">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                        Status
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Progress Column -->
+        <div class="col-md-3">
+            <div class="task-column">
+                <h5 class="task-column-header">In Progress</h5>
+                <div class="task-list" id="inprogress-list">
+                    @* @foreach (var task in Model.InProgressTasks)
+                    {
+                        <div class="task-card" data-task-id="@task.Id">
+                            <div class="task-content">
+                                <h6>@task.Title</h6>
+                                <div class="task-actions">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                            Status
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+                    <div class="task-card" data-task-id="@@task.Id">
+                        <div class="task-content">
+                            <h6>hello</h6>
+                            <div class="task-actions">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                        Status
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Review Column -->
+        <div class="col-md-3">
+            <div class="task-column">
+                <h5 class="task-column-header">In Review</h5>
+                <div class="task-list" id="inreview-list">
+                    @* @foreach (var task in Model.InReviewTasks)
+                    {
+                        <div class="task-card" data-task-id="@task.Id">
+                            <div class="task-content">
+                                <h6>@task.Title</h6>
+                                <div class="task-actions">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                            Status
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+                    <div class="task-card" data-task-id="@@task.Id">
+                        <div class="task-content">
+                            <h6>hello</h6>
+                            <div class="task-actions">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                        Status
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Done Column -->
+        <div class="col-md-3">
+            <div class="task-column">
+                <h5 class="task-column-header">Done</h5>
+                <div class="task-list" id="done-list">
+                    @* @foreach (var task in Model.DoneTasks)
+                    {
+                        <div class="task-card" data-task-id="@task.Id">
+                            <div class="task-content">
+                                <h6>@task.Title</h6>
+                                <div class="task-actions">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                            Status
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                            <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+                    <div class="task-card" data-task-id="@@task.Id">
+                        <div class="task-content">
+                            <h6>hello</h6>
+                            <div class="task-actions">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                        Status
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item status-option" data-status="Todo">Todo</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InProgress">In Progress</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="InReview">In Review</a></li>
+                                        <li><a class="dropdown-item status-option" data-status="Done">Done</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Task Modal -->
+<div class="modal fade" id="newTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="Create" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Assigned To</label>
+                        <input type="text" class="form-control" name="AssignedTo">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" class="form-control" name="DueDate">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.status-option').click(function(e) {
+                e.preventDefault();
+                const taskId = $(this).closest('.task-card').data('task-id');
+                const newStatus = $(this).data('status');
+
+                $.post('/Task/UpdateStatus', {
+                    taskId: taskId,
+                    newStatus: newStatus
+                }, function(response) {
+                    if (response.success) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+    /* wwwroot/css/tasks.css */
+    .task-column {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 16px;
+        min-height: 500px;
+    }
+
+    .task-column-header {
+        color: #6c757d;
+        margin-bottom: 16px;
+        font-weight: 600;
+    }
+
+    .task-list {
+        min-height: 100px;
+    }
+
+    .task-card {
+        background: white;
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+    .task-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .task-content h6 {
+            margin: 0;
+            color: #212529;
+        }
+
+    .task-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .btn-light {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+
+        .btn-light:hover {
+            background: #e9ecef;
+        }
+</style>

@@ -19,8 +19,8 @@ namespace Proxima.Validators
             RuleFor(pa => pa.Name)
                 .Length(2, 100).WithMessage("Name must be between 2 and 100 characters.");
 
-            RuleFor(pa => pa.RoleID)
-                .GreaterThan(0).WithMessage("Role ID must be a positive integer.");
+            //RuleFor(pa => pa.RoleID)
+            //    .GreaterThan(0).WithMessage("Role ID must be a positive integer.");
 
             RuleFor(pa => pa.RoleName)
                 .Length(2, 50).WithMessage("Role Name must be between 2 and 50 characters.");

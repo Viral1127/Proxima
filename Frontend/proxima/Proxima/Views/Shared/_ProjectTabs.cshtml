@@ -1,0 +1,21 @@
+﻿    <div class="d-flex align-items-center">
+        <h1 class="page-title me-5">@Model.Title</h1>
+        <ul class="nav nav-tabs" id="projectTabs">
+            <li class="nav-item">
+            <a class="nav-link active text-dark " data-bs-toggle="tab" asp-controller="Project" asp-action="ProjectOverview">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" data-bs-toggle="tab" href="#tasks">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" data-bs-toggle="tab" href="#milestones">Milestones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" data-bs-toggle="tab" href="#files">Files</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" data-bs-toggle="tab" href="#messages">Messages</a>
+            </li>
+        </ul>
+    </div>
+    <hr />

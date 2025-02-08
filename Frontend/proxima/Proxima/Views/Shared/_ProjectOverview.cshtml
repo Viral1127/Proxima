@@ -1,0 +1,272 @@
+﻿@model Proxima.Models.ProjectModel;
+<div class="d-flex justify-content-center">
+    <div class="tab-content mt-3" style="width:70vw;max-width:100%;">
+
+        <div class="tab-pane fade show active" id="overview">
+            <div class="d-flex align-items-center mb-4">
+                <h3 class="fw-bold me-3">@Model.Title</h3><br />
+                <div class="d-flex justify-content-center align-items-center">
+                    <div id="projectCircle" class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">P</div>
+                    <button class="btn btn-primary ms-3" id="assignButton" style="display:none;" data-bs-toggle="modal" data-bs-target="#assignModal">Assign People</button>
+                </div>
+            </div>
+            <div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6>Add member to @Model.Title project.</h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="height:5px;width:5px;"></button>
+                                </div>
+                                    <input type="text" id="searchUser" class="form-control mb-3" placeholder="Search for users">
+                                    <ul class="list-group" id="userList">
+                                        <!-- Dynamically filled by JavaScript -->
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-0 border rounded shadow-sm bg-white p-3">
+                <div class="col d-flex align-items-center justify-content-center border-end">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light rounded p-2 me-2">
+                            <img src="https://img.icons8.com/fluency/48/ok.png" alt="Completed" width="24">
+                        </div>
+                        <div>
+                            <div class="text-muted">Completed tasks</div>
+                            <div class="fw-bold fs-5" id="completedTasks">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center border-end">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light rounded p-2 me-2">
+                            <img src="https://img.icons8.com/color/48/folder-invoices--v1.png" alt="Incomplete" width="24">
+                        </div>
+                        <div>
+                            <div class="text-muted" >Incomplete tasks</div>
+                            <div class="fw-bold fs-5" id="incompleteTasks">2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light rounded p-2 me-2">
+                            <img src="https://img.icons8.com/color/48/high-priority.png" alt="Overdue" width="24">
+                        </div>
+                        <div>
+                            <div class="text-muted">Overdue tasks</div>
+                            <div class="fw-bold fs-5" id="overdueTasks">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border rounded shadow-sm bg-white p-3 my-3" style="height:50vh;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="m-0">Time-logs</h6>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Last 7 days
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Last 7 days</a></li>
+                            <li><a class="dropdown-item" href="#">Last 30 days</a></li>
+                            <li><a class="dropdown-item" href="#">This month</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center text-muted py-4">
+                    <h6>0:00</h6>
+                    <hr>
+                    <div class="d-flex justify-content-around align-content-end text-muted">
+                        <span>01 Feb</span>
+                        <span>02 Feb</span>
+                        <span>03 Feb</span>
+                        <span>04 Feb</span>
+                        <span>05 Feb</span>
+                        <span>06 Feb</span>
+                        <span>07 Feb</span>
+                        <span>08 Feb</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border rounded shadow-sm bg-white p-3">
+                <h6>Milestones</h6>
+                <div class="d-flex align-items-center mt-2">
+                    <div id="milestoneList">
+                        <span>aaaaa</span>
+                        <span class="text-muted" id="milestoneCount">(0/1)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="tasks">Tasks Content</div>
+        <div class="tab-pane fade" id="milestones">Milestones Content</div>
+        <div class="tab-pane fade" id="files">Files Content</div>
+        <div class="tab-pane fade" id="messages">Messages Content</div>
+    </div>
+</div>
+
+<style>
+    #projectCircle:hover {
+        cursor: pointer;
+    }
+
+    #assignButton:hover {
+        display: block !important;
+    }
+
+</style>
+
+<script>
+    $('#projectCircle').hover(function () {
+        $('#assignButton').show();
+    }, function () {
+        $('#assignButton').show();
+    });
+
+    $(document).ready(function () {
+        var projectID = @Model.ProjectID; // Ensure this is properly passed
+
+        // Debugging output to check the value of projectID
+        console.log("Project ID:", projectID);
+
+        function fetchUsers() {
+            $.ajax({
+                url: `https://localhost:7107/api/User/GetAllUsers`, // Replace with actual API endpoint
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log("Users Data:", data);
+
+                    var userList = $("#userList");
+                    userList.empty();
+
+                    data.forEach(function (user) {
+                        var userHtml = `
+                            <li class="list-group-item">
+                                <input type="checkbox" class="userCheckbox" data-user-id="${user.userID}" data-first-letter="${user.name.charAt(0)}">
+                                <span>${user.name} (${user.role})</span>
+                            </li>
+                        `;
+                        userList.append(userHtml);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching users:", error);
+                }
+            });
+        }
+
+        // Fetch users when modal is opened
+        $('#assignModal').on('shown.bs.modal', function () {
+            fetchUsers();
+        });
+
+        // Handle user selection and update circle with first letter
+        $('#userList').on('change', '.userCheckbox', function () {
+            var userFirstLetter = $(this).data('first-letter');
+            var isChecked = $(this).prop('checked');
+
+            // If checked, add the letter to the circle
+            if (isChecked) {
+                $('#projectCircle').text(userFirstLetter);
+            } else {
+                $('#projectCircle').text('P'); // Reset to default 'P' or leave it empty
+            }
+        });
+
+        // Handle search functionality in the modal
+        $('#searchUser').on('input', function () {
+            var searchTerm = $(this).val().toLowerCase();
+
+            $('#userList .list-group-item').each(function () {
+                var userName = $(this).text().toLowerCase();
+                if (userName.indexOf(searchTerm) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+
+        // Function to fetch task counts
+        function fetchTaskCounts() {
+            $.ajax({
+                url: `https://localhost:7107/api/Project/TaskCounts/${projectID}`, // Correct API endpoint
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log("Task Data:", data); // Debugging output
+
+                    // Update the task counts on the page
+                    $("#completedTasks").text(data.completedTasks);
+                    $("#incompleteTasks").text(data.incompleteTasks);
+                    $("#overdueTasks").text(data.overdueTasks);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching tasks:", error);
+                    console.log("XHR:", xhr);
+                    console.log("Status:", status);
+                }
+            });
+        }
+
+        // Function to fetch milestones
+        function fetchMilestones() {
+            $.ajax({
+                url: `https://localhost:7107/api/Milestones/MilestonesByProjectID/${projectID}`,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log("Milestone Data:", data);
+
+                    var milestoneContainer = $("#milestoneList");
+                    milestoneContainer.empty();
+
+                    var totalMilestones = data.length;
+                    var achievedMilestones = data.filter(m => m.status === "Achieved").length;
+
+                    $("#milestoneCount").text(`(${achievedMilestones}/${totalMilestones})`);
+
+                    if (data.length === 0) {
+                        milestoneContainer.append("<p class='text-muted'>No milestones found.</p>");
+                    } else {
+                        data.forEach(function (milestone) {
+                            var isAchieved = milestone.status === "Achieved"; // Fixed variable name
+
+                            var milestoneHtml = `
+                                <div class="d-flex align-items-center mt-2">
+                                    <div class="p-2">
+                                        <span class="${isAchieved ? 'text-success' : 'text-muted'}" style="font-size: 20px;">
+                                            ${isAchieved ? '●' : '○'}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>${milestone.title}</span>
+                                        <span>(${achievedMilestones}/${totalMilestones})</span>
+                                    </div>
+                                </div>
+                            `;
+                            milestoneContainer.append(milestoneHtml);
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching milestones:", error);
+                    $("#milestoneList").html("<p class='text-danger'>Failed to load milestones.</p>");
+                }
+            });
+        }
+
+        // Call the functions on page load
+        fetchTaskCounts();
+        fetchMilestones();
+    });
+</script>

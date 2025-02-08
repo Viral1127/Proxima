@@ -18,10 +18,10 @@ namespace Proxima.Controllers
         [HttpGet("GetAllUsers")]
         public ActionResult<IEnumerable<UserModel>> GetAllUsers()
         {
-            if (!User.IsInRole("Admin"))
-            {
-                return StatusCode(500, "Only Admin can view List of users");
-            }
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    return StatusCode(500, "Only Admin can view List of users");
+            //}
             var users = _userRepository.GetUsers();
             return Ok(users);
 

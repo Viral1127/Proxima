@@ -156,7 +156,7 @@
     "Parameters": [
       {
         "Name": "project",
-        "Type": "Proxima.Models.ProjectModel",
+        "Type": "Proxima.Models.ProjectSave",
         "IsRequired": true
       }
     ],
@@ -225,6 +225,22 @@
     "Parameters": [
       {
         "Name": "clientID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectController",
+    "Method": "GetTaskCounts",
+    "RelativePath": "api/Project/TaskCounts/{projectId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
         "Type": "System.Int32",
         "IsRequired": true
       }

@@ -246,17 +246,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProjectModel"
+                "$ref": "#/components/schemas/ProjectSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProjectModel"
+                "$ref": "#/components/schemas/ProjectSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProjectModel"
+                "$ref": "#/components/schemas/ProjectSave"
               }
             }
           }
@@ -362,6 +362,29 @@
         "parameters": [
           {
             "name": "projectID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Project/TaskCounts/{projectId}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1457,7 +1480,8 @@
           },
           "clientID": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "startDate": {
             "type": "string",
@@ -1479,6 +1503,28 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectSave": {
+        "type": "object",
+        "properties": {
+          "projectID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

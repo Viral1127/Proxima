@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Proxima.Models;
 
 namespace Proxima.Data
@@ -6,17 +7,19 @@ namespace Proxima.Data
     public class ProjectRepository
     {
         private readonly string _connectionString;
+        private readonly ApplicationDbContext _context;
 
-        public ProjectRepository(IConfiguration configuration)
+        public ProjectRepository(IConfiguration configuration,ApplicationDbContext context)
         {
             _connectionString = configuration.GetConnectionString("ConnectionString");
+            _context = context;
         }
 
         #region GetAllProjects
 
         public List<ProjectModel> GetProjects() { 
             var projects = new List<ProjectModel>();
-
+            
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand cmd = new SqlCommand("PR_Projects_GetAllProjects", connection)
@@ -31,8 +34,8 @@ namespace Proxima.Data
                     {
                         ProjectID = Convert.ToInt32(reader["ProjectID"]),
                         Title = reader["Title"].ToString(),
-                        Description = reader["Description"].ToString(),
-                        ClientID = Convert.ToInt32(reader["ClientID"]),
+                        Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
+                        ClientID = reader["ClientID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["ClientID"]),
                         StartDate = Convert.ToDateTime(reader["StartDate"]),
                         EndDate = Convert.ToDateTime(reader["EndDate"]),
                         Status = reader["Status"].ToString(),
@@ -45,6 +48,8 @@ namespace Proxima.Data
         }
 
         #endregion
+
+
 
         #region GetProjectByID
         public ProjectModel GetProjectByID(int ProjectID)
@@ -116,7 +121,7 @@ namespace Proxima.Data
         #endregion
 
         #region CreateProject
-        public bool CreateProject(ProjectModel project)
+        public bool CreateProject(ProjectSave project)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -124,10 +129,7 @@ namespace Proxima.Data
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@ClientID", project.ClientID);
                 cmd.Parameters.AddWithValue("@Title", project.Title);
-                cmd.Parameters.AddWithValue("@Description", project.Description);
-                cmd.Parameters.AddWithValue("@Status", project.Status);
                 cmd.Parameters.AddWithValue("@StartDate", project.StartDate);
                 cmd.Parameters.AddWithValue("@EndDate",project.EndDate); 
                 connection.Open();
@@ -177,5 +179,23 @@ namespace Proxima.Data
         }
 
         #endregion
+
+        public async Task<TaskCountsDto> GetTaskCountsAsync(int projectId)
+        {
+
+            var taskCounts = await _context.Tasks
+                .Where(t => t.ProjectID == projectId)
+                .GroupBy(t => t.ProjectID)
+                .Select(g => new TaskCountsDto
+                {
+                    CompletedTasks = g.Count(t => t.Status == "Completed"),
+                    IncompleteTasks = g.Count(t => t.Status != "Completed"),
+                    OverdueTasks = g.Count(t => t.DueDate < DateTime.Now && t.Status != "Completed")
+                })
+                .FirstOrDefaultAsync();
+
+            return taskCounts ?? new TaskCountsDto();
+        }
+
     }
 }

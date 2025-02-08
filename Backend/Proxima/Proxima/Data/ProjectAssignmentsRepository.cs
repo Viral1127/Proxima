@@ -23,7 +23,6 @@ namespace Proxima.Data
                 };
                 cmd.Parameters.AddWithValue("@ProjectID", projectAssignments.ProjectID);
                 cmd.Parameters.AddWithValue("@UserID", projectAssignments.UserID);
-                cmd.Parameters.AddWithValue("@RoleID", projectAssignments.RoleID);
 
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();

@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Stored_Procedures",
+    "\\Stored_Procedures\\Projects",
+    "\\Stored_Procedures\\Project_Assignments",
     "\\Stored_Procedures\\TaskAssignments",
     "\\Stored_Procedures\\User"
   ],
-  "SelectedNode": "\\Stored_Procedures\\User\\GetAllUser.sql",
+  "SelectedNode": "\\Stored_Procedures\\Project_Assignments\\AssignUserToProject.sql",
   "PreviewInSolutionExplorer": false
 }

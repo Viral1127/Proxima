@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\vendor\%40fortawesome\fontawesome-free\less\" />
+    <Folder Include="wwwroot\assets\vendor\%40fortawesome\fontawesome-free\scss\" />
+    <Folder Include="wwwroot\assets\vendor\anchor-js\docs\" />
+    <Folder Include="wwwroot\assets\vendor\anchor-js\test\" />
+    <Folder Include="wwwroot\assets\vendor\holderjs\src\" />
+    <Folder Include="wwwroot\assets\vendor\holderjs\test\" />
+    <Folder Include="wwwroot\assets\vendor\js-cookie\src\" />
+    <Folder Include="wwwroot\assets\vendor\jvectormap-next\src\" />
+    <Folder Include="wwwroot\assets\vendor\jvectormap-next\tests\" />
+    <Folder Include="wwwroot\assets\vendor\moment\src\" />
+  </ItemGroup>
+
+</Project>

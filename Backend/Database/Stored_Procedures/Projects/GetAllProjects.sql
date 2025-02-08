@@ -4,4 +4,4 @@ BEGIN
 	SELECT * FROM Projects
 END
 
-[PR_Projects_GetAllProjects]
+	[PR_Projects_GetAllProjects]

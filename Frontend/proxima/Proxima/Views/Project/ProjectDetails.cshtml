@@ -1,0 +1,16 @@
+﻿@model Proxima.Models.ProjectModel
+@{
+    ViewBag.Title = "Project Details";
+}
+
+<div style="background: #f8f9fe;
+     padding: 1rem;
+     width: 100%;
+     -webkit-flex-grow: 1;
+     flex-grow: 1;">
+
+    @Html.Partial("_ProjectTabs")
+    <div class="tab-pane fade show active" id="overview">
+        @Html.Partial("_ProjectOverview", Model) <!-- Initial content loading -->
+    </div>
+</div>

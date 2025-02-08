@@ -22,10 +22,10 @@ namespace Proxima.Controllers
         [HttpGet]
         public IActionResult GetAllProjects()
         {
-            if (!User.IsInRole("Admin"))
-            {
-                return StatusCode(500, "Only Admin can see all projects");
-            }
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    return StatusCode(500, "Only Admin can see all projects");
+            //}
             var projects = _projectRepository.GetProjects();
             return Ok(projects);
 
@@ -64,20 +64,18 @@ namespace Proxima.Controllers
         #region CreateProject
         //[Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult CreateProject(ProjectModel project)
+        public IActionResult CreateProject(ProjectSave project)
         {
 
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Unauthorized(new { Message = "Please log in first to create a project." });
-            }
+            //if (!User.Identity.IsAuthenticated)
+            //{
+            //    return Unauthorized(new { Message = "Please log in first to create a project." });
+            //}
 
-            if (!User.IsInRole("Admin"))
-            {
-                //var response = new { Message = "You have no access to perform this action." };
-                return StatusCode(500 , "You have no access to Create project");
-            }
-
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    //var response = new { Message = "You have no access to perform this action." };
+            //    return StatusCode(500 , "You have no access to Create project
             if (project == null)
             {
                 BadRequest();
@@ -141,5 +139,16 @@ namespace Proxima.Controllers
         }
 
         #endregion
+
+        #region TaskCounts
+
+        [HttpGet("TaskCounts/{projectId}")]
+        public async Task<IActionResult> GetTaskCounts(int projectId)
+        {
+            var taskCounts = await _projectRepository.GetTaskCountsAsync(projectId);
+            return Ok(taskCounts);
+        }
+        #endregion
+
     }
 }
