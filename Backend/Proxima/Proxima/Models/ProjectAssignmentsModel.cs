@@ -1,4 +1,5 @@
-﻿namespace Proxima.Models
+﻿
+namespace Proxima.Models
 {
     public class ProjectAssignmentsModel
     {
@@ -10,5 +11,11 @@
         public string RoleName { get; set; }
         public DateTime AssignedAt { get; set; }
 
+    }
+    public class ProjectAssignmentSave
+    {
+        public int AssignmentID { get; set; }
+        public int ProjectID { get; set; }
+        public int UserID { get; set; }
     }
 }

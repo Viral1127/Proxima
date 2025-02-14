@@ -17,6 +17,22 @@ BEGIN
     PRINT 'Milestone updated successfully.';
 END;
 
+
+CREATE PROCEDURE [dbo].[PR_Milestones_UpdateMilestoneStatus]
+    @MilestoneID INT,
+    @Status NVARCHAR(50)
+AS
+BEGIN
+    UPDATE [dbo].[Milestones]
+    SET 
+        [Status] = @Status
+    WHERE [MilestoneID] = @MilestoneID;
+
+    PRINT 'Milestone status updated successfully.';
+END;
+
+[PR_Milestones_UpdateMilestoneStatus] 1,'Pending'
+
 EXEC [PR_Milestones_UpdateMilestone] 
     @MilestoneID = 4, 
     @Title = 'Revised Requirement Analysis', 

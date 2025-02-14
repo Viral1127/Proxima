@@ -61,7 +61,7 @@
     "Parameters": [
       {
         "Name": "milestones",
-        "Type": "Proxima.Models.MilestonesModel",
+        "Type": "Proxima.Models.MilestoneSaveModel",
         "IsRequired": true
       }
     ],
@@ -137,6 +137,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Proxima.Controllers.MilestonesController",
+    "Method": "UpdateMilestoneStatus",
+    "RelativePath": "api/Milestones/UpdateMilestoneStatus/{milestoneID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "milestoneID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "milestoneStatus",
+        "Type": "Proxima.Models.MilestonesStatusModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proxima.Controllers.ProjectController",
     "Method": "GetAllProjects",
     "RelativePath": "api/Project",
@@ -193,7 +214,7 @@
       },
       {
         "Name": "project",
-        "Type": "Proxima.Models.ProjectModel",
+        "Type": "Proxima.Models.ProjectUpdate",
         "IsRequired": true
       }
     ],
@@ -203,7 +224,7 @@
     "ContainingType": "Proxima.Controllers.ProjectController",
     "Method": "ArchiveProject",
     "RelativePath": "api/Project/ArchiveProject/{projectID}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -257,7 +278,7 @@
     "Parameters": [
       {
         "Name": "projectAssignments",
-        "Type": "Proxima.Models.ProjectAssignmentsModel",
+        "Type": "Proxima.Models.ProjectAssignmentSave",
         "IsRequired": true
       }
     ],
@@ -274,6 +295,22 @@
       {
         "Name": "projectID",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAssignmentsController",
+    "Method": "DeleteTaskAssignment",
+    "RelativePath": "api/ProjectAssignments/removeUserFromProject",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectAssignments",
+        "Type": "Proxima.Models.ProjectAssignmentSave",
         "IsRequired": true
       }
     ],
@@ -357,7 +394,7 @@
     "Parameters": [
       {
         "Name": "tasks",
-        "Type": "Proxima.Models.TaskModel",
+        "Type": "Proxima.Models.TaskSaveModel",
         "IsRequired": true
       }
     ],
@@ -427,6 +464,27 @@
       {
         "Name": "projectID",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "UpdateTaskStatus",
+    "RelativePath": "api/Task/UpdateStatus/{taskID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskStatus",
+        "Type": "Proxima.Models.TaskStatusModel",
         "IsRequired": true
       }
     ],

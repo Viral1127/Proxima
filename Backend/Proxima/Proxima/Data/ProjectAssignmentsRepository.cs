@@ -13,7 +13,7 @@ namespace Proxima.Data
         }
 
         #region AssignUserToProject
-        public bool AssignUserToProject(ProjectAssignmentsModel projectAssignments)
+        public bool AssignUserToProject(ProjectAssignmentSave projectAssignments)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -63,7 +63,27 @@ namespace Proxima.Data
         #endregion
 
         #region RemoveUserFromProject
+        public bool RemoveUser(int ProjectID, int UserID)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
 
+                using (SqlCommand command = new SqlCommand("PR_ProjectAssignments_RemoveUserFromProject", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    // Add parameters to the stored procedure
+                    command.Parameters.Add(new SqlParameter("@ProjectID", ProjectID));
+                    command.Parameters.Add(new SqlParameter("@UserID", UserID));
+
+                    // Execute the stored procedure and check the result
+                    int result = command.ExecuteNonQuery();
+
+                    return result > 0; // If rows are affected, it means the user was removed
+                }
+            }
+        }
         #endregion
     }
 }

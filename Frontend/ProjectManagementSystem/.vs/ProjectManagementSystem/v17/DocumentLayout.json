@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6AA427AA-8D42-47EB-A99C-61EDCC35F291}|ProjectManagementSystem\\ProjectManagementSystem.csproj|d:\\darshan university\\projects\\proxima\\frontend\\projectmanagementsystem\\projectmanagementsystem\\views\\mytask\\tasklist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6AA427AA-8D42-47EB-A99C-61EDCC35F291}|ProjectManagementSystem\\ProjectManagementSystem.csproj|solutionrelative:projectmanagementsystem\\views\\mytask\\tasklist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6AA427AA-8D42-47EB-A99C-61EDCC35F291}|ProjectManagementSystem\\ProjectManagementSystem.csproj|d:\\darshan university\\projects\\proxima\\frontend\\projectmanagementsystem\\projectmanagementsystem\\views\\project\\projectlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6AA427AA-8D42-47EB-A99C-61EDCC35F291}|ProjectManagementSystem\\ProjectManagementSystem.csproj|solutionrelative:projectmanagementsystem\\views\\project\\projectlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -31,19 +35,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProjectList.cshtml",
-              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
-              "RelativeDocumentMoniker": "ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
-              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
-              "RelativeToolTip": "ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
+              "Title": "TaskList.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\MyTask\\TaskList.cshtml",
+              "RelativeDocumentMoniker": "ProjectManagementSystem\\Views\\MyTask\\TaskList.cshtml",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\MyTask\\TaskList.cshtml",
+              "RelativeToolTip": "ProjectManagementSystem\\Views\\MyTask\\TaskList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-04T04:56:35.682Z",
+              "WhenOpened": "2025-02-11T04:44:07.027Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ProjectList.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
+              "RelativeDocumentMoniker": "ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
+              "RelativeToolTip": "ProjectManagementSystem\\Views\\Project\\ProjectList.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-04T04:56:35.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\ProjectManagementSystem\\ProjectManagementSystem\\appsettings.json",
               "RelativeDocumentMoniker": "ProjectManagementSystem\\appsettings.json",

@@ -18,7 +18,7 @@ namespace Proxima.Controllers
 
         #region AssignUserToProject
         [HttpPost]
-        public IActionResult AssignUserToProject([FromBody] ProjectAssignmentsModel projectAssignments)
+        public IActionResult AssignUserToProject([FromBody] ProjectAssignmentSave projectAssignments)
         {
             //if (User.IsInRole("Admin"))
             //{
@@ -44,10 +44,10 @@ namespace Proxima.Controllers
         [HttpGet("{projectID}")]
         public IActionResult GetUserByProjectID(int projectID)
         {
-            if (!User.IsInRole("Admin"))
-            {
-                return StatusCode(500, "only Admin can see the list of users by ProjectID");
-            }
+            //if (!User.IsInRole("Admin"))
+            //{
+            //    return StatusCode(500, "only Admin can see the list of users by ProjectID");
+            //}
             var users = _projectAssignmentsRepository.GetUserByProjectID(projectID);
             if (users == null)
             {
@@ -56,6 +56,26 @@ namespace Proxima.Controllers
             return Ok(users);
         }
 
+        #endregion
+
+        #region RemoveTaskFromUser
+        [HttpPost("removeUserFromProject")]
+        public IActionResult DeleteTaskAssignment([FromBody] ProjectAssignmentSave projectAssignments)
+        {
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have not access to Remove task from user");
+            //}
+            var isDeleted = _projectAssignmentsRepository.RemoveUser(projectAssignments.ProjectID , projectAssignments.UserID);
+            if (isDeleted)
+            {
+                return Ok("User removed from Project    ");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
         #endregion
     }
 }

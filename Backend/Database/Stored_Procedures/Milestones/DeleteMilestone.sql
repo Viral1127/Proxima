@@ -2,13 +2,12 @@ ALTER PROCEDURE [dbo].[PR_Milestones_DeleteMilestone]
     @MilestoneID INT
 AS
 BEGIN
-    UPDATE [dbo].[Milestones]
-    SET [Status] = 'Achieved'
+    DELETE FROM Milestones
     WHERE [MilestoneID] = @MilestoneID
 
-    PRINT 'Milestone archived successfully.';
+    PRINT 'Milestone deleted successfully.';
 END;
 
-EXEC [PR_Milestones_DeleteMilestone] @MilestoneID = 1;
+EXEC [PR_Milestones_DeleteMilestone] @MilestoneID = 2;
 
 select * from Milestones

@@ -108,7 +108,7 @@ namespace Proxima.Data
         #endregion
 
         #region CreateMilestones
-        public bool CreateMilestones(MilestonesModel milestones)
+        public bool CreateMilestones(MilestoneSaveModel milestones)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -118,9 +118,7 @@ namespace Proxima.Data
                 };
                 cmd.Parameters.AddWithValue("@ProjectID", milestones.ProjectID);
                 cmd.Parameters.AddWithValue("@Title", milestones.Title);
-                cmd.Parameters.AddWithValue("@Description", milestones.Description);
                 cmd.Parameters.AddWithValue("@DueDate", milestones.DueDate);
-                cmd.Parameters.AddWithValue("@Status", milestones.Status);
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
@@ -142,6 +140,24 @@ namespace Proxima.Data
                 cmd.Parameters.AddWithValue("@Description", milestones.Description);
                 cmd.Parameters.AddWithValue("@DueDate", milestones.DueDate);
                 cmd.Parameters.AddWithValue("@Status", milestones.Status);
+                connection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+        #endregion
+
+        #region UpdateMilestone Status
+        public bool UpdateMilestoneStatus(MilestonesStatusModel milestoneStatus)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("PR_Milestones_UpdateMilestoneStatus", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@MilestoneID", milestoneStatus.MilestoneID);
+                cmd.Parameters.AddWithValue("@Status", milestoneStatus.Status);
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;

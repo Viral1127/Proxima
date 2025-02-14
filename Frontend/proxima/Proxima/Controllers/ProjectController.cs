@@ -58,14 +58,27 @@ namespace Proxima.Controllers
 
         public async Task<ActionResult> ProjectDetails(int id)
         {
-            var response = await _httpClient.GetAsync($"api/Project/{id}");
-                if (response.IsSuccessStatusCode)
+            var projectResponse = await _httpClient.GetAsync($"api/Project/{id}");
+            var taskResponse = await _httpClient.GetAsync($"api/Task/TasksByProjectID/{id}");
+            var milestoneResponse = await _httpClient.GetAsync($"api/Milestone/MilestonesByProjectID/{id}");
+
+            var viewModel = new ProjectDetailsViewModel();
+            if (projectResponse.IsSuccessStatusCode)
+            {
+                string projectData = await projectResponse.Content.ReadAsStringAsync();
+                viewModel.Project = JsonConvert.DeserializeObject<ProjectModel>(projectData);
+            }
+            if (taskResponse.IsSuccessStatusCode)
                 {
-                    string data = await response.Content.ReadAsStringAsync();
-                    var project = JsonConvert.DeserializeObject<ProjectModel>(data);
-                    return View(project);
+                    string taskData = await taskResponse.Content.ReadAsStringAsync();
+                    viewModel.Tasks = JsonConvert.DeserializeObject<List<TaskModel>>(taskData);
                 }
-            return View(new ProjectModel());
+            if (milestoneResponse.IsSuccessStatusCode)
+            {
+                string milestoneData = await milestoneResponse.Content.ReadAsStringAsync();
+                viewModel.Milestones = JsonConvert.DeserializeObject<List<MilestoneModel>>(milestoneData);
+            }
+            return View(viewModel);
         }
 
         public async Task<ActionResult>  ProjectOverview(int id)
@@ -75,9 +88,38 @@ namespace Proxima.Controllers
             {
                 string data = await response.Content.ReadAsStringAsync();
                 var project = JsonConvert.DeserializeObject<ProjectModel>(data);
-                return View(project);
+                return PartialView("_ProjectOverview", project);
             }
             return PartialView("_ProjectOverview",new ProjectModel());
-        }   
+        }
+        public async Task<ActionResult> ProjectTasks(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Task/TasksByProjectID/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                var tasks = JsonConvert.DeserializeObject<List<TaskModel>>(data);
+                return PartialView("_ProjectTasks", tasks); 
+            }
+            return PartialView("_ProjectTasks", new List<TaskModel>());
+        }
+
+        public async Task<ActionResult> ProjectMilestones(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Milestones/MilestonesByProjectID/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                var milestones = JsonConvert.DeserializeObject<List<MilestoneModel>>(data);
+                return PartialView("_ProjectMilestones", milestones);
+            }
+            return PartialView("_ProjectMilestones", new List<MilestoneModel>());
+        }
+
+        public IActionResult TaskDetails()
+        {
+            return View();
+        }
+
     }
 }

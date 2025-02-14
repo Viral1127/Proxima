@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[PR_ProjectAssignments_RemoveUserFromProject]
+ALTER PROCEDURE [dbo].[PR_ProjectAssignments_RemoveUserFromProject]
     @ProjectID INT,
     @UserID INT
 AS
@@ -20,3 +20,5 @@ BEGIN
 END;
 
 EXEC [PR_ProjectAssignments_RemoveUserFromProject] @ProjectID = 1, @UserID = 2;
+
+select * from ProjectAssignments

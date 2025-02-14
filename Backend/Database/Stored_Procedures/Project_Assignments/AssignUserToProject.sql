@@ -40,3 +40,4 @@ select * from ProjectAssignments
 select * from Projects
 select * from Users
 
+select * from Tasks

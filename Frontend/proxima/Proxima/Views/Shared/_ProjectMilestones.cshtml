@@ -1,0 +1,343 @@
+﻿@model List<Proxima.Models.MilestoneModel>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="text-center mt-4">
+        <h5 class="text-muted">No milestones added yet</h5>
+        <p>You can add a new milestone by clicking the button below.</p>
+        <button class="btn btn-gradient-primary btn-rounded btn-fw mt-2">Add New Milestone</button>
+    </div>
+}
+else
+{
+    <div class="milestone-section">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="font-weight-medium">Pending</h5>
+            <span class="mdi mdi-dots-horizontal" style="font-size: 20px;"></span>
+        </div>
+
+
+        <div class="">
+            <ul class="">
+                @foreach (var milestones in Model.Where(m=>m.Status == "Pending"))
+                {
+                    <div class="border rounded shadow-sm bg-white p-3 my-2" id="milestoneCard">
+                        <div class="d-flex justify-content-between">
+                            <div id="milestoneList">
+                                <label class="icon-container">
+                                    <div class="d-flex gap-2">
+                                        <i id="statusIcon" class="mdi mdi-circle-outline status-btn" style="margin-top:2px;" onclick="toggleDropdown(event)"></i>
+                                        <div class="dropdown">
+                                            <div id="statusDropdown" class="dropdown-content">
+                                                <span onclick="selectStatus('mdi mdi-clock-outline', 'Pending', @milestones.MilestoneID, event)">
+                                                    <i class="mdi mdi-clock-outline icon"></i> Pending
+                                                </span>
+                                                <span onclick="selectStatus('mdi mdi-archive', 'Achieved', @milestones.MilestoneID, event)">
+                                                    <i class="mdi mdi-archive icon"></i> Achieved
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <span class="icon-text">@milestones.Title</span>
+                                            <p class="text-muted text-small font-weight-medium">@milestones.DueDate.ToString("d MMMM")</p>
+                                        </div>
+                                    </div>  
+                                </label>
+
+                            </div>
+                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-milestone" data-id="@milestones.MilestoneID" style="font-size: 15px;"></span>
+                        </div>
+                    </div>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="milestone-section">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="font-weight-medium">Achieved</h5>
+            <span class="mdi mdi-dots-horizontal" style="font-size: 20px;"></span>
+        </div>
+
+
+        <div class="">
+            <ul class="">
+                @foreach (var milestones in Model.Where(m => m.Status == "Achieved"))
+                {
+                    <div class="border rounded shadow-sm bg-white p-3 my-2" id="milestoneCard">
+                        <div class="d-flex justify-content-between">
+                            <div id="milestoneList">
+                                <label class="icon-container">
+                                    <div class="d-flex gap-2">
+                                        <i id="statusIcon" class="mdi mdi-circle-outline status-btn" style="margin-top:2px;" onclick="toggleDropdown(event)"></i>
+                                        <div class="dropdown">
+                                            <div id="statusDropdown" class="dropdown-content">
+                                                <span onclick="selectStatus('mdi mdi-clock-outline', 'Pending', @milestones.MilestoneID, event)">
+                                                    <i class="mdi mdi-clock-outline icon"></i> Pending
+                                                </span>
+                                                <span onclick="selectStatus('mdi mdi-archive', 'Achieved', @milestones.MilestoneID, event)">
+                                                    <i class="mdi mdi-archive icon"></i> Achieved
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <span class="icon-text">@milestones.Title</span>
+                                            <p class="text-muted text-small font-weight-medium">@milestones.DueDate.ToString("d MMMM")</p>
+                                        </div>
+                                    </div>
+                                </label>
+
+                            </div>
+                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-milestone" data-id="@milestones.MilestoneID" style="font-size: 15px;"></span>
+                        </div>
+                    </div>
+                }
+            </ul>
+        </div>
+    </div>
+
+@*     <div class="container my-5">
+        <div class="avatar-group">
+            <!-- Static Avatars for example -->
+            <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Viral">
+                <span class="avatar-text" id="avatar-1">V</span>
+            </a>
+            <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
+                <span class="avatar-text" id="avatar-2">R</span>
+            </a>
+            <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
+                <span class="avatar-text" id="avatar-3">A</span>
+            </a>
+            <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
+                <span class="avatar-text" id="avatar-4">J</span>
+            </a>
+
+            <!-- Add User Button -->
+            <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Add User">
+                <span class="avatar-text plus">+</span>
+            </a>
+        </div>
+    </div> *@
+
+}
+
+
+<script>
+
+@*     const users = ["Viral", "Romina Hadid", "Alexander Smith", "Jessica Doe"];
+
+    // Select all avatar-text elements
+    const avatarElements = document.querySelectorAll('.avatar-text');
+
+    // Loop over each user and set the first letter in the corresponding avatar
+    users.forEach((user, index) => {
+        let firstLetter = user.charAt(0).toUpperCase(); // Get the first letter
+        avatarElements[index].textContent = firstLetter; // Set the letter in the span
+    }); *@
+
+    function toggleDropdown(event) {
+        event.stopPropagation(); // Prevents click event from propagating to document
+        let iconContainer = event.currentTarget.closest(".icon-container");
+        let dropdown = iconContainer.querySelector(".dropdown-content");
+
+        console.log("Toggling dropdown", dropdown); // Debugging
+
+        // Close other dropdowns
+        $(".dropdown-content").not(dropdown).removeClass("show");
+
+        // Toggle this dropdown
+        $(dropdown).toggleClass("show");
+    }
+
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.dropdown').length) {
+            $(".dropdown-content").removeClass("show");
+        }
+    });
+
+    function selectStatus(iconClass, statusText, milestoneID, event) {
+        event.stopPropagation(); // Prevent event from closing dropdown before update
+
+        let iconContainer = event.currentTarget.closest(".icon-container");
+        let statusIcon = iconContainer.querySelector(".status-btn");
+
+        console.log("Changing icon for Milestone ID:", milestoneID); // Debugging
+
+        // Update icon
+        $(statusIcon).attr("class", iconClass + " status-btn");
+
+        // Close dropdown
+        $(".dropdown-content").removeClass("show");
+    }
+    function selectStatus(iconClass, statusText, milestoneID, event) {
+        let statusIcon = event.target.closest("label").querySelector(".status-btn");
+        $(statusIcon).attr("class", iconClass + " status-btn");
+
+        let requestData = {
+            milestoneID: milestoneID,
+            status: statusText,
+        };
+
+        $.ajax({
+            url: `https://localhost:7107/api/Milestones/UpdateMilestoneStatus/${milestoneID}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                console.log("Response:", response);
+                if (response.message === "Milestone Status Updated succesfully") {
+                    location.reload();
+                }
+                else{
+                    alert("Failed to update task status.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Error:", xhr.responseText);
+                alert("Error updating task status. Check console for details.");
+            }
+        });
+    }
+
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.dropdown').length) {
+            $(".dropdown-content").removeClass("show");
+        }
+    });
+
+	$(document).on('click','.delete-milestone',function(){
+		let milestoneID = $(this).data('id');
+		console.log("Deleting Milestone ID:", milestoneID); // Debugging
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `https://localhost:7107/api/Milestones/${milestoneID}`,
+                    type: "DELETE",
+                    success:  async function (response) {
+                        await Swal.fire("Achived!", "Your milestone has been deleted.", "success");
+                        $(`span[data-id="${milestoneID}"]`).closest("li").remove();
+							location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire("Error", "Something went wrong!", "error");
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+	});
+</script>
+
+<style>
+    /* .avatar-group { */
+    /*     display: flex; */
+    /*     justify-content: flex-start; */
+    /*     align-items: center; */
+    /*     position: relative; */
+    /* } */
+
+    /* .avatar { */
+    /*     display: inline-block; */
+    /*     position: absolute; */
+    /*     width: 50px; */
+    /*     height: 50px; */
+    /*     text-align: center; */
+    /*     border: 2px solid #fff; */
+    /*     background-color: #6c757d; /* Default background color */ */
+    /*     z-index: 1; /* To stack the avatars */ */
+    /*     transition: all 0.3s ease-in-out; */
+    /* } */
+
+    /*     .avatar:hover { */
+    /*         background-color: #007bff; */
+    /*         cursor: pointer; */
+    /*         z-index: 10; /* Bring the hovered avatar to the front */ */
+    /*         transform: scale(1.2); /* Slightly scale up the image */ */
+    /*     } */
+
+    /* .avatar-text { */
+    /*     display: flex; */
+    /*     justify-content: center; */
+    /*     align-items: center; */
+    /*     height: 100%; */
+    /*     width: 100%; */
+    /*     font-size: 18px; */
+    /*     font-weight: bold; */
+    /*     color: white; */
+    /* } */
+
+    /*     .avatar-text.plus { */
+    /*         font-size: 24px; */
+    /*         color: white; */
+    /*     } */
+
+    /*     /* Add user button styling */ */
+    /*     .avatar-text.plus { */
+    /*         font-size: 24px; */
+    /*         color: white; */
+    /*     } */
+
+    /* /* Overlapping effect */ */
+    /* .avatar:nth-child(1) { */
+    /*     left: 0; */
+    /* } */
+
+    /* .avatar:nth-child(2) { */
+    /*     left: 30px; */
+    /* } */
+
+    /* .avatar:nth-child(3) { */
+    /*     left: 60px; */
+    /* } */
+
+    /* .avatar:nth-child(4) { */
+    /*     left: 90px; */
+    /* } */
+
+    /* .avatar:nth-child(5) { */
+    /*     left: 120px; */
+    /* } */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 150px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        z-index: 1;
+        padding: 5px;
+    }
+
+    .dropdown-content span {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .dropdown-content span:hover {
+        background-color: #f0f0f0;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .icon {
+        margin-right: 8px;
+    }
+
+
+</style>

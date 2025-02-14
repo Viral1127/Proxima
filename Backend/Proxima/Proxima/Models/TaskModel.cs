@@ -19,4 +19,22 @@ namespace Proxima.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
+    public class TaskSaveModel
+    {
+        [Key]
+        public int TaskID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int TaskTypeID { get; set; }
+        public DateTime DueDate { get; set; }
+        public int AssignedTo { get; set; }
+        public int ProjectID { get; set; }
+    }
+    public class TaskStatusModel
+    {
+        [Key]
+        public int TaskID { get; set; }
+        public string Status { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+    }
 }

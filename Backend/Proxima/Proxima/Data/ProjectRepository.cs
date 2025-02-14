@@ -70,8 +70,8 @@ namespace Proxima.Data
                     {
                         ProjectID = Convert.ToInt32(reader["ProjectID"]),
                         Title = reader["Title"].ToString(),
-                        Description = reader["Description"].ToString(),
-                        ClientID = Convert.ToInt32(reader["ClientID"]),
+                        Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : string.Empty,
+                        ClientID = reader["ClientID"] != DBNull.Value ? Convert.ToInt32(reader["ClientID"]) : 0,
                         StartDate = Convert.ToDateTime(reader["StartDate"]),
                         EndDate = Convert.ToDateTime(reader["EndDate"]),
                         Status = reader["Status"].ToString(),
@@ -140,7 +140,7 @@ namespace Proxima.Data
         #endregion
 
         #region UpdateProject
-        public bool UpdateProject(ProjectModel project)
+        public bool UpdateProject(ProjectUpdate project)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -156,7 +156,7 @@ namespace Proxima.Data
                 cmd.Parameters.AddWithValue("@EndDate", project.EndDate);
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
+                return rowsAffected > 0;    
             }
         }
         #endregion

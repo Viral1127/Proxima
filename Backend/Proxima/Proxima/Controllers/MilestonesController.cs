@@ -53,12 +53,12 @@ namespace Proxima.Controllers
 
         #region AddMilestones
         [HttpPost]
-        public IActionResult CreateMilestones([FromBody] MilestonesModel milestones)
+        public IActionResult CreateMilestones([FromBody] MilestoneSaveModel milestones)
         {
-            if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
-            {
-                return StatusCode(500, "You have not access to create project's milestone");
-            }
+            //if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have not access to create project's milestone");
+            //}
             if (milestones == null)
             {
                 return BadRequest();
@@ -99,19 +99,45 @@ namespace Proxima.Controllers
 
         #endregion
 
-        #region AchivedMilestone
+        #region UpdateMilestone Status
+
+        [HttpPut("UpdateMilestoneStatus/{milestoneID}")]
+        public IActionResult UpdateMilestoneStatus(int milestoneID, [FromBody] MilestonesStatusModel milestoneStatus)
+        {
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have not access to update project's milestone");
+            //}
+            if (milestoneStatus == null || milestoneID != milestoneStatus.MilestoneID)
+            {
+                return BadRequest();
+            }
+            var isUpdated = _milestonesRepository.UpdateMilestoneStatus(milestoneStatus);
+            if (isUpdated)
+            {
+                return Ok(new { Message = "Milestone Status Updated succesfully" });
+            }
+            else
+            {
+                return StatusCode(500, "An error occured while updating Milestone");
+            }
+        }
+
+        #endregion
+
+        #region DeleteMilestone
         [HttpDelete("{milestoneID}")]
 
         public IActionResult DeleteMilestone(int milestoneID)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
-            {
-                return StatusCode(500, "You have not access to delete project's milestone");
-            }
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have not access to delete project's milestone");
+            //}
             var isDeleted = _milestonesRepository.DeleteMilestone(milestoneID);
             if (isDeleted)
             {
-                return Ok(new { Message = "Milestone achived successfully" });
+                return Ok(new { Message = "Milestone deleted successfully" });
             }
             else
             {

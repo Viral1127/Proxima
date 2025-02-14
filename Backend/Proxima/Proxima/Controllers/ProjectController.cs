@@ -95,11 +95,11 @@ namespace Proxima.Controllers
 
         [HttpPut("{projectID}")]
 
-        public IActionResult UpdateProject(int projectID, [FromBody] ProjectModel project)
+        public IActionResult UpdateProject(int projectID, [FromBody] ProjectUpdate project)
         {
-            if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager"))){
-                return StatusCode(500, "Only Admin, Project Manager can Update project details.");
-            }
+            //if(!(User.IsInRole("Admin") || User.IsInRole("Project Manager"))){
+            //    return StatusCode(500, "Only Admin, Project Manager can Update project details.");
+            //}
             if (project == null || projectID != project.ProjectID)
             {
                 return BadRequest();
@@ -118,14 +118,14 @@ namespace Proxima.Controllers
         #endregion
 
         #region ArchiveProject
-        [HttpDelete("ArchiveProject/{projectID}")]
+        [HttpPost("ArchiveProject/{projectID}")]
 
         public IActionResult ArchiveProject(int projectID)
         {
-            if (!(User.IsInRole("Admin")))
-            {
-                return StatusCode(500, "Only Admin can Delete Project");
-            }
+            //if (!(User.IsInRole("Admin")))
+            //{
+            //    return StatusCode(500, "Only Admin can Delete Project");
+            //}
             var isArchived = _projectRepository.ArchiveProject(projectID);
             if (isArchived)
             {

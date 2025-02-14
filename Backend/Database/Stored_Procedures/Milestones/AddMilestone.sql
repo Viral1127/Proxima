@@ -1,23 +1,19 @@
-CREATE PROCEDURE [dbo].[PR_Milestone_AddMilestone]
+ALTER PROCEDURE [dbo].[PR_Milestone_AddMilestone]
     @ProjectID INT,
     @Title NVARCHAR(255),
-    @Description NVARCHAR(MAX),
-    @DueDate DATE,
-    @Status NVARCHAR(50)
+    @DueDate DATE
 AS
 BEGIN
-    INSERT INTO Milestones (ProjectID, Title, Description, DueDate, Status)
-    VALUES (@ProjectID, @Title, @Description, @DueDate, @Status);
+    INSERT INTO Milestones (ProjectID, Title,DueDate)
+    VALUES (@ProjectID, @Title, @DueDate);
 
     PRINT 'Milestone added successfully.';
 END;
 
 EXEC [PR_Milestone_AddMilestone] 
     @ProjectID = 1, 
-    @Title = 'Requirement Analysis', 
-    @Description = 'Analyze client requirements.', 
-    @DueDate = '2025-01-10', 
-    @Status = 'Pending';
+    @Title = 'Requirement Analysis',
+    @DueDate = '2025-01-10'
 
 	select * from Milestones
 	select * from Projects

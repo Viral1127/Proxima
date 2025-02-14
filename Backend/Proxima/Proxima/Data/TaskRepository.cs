@@ -126,7 +126,7 @@ namespace Proxima.Data
         #endregion
 
         #region CreateTasks
-        public bool CreateTasks(TaskModel tasks)
+        public bool CreateTasks(TaskSaveModel tasks)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -163,6 +163,24 @@ namespace Proxima.Data
                 cmd.Parameters.AddWithValue("@DueDate", tasks.DueDate);
                 cmd.Parameters.AddWithValue("@Status", tasks.Status);
                 cmd.Parameters.AddWithValue("@AssignedTo", tasks.AssignedTo);
+                connection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+        #endregion
+        #region UpdateTasks
+        public bool UpdateTaskStatus(TaskStatusModel taskStatus)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("PR_Tasks_UpdateTaskStatus", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@TaskID", taskStatus.TaskID);
+                cmd.Parameters.AddWithValue("@Status", taskStatus.Status);
+                
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;

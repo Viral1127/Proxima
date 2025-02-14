@@ -22,10 +22,26 @@ BEGIN
     PRINT 'Task updated successfully.';
 END;
 
+CREATE PROCEDURE [dbo].[PR_Tasks_UpdateTaskStatus]
+    @TaskID INT,
+    @Status VARCHAR(50) -- Must be 'In Progress', 'Under Review', 'Completed'
+AS
+BEGIN
+    UPDATE [dbo].[Tasks]
+    SET 
+        [Status] = @Status,
+        [UpdatedAt] = GETDATE()
+    WHERE [TaskID] = @TaskID;
+
+    PRINT 'Task status updated successfully.';
+END;
+
+[PR_Tasks_UpdateTaskStatus] 12,'Under Review'
+
 EXEC [PR_Tasks_UpdateTask]
-    @TaskID = 6,
-    @Title = 'Update API Documentation',
-    @Description = 'Revise and complete the API documentation.',
+    @TaskID = 3,
+    @Title = 'API Integration',
+    @Description = 'Integrate APIs into the app.',
     @TaskTypeID = 2, -- Updated TaskTypeID
     @DueDate = '2025-02-20',
     @Status = 'Under Review', -- Updated status

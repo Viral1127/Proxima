@@ -25,3 +25,5 @@ END
 select * from Tasks
 
 [PR_Taks_GetAllTasks]
+
+select * from Users

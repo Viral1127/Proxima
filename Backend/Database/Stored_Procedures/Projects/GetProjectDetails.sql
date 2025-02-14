@@ -6,6 +6,6 @@ BEGIN
     WHERE [ProjectID] = @ProjectID;
 END;
 
-exec [PR_Projects_SelectByPK] 1
+exec [PR_Projects_SelectByPK] 1022
 
 drop procedure [PR_Projects.SelectByPK]

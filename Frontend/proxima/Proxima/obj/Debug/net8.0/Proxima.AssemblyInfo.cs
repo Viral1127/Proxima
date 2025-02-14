@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Proxima")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90ac8fbb281f2c6baadb3a4c2b583d355130b86e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb8dd362c180ceea6e9e007d392b3952d1577426")]
 [assembly: System.Reflection.AssemblyProductAttribute("Proxima")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Proxima")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
