@@ -1,11 +1,10 @@
-CREATE PROCEDURE [dbo].[PR_Tasks_UpdateTask]
+ALTER PROCEDURE [dbo].[PR_Tasks_UpdateTask]
     @TaskID INT,
     @Title VARCHAR(100),
     @Description VARCHAR(100),
     @TaskTypeID INT,
     @DueDate DATETIME,
-    @Status VARCHAR(50), -- Must be 'In Progress', 'Under Review', 'Completed'
-    @AssignedTo INT
+    @Status VARCHAR(50) -- Must be 'In Progress', 'Under Review', 'Completed'
 AS
 BEGIN
     UPDATE [dbo].[Tasks]
@@ -15,7 +14,6 @@ BEGIN
         [TaskTypeID] = @TaskTypeID,
         [DueDate] = @DueDate,
         [Status] = @Status,
-        [AssignedTo] = @AssignedTo,
         [UpdatedAt] = GETDATE()
     WHERE [TaskID] = @TaskID;
 
@@ -44,7 +42,6 @@ EXEC [PR_Tasks_UpdateTask]
     @Description = 'Integrate APIs into the app.',
     @TaskTypeID = 2, -- Updated TaskTypeID
     @DueDate = '2025-02-20',
-    @Status = 'Under Review', -- Updated status
-    @AssignedTo = 3; -- Updated AssignedTo
+    @Status = 'Under Review' -- Updated status
 
 	select * from Tasks

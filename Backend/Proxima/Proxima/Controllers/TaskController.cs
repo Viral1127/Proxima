@@ -76,12 +76,12 @@ namespace Proxima.Controllers
         #region UpdateTask
 
         [HttpPut("{taskID}")]
-        public IActionResult UpdateTask(int taskID, [FromBody] TaskModel tasks)
+        public IActionResult UpdateTask(int taskID, [FromBody] TaskUpdateModel tasks)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
-            {
-                return StatusCode(500, "You have no access to Update task");
-            }
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have no access to Update task");
+            //}
             if (tasks == null || taskID != tasks.TaskID)
             {
                 return BadRequest();

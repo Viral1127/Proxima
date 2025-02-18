@@ -1,11 +1,22 @@
-CREATE PROCEDURE [dbo].[PR_TaskAssignments_DeleteTaskAssignment]
-    @AssignmentID INT
+Alter PROCEDURE [dbo].[PR_TaskAssignments_DeleteTaskAssignment]
+    @TaskID INT,
+    @UserID INT
 AS
 BEGIN
-    DELETE FROM TaskAssignments
-    WHERE AssignmentID = @AssignmentID;
+    IF EXISTS (
+        SELECT 1 FROM [dbo].TaskAssignments
+        WHERE TaskID = @TaskID AND [UserID] = @UserID
+    )
+    BEGIN
+        DELETE FROM TaskAssignments
+        WHERE TaskID = @TaskID AND [UserID] = @UserID;
 
-    PRINT 'Task assignment deleted successfully.';
+        PRINT 'User successfully removed from the task.';
+    END
+    ELSE
+    BEGIN
+        PRINT 'User is not assigned to this task.';
+    END
 END;
-
-[PR_TaskAssignments_DeleteTaskAssignment] 3
+select * from TaskAssignments
+[PR_TaskAssignments_DeleteTaskAssignment] 32 , 1

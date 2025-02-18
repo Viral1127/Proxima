@@ -1,0 +1,261 @@
+﻿@model List<Proxima.Models.ProjectAttachmentModel>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+<style>
+    /* Ensure same card size */
+    .file-card {
+        width: 100%;
+        max-width: 160px;
+        height: 25vh;
+        margin: auto;
+    }
+
+        /* Uniform image size with opacity */
+        .file-card img {
+            height: 120px;
+            object-fit: cover;
+            opacity: 0.6;
+            width: 100%;
+        }
+
+        /* Card body adjustments */
+        .file-card .card-body {
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* Adjust title size */
+        .file-card .card-title {
+            font-size: 12px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Small text for uploader */
+        .file-card .card-text {
+            font-size: 10px;
+        }
+
+    /* Hover effect for vertical dots */
+    .dots-icon {
+        padding: 5px;
+        border-radius: 50%;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .dots-icon:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+    /* Small dropdown menu */
+    .dropdown-menu {
+        min-width: 12px !important; /* Reduce width */
+        padding: 5px; /* Less padding */
+        font-size: 12px; /* Smaller text */
+    }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa !important; /* Light background */
+            color: black !important;
+        }
+
+
+</style>
+
+<div class="content-wrapper">
+    @if (!Model.Any() || Model.First().ProjectID == 0)
+    {
+        <div class="text-center mt-4">
+            <h5 class="text-muted">No Files uploaded yet</h5>
+            <p>You can add a new files by clicking the +Add Files button.</p>
+        </div>
+    }
+    else
+    {
+        <div class="">
+            <div class="row" id="fileContainer">
+                <!-- AJAX loaded files will appear here -->
+            </div>
+            <input type="hidden" id="projectId" value="@(@Model.Any() ? Model.First().ProjectID : 0)" />
+        </div>
+
+        <!-- File Preview Modal -->
+        <div class="modal fade" id="filePreviewModal" tabindex="-1" aria-labelledby="filePreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filePreviewModalLabel">File Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="previewImage" class="img-fluid" alt="Preview">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        console.log("jQuery document ready!");
+        const projectId = $("#projectId").val(); // Get the Project ID from hidden input
+        
+        loadProjectFiles(projectId);
+
+            function loadProjectFiles(projectId) {
+        console.log("Fetching files for projectId:", projectId);
+
+        $.ajax({
+            url: `https://localhost:7107/api/ProjectAttachment/AttachmentByProjectID/${projectId}`,
+            type: "GET",
+            dataType: "json",
+            success: function (files) {
+                console.log("Files received from API:", files);
+                let fileContainer = $("#fileContainer");
+                fileContainer.empty(); // Clear old data
+
+                if (files.length === 0) {
+                    fileContainer.html("<p>No files uploaded yet.</p>");
+                    return;
+                }
+
+                let baseURL = "https://localhost:7107/uploads/";
+
+                files.forEach(file => {
+                    let fileTypeIcon = getFileIcon(file.fileType);
+
+                    // ✅ Fixing file path dynamically
+                    let fullPath = file.filePath.startsWith("http") ? file.filePath : baseURL + file.filePath.replace(/^uploads\/?/, "");
+
+                    let fileCard = `
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                            <div class="card shadow-sm file-card">
+                                <div class="position-relative">
+                                    <img src="${fullPath}" class="card-img-top" alt="${file.fileName}"
+                                         onerror="this.onerror=null;this.src='pdf-placeholder.png';">
+
+                                    <div class="dropdown position-absolute top-0 end-0">
+                                        <i class="mdi mdi-dots-vertical dots-icon" data-bs-toggle="dropdown"></i>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="${fullPath}" download>View</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="downloadFile('${fullPath}', '${file.fileName}')">Download</a></li>
+                                            <li>
+                                                <a class="dropdown-item text-danger delete-file" href="#" data-attachment-id="${file.attachmentID}">
+                                                    Delete
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card-body mt-2">
+                                    <p class="card-title  fw-medium">${file.fileName}</p>
+                                    <p class="card-text text-muted">Uploaded by ${file.uploadedByUser}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    fileContainer.append(fileCard);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching files:", xhr.responseText);
+            }
+        });
+    }
+
+
+        function getFileIcon(fileType) {
+            const icons = {
+                "image": '<i class="bi bi-image" style="font-size: 3rem;"></i>',
+                "pdf": '<i class="bi bi-file-earmark-pdf" style="font-size: 3rem; color: red;"></i>',
+                "doc": '<i class="bi bi-file-earmark-word" style="font-size: 3rem; color: blue;"></i>',
+                "default": '<i class="bi bi-file-earmark" style="font-size: 3rem;"></i>'
+            };
+
+            if (fileType.includes("image")) return icons.image;
+            if (fileType.includes("pdf")) return icons.pdf;
+            if (fileType.includes("word") || fileType.includes("doc")) return icons.doc;
+            return icons.default;
+        }
+
+        window.previewFile = function (fullPath) {
+
+            let previewImage = document.getElementById("previewImage");
+
+            if (/\.(jpeg|jpg|png|gif)$/.test(fullPath)) {
+                previewImage.src = fullPath;
+
+                // Open modal using Bootstrap 5 API
+                let modal = new bootstrap.Modal(document.getElementById("filePreviewModal"));
+                modal.show();
+            } else {
+                window.open(fullPath, "_blank");
+            }
+        };
+
+        window.downloadFile = function (fileUrl, fileName) {
+        fetch(fileUrl)
+            .then(response => response.blob())  // Convert to Blob
+            .then(blob => {
+                let blobUrl = window.URL.createObjectURL(blob);
+                let a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = fileName || "downloaded-file"; // Set filename
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(blobUrl); // Clean up memory
+            })
+            .catch(error => console.error("Error downloading file:", error));
+    };
+
+            $(document).on("click", ".delete-file", function (e) {
+        e.preventDefault();
+
+        let attachmentId = $(this).data("attachment-id"); // Get Attachment ID
+        let fileCard = $(this).closest(".file-card"); // Get the file card
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This file will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `https://localhost:7107/api/ProjectAttachment/${attachmentId}`, // Adjust API URL if needed
+                    type: "DELETE",
+                    success: function (response) {
+                        Swal.fire("Deleted!", response.Message, "success");
+                        fileCard.fadeOut(300, function () {
+                            $(this).remove();
+                        });
+                    },
+                    error: function (xhr) {
+                        let errorMsg = xhr.responseJSON?.Message || "Failed to delete the file.";
+                        Swal.fire("Error", errorMsg, "error");
+                    }
+                });
+            }
+        });
+    });
+
+
+
+    });
+</script>

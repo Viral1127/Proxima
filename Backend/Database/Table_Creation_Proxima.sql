@@ -52,6 +52,18 @@ CREATE TABLE Projects (
     UpdatedAt DATETIME NULL
 );
 
+CREATE TABLE ProjectAttachments (
+    AttachmentID INT PRIMARY KEY IDENTITY(1,1),
+    FileName NVARCHAR(255) NOT NULL,
+    FilePath NVARCHAR(500) NOT NULL,
+    FileType NVARCHAR(100) NOT NULL,
+    ProjectID INT NOT NULL,
+    UploadedBy INT NOT NULL,
+    UploadedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID),
+    FOREIGN KEY (UploadedBy) REFERENCES Users(UserID)
+);
+
 -- Table: Milestones
 CREATE TABLE Milestones (
     MilestoneID INT IDENTITY(1,1) PRIMARY KEY,

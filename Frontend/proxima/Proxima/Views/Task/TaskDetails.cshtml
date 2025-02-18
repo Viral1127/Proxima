@@ -1,0 +1,715 @@
+﻿@model Proxima.Models.TaskModel;
+@{
+    string iconClass = "mdi mdi-circle-outline"; // Default icon
+
+    if (Model.Status == "In Progress")
+    {
+        iconClass = "mdi mdi-circle-slice-4";
+    }
+    else if (Model.Status == "Under Review")
+    {
+        iconClass = "mdi mdi-eye-check";
+    }
+    else if (Model.Status == "Completed")
+    {
+        iconClass = "mdi mdi-check-circle";
+    }
+}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Detail Page</title>
+
+<style>
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            background-color: #f97316;
+            color: white;
+            font-size: 12px;
+            position: relative;
+            /* transition: transform 0.3s ease-in-out; */
+        }
+
+        .plus-avatar {
+            position: absolute;
+            top: 0;
+            left: 29px; /* Adjust overlap */
+            background-color: lightgray;
+            color: white;
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0;
+            /* transition: visibility 0s linear 0.3s, opacity 0.3s; */
+        }
+
+        .avatar-container:hover .plus-avatar {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-10px); /* Move on hover */
+        }
+
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1;
+            padding: 5px;
+            font-size: 12px; /* Decrease font size */
+            padding: 4px 8px;
+        }
+
+        .user-dropdown-content span {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .user-dropdown-content span:hover {
+            background-color: #f0f0f0;
+        }
+
+        #userList {
+            max-height:8rem;
+            overflow-y: auto; 
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+        }
+
+        #userList::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+        }
+
+
+
+        .comment-input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+        }
+
+        .metadata-item {
+            margin-bottom: 1rem;
+        }
+
+        /* Add borders between sections */
+        .left-section {
+            border-right: 2px solid #ddd;
+        }
+
+        .header {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .task-title {
+            font-weight: 400;
+        }
+
+        /* Responsive styling for mobile view */
+        @@media (max-width: 767px) {
+            .left-section
+
+        {
+            border-right: none;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .right-section {
+            border-top: 2px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .comment-input {
+            width: auto;
+        }
+
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1;
+            padding: 5px;
+            font-size: 12px; /* Decrease font size */
+            padding: 4px 8px;
+        }
+
+        .dropdown-content span {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .dropdown-content span:hover {
+            background-color: #f0f0f0;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .mdi {
+            cursor: pointer !important;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="content-fluid min-vh-100 bg-light">
+        <header class="d-flex justify-content-between align-items-center p-3 header">
+            <div class="d-flex align-items-center gap-4">
+
+                <i class="mdi mdi-chevron-left mt-1 cursor-pointer" style="font-size:20px;"></i>
+                
+                <span class="text-muted fs-4">@Model.ProjectName</span>
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="mdi mdi-link-variant" style="font-size:20px;"></i>
+                <i class="mdi mdi-circle-edit-outline" style="font-size:20px;" id="actionIcon" title="Edit" data-bs-toggle="modal" data-bs-target="#taskEditModal"></i>
+                <i class="mdi mdi-trash-can-outline delete-task" style="font-size:20px; color:red;" title="Delete"></i>
+              
+            </div>
+            <div class="modal fade" id="taskEditModal" tabindex="-1" aria-labelledby="taskEditModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">@Model.ProjectName</h4>
+                                <hr />
+                                <form class="forms-sample" id="taskEditForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputUsername1">Task Title</label>
+                                        <input type="text" class="form-control" id="taskName" name="Title" placeholder="Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description:</label>
+                                        <textarea class="form-control" id="description" name="description" placeholder="Description..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dueDate">Due Date:</label>
+                                        <input type="date" class="form-control" id="dueDate" name="dueDate">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="status" class="form-label">Status:</label>
+                                                <select class="form-select form-control" id="taskStatusDropdown" name="status">
+                                                    <option disabled>Select Status</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Under Review">Under Review</option>
+                                                    <option value="Completed">Completed</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="taskType" class="form-label">TaskType:</label>
+                                                <select class="form-select form-control" id="taskTypeDropdown" name="typeName">
+                                                    <option disabled>Select TaskType</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="taskID" value="@Model.TaskID" />
+                                    <button type="submit" class="btn btn-gradient-primary me-2" id="save">Submit</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container px-5 d-flex flex-column flex-md-row gap-4">
+            <!-- Left Section: Task Details -->
+            <div class="col-md-9 left-section p-3">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-lg-start gap-2">
+                        <div class="">
+                            <h1 class="h5 task-title">@Model.Title</h1>
+                            <p class="text-muted">@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="h6">Activity</h2>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <input type="text" class="comment-input" placeholder="Leave a comment..." id="commentInput">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-light">
+                                        <i class="lucide-paperclip" style="width: 16px; height: 16px;"></i>
+                                    </button>
+                                    <button class="btn btn-light">
+                                        <i class="lucide-smile-plus" style="width: 16px; height: 16px;"></i>
+                                    </button>
+                                </div>
+                                <button class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h6 class="text-muted">Recent Activity</h6>
+                        <div id="activityList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Metadata -->
+            <div class="col-md-3 right-section p-3">
+                <div class="space-y-4">
+                    <div class="row">
+						<div class="col">
+                            <p class="fw-medium">Status</p>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <i id="statusIcon" class="@iconClass status-btn" onclick="toggleDropdown(event)"></i>
+                                <span class="taskStatus" style="font-size:0.9rem;">@Model.Status</span>
+                                <div class="dropdown">
+                                    <div id="statusDropdown" class="dropdown-content">
+                                        <span onclick="selectStatus('mdi mdi-circle-slice-4', 'In Progress', @Model.TaskID, event)">
+                                            <i class="mdi mdi-circle-slice-4 icon"></i> In Progress
+                                        </span>
+                                        <span onclick="selectStatus('mdi mdi-eye-check', 'Under Review', @Model.TaskID, event)">
+                                            <i class="mdi mdi-eye-check icon"></i> Under Review
+                                        </span>
+                                        <span onclick="selectStatus('mdi mdi-check-circle', 'Completed', @Model.TaskID, event)">
+                                            <i class="mdi mdi-check-circle icon"></i> Completed
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-medium">Priority</p>
+                        </div>
+                        <div class="col">
+                            <span class="taskStatus" style="font-size:0.9rem;">High</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-medium">Label</p>
+                        </div>
+                        <div class="col">
+                            <span class="taskStatus" style="font-size:0.9rem;">@Model.TypeName</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-medium">Due Date</p>
+                        </div>
+                        <div class="col">
+                            <span class="taskStatus" style="font-size:0.9rem;">@Model.DueDate.ToString("d MMMM")</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-medium">Assign</p>
+                        </div>
+                        <div class="col">
+                            <div class="avatar-container">
+                                <div class="avatar main-avatar">
+                                    <span>V</span>
+                                </div>
+                                <div class="avatar plus-avatar" onclick="toggleAvatarDropdown(event)">
+                                    <span>+</span>
+                                </div>
+                                <div class="user-dropdown-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="height:5px;width:5px;"></button>
+                                    </div>
+                                    <ul class="list-group" id="userList">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+            $(document).on("click", ".mdi-chevron-left", function () {
+        window.history.back(); // Go back to the previous page
+    });
+
+    function toggleAvatarDropdown(event) {
+        event.stopPropagation(); // Prevent event bubbling
+
+        // Find the dropdown element
+        let dropdown = event.target.closest(".avatar-container").querySelector(".user-dropdown-content");
+
+        // Toggle the display of the dropdown
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        } else {
+            dropdown.style.display = "block";
+        }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+        // Close dropdown if clicked outside
+        if (!event.target.closest(".avatar-container")) {
+            document.querySelectorAll(".user-dropdown-content").forEach(dropdown => {
+                dropdown.style.display = "none";
+            });
+        }
+    });
+
+    $(document).on("click", ".btn-close", function () {
+        $(this).closest(".user-dropdown-content").hide(); // Hide the parent dropdown
+    });
+
+
+
+    // Example of activity items (to simulate React state)
+    const activityItems = [
+        { action: "assigned task to vc.", time: "16 hours ago" },
+        { action: "removed assignee.", time: "16 hours ago" },
+    ];
+
+    // Render activity items
+    const activityList = document.getElementById('activityList');
+    activityItems.forEach(item => {
+        const activityElement = document.createElement('div');
+        activityElement.classList.add('d-flex', 'align-items-start', 'gap-3', 'mb-3');
+        activityElement.innerHTML = `
+
+            <div class="avatar"><span>v</span></div>
+            <div class="flex-1">
+                <p class="text-sm"><strong>vc</strong> ${item.action}</p>
+                <p class="text-xs text-muted">${item.time}</p>
+            </div>
+        `;
+        activityList.appendChild(activityElement);
+    });
+
+        function toggleDropdown(event) {
+        event.stopPropagation();
+        let dropdown = event.target.closest("label").querySelector(".dropdown-content");
+        $(".dropdown-content").not(dropdown).removeClass("show");
+        $(dropdown).toggleClass("show");
+    }
+
+    function selectStatus(iconClass, statusText, taskID, event) {
+        let statusIcon = event.target.closest("label").querySelector(".status-btn");
+        let statusLabel = statusIcon.closest("label").querySelector(".taskStatus");
+
+        let requestData = {
+            taskID: taskID,
+            status: statusText,
+            updatedAt: new Date().toISOString()
+        };
+
+        $.ajax({
+            url: `https://localhost:7107/api/Task/UpdateStatus/${taskID}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                console.log("Response:", response);
+                if (response.message === "Task Status Updated succesfully") {
+                    $(statusIcon).attr("class", iconClass + " status-btn");
+                    $(statusLabel).text(statusText);
+                     $(".dropdown-content").removeClass("show");
+                }
+                else{
+                    alert("Failed to update task status.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Error:", xhr.responseText);
+                alert("Error updating task status. Check console for details.");
+            }
+        });
+    }
+
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.dropdown').length) {
+            $(".dropdown-content").removeClass("show");
+        }
+    });
+
+    $(document).on('click', '.delete-task', function () {
+        let taskId = @Model.TaskID;
+		let projectID = @Model.ProjectID;
+        if (!taskId) {
+            console.error("Task ID is missing");
+            return;
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `https://localhost:7107/api/Task/${taskId}`,
+                    type: "DELETE",
+                    success: async function (response) {
+                        await Swal.fire("Deleted!", "Your task has been deleted.", "success");
+						location.href = `/Project/ProjectDetails/${projectID}`;
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire("Error", "Something went wrong!", "error");
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        var taskID = @Model.TaskID;
+
+        function fetchTaskTypes(selectedValue = null) {
+            $.ajax({
+                url: "https://localhost:7107/api/TaskType",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let dropdown = $("#taskTypeDropdown");
+                    dropdown.empty()
+                    dropdown.append('<option disabled selected>Select TaskType</option>');
+                    
+                    
+                    data.forEach(function (taskType){
+                        console.log(taskType);
+                        dropdown.append(`<option value="${taskType.taskTypeID}">${taskType.typeName}</option>`);
+                    });
+
+                    if (selectedValue) {
+                        dropdown.val(selectedValue).change();
+                    }
+                },
+                error: function () {
+                    console.error("Error fetching task types.");
+                }
+            });
+        }
+
+        // Call the function to load task types on page load
+        // fetchTaskTypes();
+
+        function fetchUsers() {
+            $.ajax({
+                url: "https://localhost:7107/api/User/GetAllUsers",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log("Users Data:", data);
+
+                    var userdropdown = $("#userDropdown");
+                    var userList = $("#userList");
+
+                    userdropdown.empty();
+                    userList.empty();
+
+                    userdropdown.append('<option disabled selected>Select Users</option>');
+
+                    if (data.length === 0) {
+                        console.warn("No users found!");
+                        return;
+                    }
+
+                    data.forEach(function (user) {
+
+                        userdropdown.append(`<option value="${user.userID}">${user.name}</option>`);
+
+                        var userHtml = `
+                            <li class="list-group-item p-1">
+                                <div class="d-flex align-items-center">
+                                    <input class="form-check-input user-checkbox me-1" type="checkbox" id="user-${user.userID}" data-user-id="${user.userID}" />
+                                    <label class="form-check-label m-0" for="user-${user.userID}">
+                                        ${user.name}
+                                    </label>
+                                </div>
+                            </li>`;
+                        userList.append(userHtml);
+                    });
+
+                    loadAssignedUsers();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching users:", error);
+                }
+            });
+        }
+
+        function loadAssignedUsers() {
+            $.ajax({
+                url: `https://localhost:7107/api/TaskAssignment/${taskID}`,
+                type: "GET",
+                dataType: "json",
+                success: function (assignedUsers) {
+                    assignedUsers.forEach(user => {
+                        $(`#user-${user.userID}`).prop("checked", true);
+                    });
+                },
+                error: function () {
+                    console.error("Error fetching assigned users.");
+                }
+            });
+        }
+
+        function assignUserToTask(userID) {
+            $.ajax({
+                url: "https://localhost:7107/api/TaskAssignment",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ taskID: taskID, userID: userID }),
+                success: function () {
+                    console.log(`User ${userID} assigned to task ${taskID}.`);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Failed to assign user:", error);
+                }
+            });
+        }
+
+        function removeUserFromTask(userID) {
+            $.ajax({
+                url: "https://localhost:7107/api/TaskAssignment/removeUserFromTask",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ taskID: taskID, userID: userID }),
+                success: function () {
+                    console.log(`User ${userID} removed from task ${taskID}.`);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Failed to remove user:", error);
+                }
+            });
+        }
+
+        $(document).on("change", ".user-checkbox", function () {
+            const userID = $(this).data("user-id");
+            if ($(this).is(":checked")) {
+                assignUserToTask(userID);
+            } else {
+                removeUserFromTask(userID);
+            }
+        });
+
+        $('#assignModal').on('shown.bs.modal', function () {
+            fetchUsers();
+        });
+
+        fetchUsers();
+
+
+        $("#taskEditModal").on('show.bs.modal', function (event) {
+            var modal = $(this);
+            var taskID = $('#taskID').val();
+
+            $.ajax({
+                url: `https://localhost:7107/api/Task/${taskID}`,
+                type: "GET",
+                success: function (data) {
+					console.log("Task Data:", data);
+                    if (data) {
+                        modal.find('#taskName').val(data.title);
+                        modal.find('#description').val(data.description);
+                        modal.find('#taskStatusDropdown').val(data.status);
+                        modal.find('#userDropdown').val(data.name);
+                        modal.find('#dueDate').val(data.dueDate.split('T')[0]);
+
+                        fetchTaskTypes(data.taskTypeID);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching project data:", error);
+                }
+            });
+        });
+
+        $("#taskEditForm").submit(function (event) {
+            event.preventDefault();
+
+            var taskID = $('#taskID').val();
+
+            let taskData = {
+                taskID: taskID,
+                title: $("#taskName").val(),
+                description: $("#description").val(),
+                status: $("#taskStatusDropdown").val(),
+                taskTypeID: $("#taskTypeDropdown").val(),  // Get selected Task Type
+                assignedUserID: $("#userDropdown").val(), // Get selected User
+                dueDate: $("#dueDate").val()
+            };
+
+            console.log("Task Data to Update:", taskData);
+
+            $.ajax({
+                url: `https://localhost:7107/api/Task/${taskID}`,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(taskData),
+                success: async function () {
+                    await alert("Task updated successfully!");
+                    $('#taskEditModal').modal('hide');
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error("Error updating task:", error);
+                    alert("Error updating task!");
+                }
+            });
+        });
+    });
+
+
+</script>
+</html>

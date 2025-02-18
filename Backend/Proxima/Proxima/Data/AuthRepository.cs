@@ -14,7 +14,7 @@ namespace Proxima.Data
         }
 
         #region Registration
-        public bool Register(UserModel user)
+        public bool Register(RegisterModel user)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -25,9 +25,7 @@ namespace Proxima.Data
                 cmd.Parameters.AddWithValue("@Name", user.Name);
                 cmd.Parameters.AddWithValue("@Email", user.Email);
                 cmd.Parameters.AddWithValue("@Password", user.Password);
-                cmd.Parameters.AddWithValue("@RoleName", user.RoleName);
-                cmd.Parameters.AddWithValue("@Status", user.Status);
-
+                cmd.Parameters.AddWithValue("@RoleID", user.RoleID);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected > 0;

@@ -2,14 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Stored_Procedures",
-    "\\Stored_Procedures\\Milestones",
-    "\\Stored_Procedures\\Projects",
-    "\\Stored_Procedures\\Project_Assignments",
-    "\\Stored_Procedures\\TaskAssignments",
-    "\\Stored_Procedures\\Tasks",
-    "\\Stored_Procedures\\TaskTypes",
     "\\Stored_Procedures\\User"
   ],
-  "SelectedNode": "\\Table_Creation_Proxima.sql",
+  "SelectedNode": "\\Stored_Procedures\\User\\RegisterUser.sql",
   "PreviewInSolutionExplorer": false
 }

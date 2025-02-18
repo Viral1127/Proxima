@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\views\\project\\projectlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\views\\project\\projectlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\models\\projectmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|d:\\darshan university\\projects\\proxima\\frontend\\pms\\pms\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{133CE0CD-46A9-4FB4-A30F-6A56D972BE75}|PMS\\PMS.csproj|solutionrelative:pms\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +47,79 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "PMS\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "PMS\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Title": "ProjectList.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Project\\ProjectList.cshtml",
+              "RelativeDocumentMoniker": "PMS\\Views\\Project\\ProjectList.cshtml",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Project\\ProjectList.cshtml",
+              "RelativeToolTip": "PMS\\Views\\Project\\ProjectList.cshtml",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAYwJYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-14T07:41:38.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProjectModel.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Models\\ProjectModel.cs",
+              "RelativeDocumentMoniker": "PMS\\Models\\ProjectModel.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Models\\ProjectModel.cs",
+              "RelativeToolTip": "PMS\\Models\\ProjectModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T14:31:22.083Z",
+              "WhenOpened": "2025-02-14T07:40:20.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\appsettings.json",
+              "RelativeDocumentMoniker": "PMS\\appsettings.json",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\appsettings.json",
+              "RelativeToolTip": "PMS\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-14T07:38:37.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "PMS\\Controllers\\ProjectController.cs",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "PMS\\Controllers\\ProjectController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T07:17:40.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "PMS\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "PMS\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAADYBAAAAAAAAAAAYwFEBAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-14T07:14:54.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PMS\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\PMS\\PMS\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PMS\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALUAAAAAAAAAAAAYwNYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-14T07:14:46.009Z",
               "EditorCaption": ""
             }
           ]

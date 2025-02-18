@@ -76,10 +76,12 @@ namespace Proxima.Data
                         Title = reader["Title"].ToString(),
                         Description = reader["Description"].ToString(),
                         TaskTypeID = Convert.ToInt32(reader["TaskTypeID"]),
+                        TypeName = reader["TypeName"].ToString(),
                         DueDate = Convert.ToDateTime(reader["DueDate"]),
                         Status = reader["Status"].ToString(),
                         AssignedTo = Convert.ToInt32(reader["AssignedTo"]),
                         ProjectID = Convert.ToInt32(reader["ProjectID"]),
+                        ProjectName = reader["ProjectTitle"].ToString(),
                         CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                         UpdatedAt = reader["UpdatedAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["UpdatedAt"])
                     };
@@ -148,7 +150,7 @@ namespace Proxima.Data
         #endregion
 
         #region UpdateTasks
-        public bool UpdateTasks(TaskModel tasks)
+        public bool UpdateTasks(TaskUpdateModel tasks)
         {   
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -162,7 +164,6 @@ namespace Proxima.Data
                 cmd.Parameters.AddWithValue("@TaskTypeID", tasks.TaskTypeID);
                 cmd.Parameters.AddWithValue("@DueDate", tasks.DueDate);
                 cmd.Parameters.AddWithValue("@Status", tasks.Status);
-                cmd.Parameters.AddWithValue("@AssignedTo", tasks.AssignedTo);
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;

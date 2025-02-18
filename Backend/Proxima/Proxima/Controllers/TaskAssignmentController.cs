@@ -18,12 +18,12 @@ namespace Proxima.Controllers
 
         #region AssignTaskToUser
         [HttpPost]
-        public IActionResult AssignTaskToUser([FromBody] TaskAssignmentModel taskAssignments)
+        public IActionResult AssignTaskToUser([FromBody] TaskAssignmentSave taskAssignments)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
-            {
-                return StatusCode(500, "Only Admin and Project Manager can assign task to user");
-            }
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "Only Admin and Project Manager can assign task to user");
+            //}
             if (taskAssignments == null)
             {
                 return BadRequest();
@@ -68,18 +68,18 @@ namespace Proxima.Controllers
 
         #endregion
 
-        #region RemoveTaskFromUser
-        [HttpDelete("{assignmentID}")]
-        public IActionResult DeleteTaskAssignment(int assignmentID)
+        #region RemoveUserFromTask
+        [HttpPost("removeUserFromTask")]
+        public IActionResult DeleteTaskAssignment([FromBody] TaskAssignmentSave taskAssignments)
         {
-            if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
-            {
-                return StatusCode(500, "You have not access to Remove task from user");
-            }
-            var isDeleted = _taskAssignmentRepository.DeleteTaskAssignments(assignmentID);
+            //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+            //{
+            //    return StatusCode(500, "You have not access to Remove task from user");
+            //}
+            var isDeleted = _taskAssignmentRepository.DeleteTaskAssignments(taskAssignments.TaskID, taskAssignments.UserID);
             if (isDeleted)
             {
-                return Ok("Task removed from user");
+                return Ok("User removed from task");
             }
             else
             {

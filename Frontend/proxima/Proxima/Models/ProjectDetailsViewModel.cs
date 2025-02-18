@@ -6,5 +6,6 @@
         public List<TaskModel> Tasks { get; set; }
 
         public List<MilestoneModel> Milestones { get; set; }
+        public List<ProjectAttachmentModel> Attachments { get; set; }
     }
 }

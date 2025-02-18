@@ -183,3 +183,5 @@ D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\
 D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Darshan University\Projects\Proxima\Backend\Proxima\Proxima\bin\Debug\net8.0\Proxima.staticwebassets.runtime.json

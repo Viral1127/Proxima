@@ -17,69 +17,89 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Proxima
 build_property.RootNamespace = Proxima
-build_property.ProjectDir = D:\Darshan University\Projects\Proxima\Frontend\Proxima\Proxima\
+build_property.ProjectDir = D:\Darshan University\Projects\Proxima\Frontend\proxima\Proxima\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Darshan University\Projects\Proxima\Frontend\Proxima\Proxima
+build_property.MSBuildProjectDirectory = D:\Darshan University\Projects\Proxima\Frontend\proxima\Proxima
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Home/Index.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Project/Index.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Project/ProjectDetails.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/ProjectDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcm9qZWN0RGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Project/ProjectList.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/ProjectList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcm9qZWN0TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Project/TaskDetails.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/TaskDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxUYXNrRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/Error.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/_ProjectFiles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfUHJvamVjdEZpbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/_ProjectMilestones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfUHJvamVjdE1pbGVzdG9uZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/_ProjectOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfUHJvamVjdE92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Project/_ProjectTasks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxfUHJvamVjdFRhc2tzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_ProjectMilestones.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9qZWN0TWlsZXN0b25lcy5jc2h0bWw=
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Shared/_Layout_Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_ProjectOverview.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9qZWN0T3ZlcnZpZXcuY3NodG1s
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Shared/_Layout_Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_ProjectTabs.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9qZWN0VGFicy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_ProjectTasks.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9qZWN0VGFza3MuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/_ViewImports.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Task/TaskDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1xUYXNrRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/_ViewStart.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Darshan University/Projects/Proxima/Frontend/Proxima/Proxima/Views/Shared/_Layout.cshtml]
+[D:/Darshan University/Projects/Proxima/Frontend/proxima/Proxima/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-h2j922oqj5

@@ -37,4 +37,13 @@ namespace Proxima.Models
         public string Status { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
+    public class TaskUpdateModel
+    {
+        [Key] public int TaskID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int TaskTypeID { get; set; }
+        public DateTime DueDate { get; set; }
+        public string Status { get; set; }
+    }
 }

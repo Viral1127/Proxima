@@ -35,7 +35,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "Proxima.Models.UserModel",
+        "Type": "Proxima.Models.RegisterModel",
         "IsRequired": true
       }
     ],
@@ -302,7 +302,7 @@
   },
   {
     "ContainingType": "Proxima.Controllers.ProjectAssignmentsController",
-    "Method": "DeleteTaskAssignment",
+    "Method": "DeleteProjectAssignment",
     "RelativePath": "api/ProjectAssignments/removeUserFromProject",
     "HttpMethod": "POST",
     "IsController": true,
@@ -312,6 +312,111 @@
         "Name": "projectAssignments",
         "Type": "Proxima.Models.ProjectAssignmentSave",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "GetAllAttachments",
+    "RelativePath": "api/ProjectAttachment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "DeleteAttachment",
+    "RelativePath": "api/ProjectAttachment/{attachmentId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attachmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "UpdateAttachment",
+    "RelativePath": "api/ProjectAttachment/{attachmentID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attachmentID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "attachment",
+        "Type": "Proxima.Models.UpdateAttachmentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "GetAttachmentByAttachmentID",
+    "RelativePath": "api/ProjectAttachment/AttachmentByAttachmentID/{attachmentID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attachmentID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "GetAttachmentByProjectID",
+    "RelativePath": "api/ProjectAttachment/AttachmentByProjectID/{projectID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectAttachmentController",
+    "Method": "UploadFile",
+    "RelativePath": "api/ProjectAttachment/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "uploadedBy",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -431,7 +536,7 @@
       },
       {
         "Name": "tasks",
-        "Type": "Proxima.Models.TaskModel",
+        "Type": "Proxima.Models.TaskUpdateModel",
         "IsRequired": true
       }
     ],
@@ -500,23 +605,7 @@
     "Parameters": [
       {
         "Name": "taskAssignments",
-        "Type": "Proxima.Models.TaskAssignmentModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
-    "Method": "DeleteTaskAssignment",
-    "RelativePath": "api/TaskAssignment/{assignmentID}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "assignmentID",
-        "Type": "System.Int32",
+        "Type": "Proxima.Models.TaskAssignmentSave",
         "IsRequired": true
       }
     ],
@@ -533,6 +622,22 @@
       {
         "Name": "taskID",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskAssignmentController",
+    "Method": "DeleteTaskAssignment",
+    "RelativePath": "api/TaskAssignment/removeUserFromTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskAssignments",
+        "Type": "Proxima.Models.TaskAssignmentSave",
         "IsRequired": true
       }
     ],

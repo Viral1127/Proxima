@@ -61,6 +61,7 @@ namespace Proxima.Controllers
             var projectResponse = await _httpClient.GetAsync($"api/Project/{id}");
             var taskResponse = await _httpClient.GetAsync($"api/Task/TasksByProjectID/{id}");
             var milestoneResponse = await _httpClient.GetAsync($"api/Milestone/MilestonesByProjectID/{id}");
+            var response = await _httpClient.GetAsync($"api/ProjectAttachment/AttachmentByProjectID/{id}");
 
             var viewModel = new ProjectDetailsViewModel();
             if (projectResponse.IsSuccessStatusCode)
@@ -77,6 +78,11 @@ namespace Proxima.Controllers
             {
                 string milestoneData = await milestoneResponse.Content.ReadAsStringAsync();
                 viewModel.Milestones = JsonConvert.DeserializeObject<List<MilestoneModel>>(milestoneData);
+            }
+            if(response.IsSuccessStatusCode)
+            {
+                string attachmentData = await response.Content.ReadAsStringAsync();
+                viewModel.Attachments = JsonConvert.DeserializeObject<List<ProjectAttachmentModel>>(attachmentData);
             }
             return View(viewModel);
         }
@@ -120,6 +126,23 @@ namespace Proxima.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> ProjectFiles(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/ProjectAttachment/AttachmentByProjectID/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                var files = JsonConvert.DeserializeObject<List<ProjectAttachmentModel>>(data);
+                return PartialView("_ProjectFiles", files);
+            }
+            return PartialView("_ProjectFiles", new List<ProjectAttachmentModel>());
+        }
+
+        //public IActionResult ProjectFiles()
+        //{
+        //    return PartialView("_ProjectFiles");
+        //}
 
     }
 }

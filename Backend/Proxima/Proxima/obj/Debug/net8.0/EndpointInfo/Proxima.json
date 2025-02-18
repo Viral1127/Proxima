@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/RegisterModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/RegisterModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/RegisterModel"
               }
             }
           }
@@ -527,6 +527,179 @@
         }
       }
     },
+    "/api/ProjectAttachment": {
+      "get": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProjectAttachment/AttachmentByAttachmentID/{attachmentID}": {
+      "get": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "attachmentID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProjectAttachment/AttachmentByProjectID/{projectID}": {
+      "get": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "projectID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProjectAttachment/upload": {
+      "post": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "uploadedBy",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProjectAttachment/{attachmentID}": {
+      "put": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "attachmentID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAttachmentModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAttachmentModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAttachmentModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProjectAttachment/{attachmentId}": {
+      "delete": {
+        "tags": [
+          "ProjectAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Roles/GetAllRoles": {
       "get": {
         "tags": [
@@ -698,17 +871,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskModel"
+                "$ref": "#/components/schemas/TaskUpdateModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskModel"
+                "$ref": "#/components/schemas/TaskUpdateModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskModel"
+                "$ref": "#/components/schemas/TaskUpdateModel"
               }
             }
           }
@@ -815,17 +988,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskAssignmentModel"
+                "$ref": "#/components/schemas/TaskAssignmentSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskAssignmentModel"
+                "$ref": "#/components/schemas/TaskAssignmentSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TaskAssignmentModel"
+                "$ref": "#/components/schemas/TaskAssignmentSave"
               }
             }
           }
@@ -883,22 +1056,30 @@
         }
       }
     },
-    "/api/TaskAssignment/{assignmentID}": {
-      "delete": {
+    "/api/TaskAssignment/removeUserFromTask": {
+      "post": {
         "tags": [
           "TaskAssignment"
         ],
-        "parameters": [
-          {
-            "name": "assignmentID",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskAssignmentSave"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskAssignmentSave"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskAssignmentSave"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1650,6 +1831,34 @@
         },
         "additionalProperties": false
       },
+      "RegisterModel": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RolesModel": {
         "type": "object",
         "properties": {
@@ -1668,7 +1877,7 @@
         },
         "additionalProperties": false
       },
-      "TaskAssignmentModel": {
+      "TaskAssignmentSave": {
         "type": "object",
         "properties": {
           "assignmentID": {
@@ -1679,88 +1888,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "taskTitle": {
-            "type": "string",
-            "nullable": true
-          },
           "userID": {
             "type": "integer",
             "format": "int32"
-          },
-          "userName": {
-            "type": "string",
-            "nullable": true
-          },
-          "roleID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "assignedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TaskModel": {
-        "type": "object",
-        "properties": {
-          "taskID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "taskTypeID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "typeName": {
-            "type": "string",
-            "nullable": true
-          },
-          "dueDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "assignedTo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "projectID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "projectName": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1832,6 +1962,36 @@
         },
         "additionalProperties": false
       },
+      "TaskUpdateModel": {
+        "type": "object",
+        "properties": {
+          "taskID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TeamMemberModel": {
         "type": "object",
         "properties": {
@@ -1889,6 +2049,28 @@
           "userID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAttachmentModel": {
+        "type": "object",
+        "properties": {
+          "attachmentID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileType": {
+            "type": "string",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -1,13 +1,20 @@
-CREATE PROCEDURE [dbo].[PR_Tasks_DeleteTask]
+ALTER PROCEDURE [dbo].[PR_Tasks_DeleteTask]
     @TaskID INT
 AS
 BEGIN
-    DELETE FROM [dbo].[Tasks]
-    WHERE [TaskID] = @TaskID;
+    -- Remove all task assignments related to this TaskID
+    DELETE FROM [dbo].[TaskAssignments] WHERE TaskID = @TaskID;
 
-    PRINT 'Task deleted successfully.';
+    -- Now delete the task
+    DELETE FROM [dbo].[Tasks] WHERE TaskID = @TaskID;
+
+    PRINT 'Task and all its assignments deleted successfully.';
 END;
 
-[PR_Tasks_DeleteTask] 5
+
+[PR_Tasks_DeleteTask] 14
 
 select * from Tasks
+select * from TaskAssignments
+select * from TaskComments
+select * from TaskAttachments

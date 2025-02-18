@@ -1,12 +1,640 @@
 {
   "Version": 1,
-  "Hash": "3gARBLFQdps3o1ZyG+hOF6dzECLfu2386jy92WjA3es=",
+  "Hash": "X+qqrFnRJKXjdAvaaZyVQH/niYvPa5EyEntqAq1GKYk=",
   "Source": "Proxima",
   "BasePath": "_content/Proxima",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Proxima\\wwwroot",
+      "Source": "Proxima",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hknfby3hiz",
+      "Integrity": "EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg"
+    },
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1e3f238d-a082-419e-8452-cb64d6a65ecf.png",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/1e3f238d-a082-419e-8452-cb64d6a65ecf#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3vb3wjradn",
+      "Integrity": "MSWxjhfMjD2Dugcawqb4Dm0kK6T8Zu17G5llF78pQ5s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1e3f238d-a082-419e-8452-cb64d6a65ecf.png"
+    },
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/1ffd8331-d1ac-4fd3-a037-e4e50c1c8285#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "iqgy8y86ft",
+      "Integrity": "OllwG3uwuWYiAPVqhXoMXoF/AvwOI/z0EyPaeNqbgUw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png"
+    },
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\855a95bd-5261-4074-9d72-91c56a61b835.jpg",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/855a95bd-5261-4074-9d72-91c56a61b835#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hknfby3hiz",
+      "Integrity": "EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\855a95bd-5261-4074-9d72-91c56a61b835.jpg"
+    },
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\a3383566-af68-4a06-ad04-39b73e801b41.jpg",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/a3383566-af68-4a06-ad04-39b73e801b41#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7i76mjo0ds",
+      "Integrity": "f+1osTrxnZFF9Dh+i7v+CNEHF4VgQ4Ui0qGtL+QXJ+I=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\a3383566-af68-4a06-ad04-39b73e801b41.jpg"
+    },
+    {
+      "Identity": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png",
+      "SourceId": "Proxima",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\",
+      "BasePath": "_content/Proxima",
+      "RelativePath": "uploads/af556140-4c15-486c-b70b-79e4b4a18bee#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "d6l3cbqq83",
+      "Integrity": "9UVZxAvDcI9suyXGlSqGxj2AUw0PTMq0mUh8NwI5dvw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.hknfby3hiz.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "312828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:54:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hknfby3hiz"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\12bb89f0-8ae7-4f6a-aba5-2e60dc7f5aab.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "312828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:54:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/1e3f238d-a082-419e-8452-cb64d6a65ecf.3vb3wjradn.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1e3f238d-a082-419e-8452-cb64d6a65ecf.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127142"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MSWxjhfMjD2Dugcawqb4Dm0kK6T8Zu17G5llF78pQ5s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 12:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3vb3wjradn"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/1e3f238d-a082-419e-8452-cb64d6a65ecf.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MSWxjhfMjD2Dugcawqb4Dm0kK6T8Zu17G5llF78pQ5s="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/1e3f238d-a082-419e-8452-cb64d6a65ecf.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1e3f238d-a082-419e-8452-cb64d6a65ecf.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127142"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MSWxjhfMjD2Dugcawqb4Dm0kK6T8Zu17G5llF78pQ5s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 12:31:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MSWxjhfMjD2Dugcawqb4Dm0kK6T8Zu17G5llF78pQ5s="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.iqgy8y86ft.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11036"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OllwG3uwuWYiAPVqhXoMXoF/AvwOI/z0EyPaeNqbgUw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 12:45:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "iqgy8y86ft"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OllwG3uwuWYiAPVqhXoMXoF/AvwOI/z0EyPaeNqbgUw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\1ffd8331-d1ac-4fd3-a037-e4e50c1c8285.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11036"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OllwG3uwuWYiAPVqhXoMXoF/AvwOI/z0EyPaeNqbgUw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 12:45:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OllwG3uwuWYiAPVqhXoMXoF/AvwOI/z0EyPaeNqbgUw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/855a95bd-5261-4074-9d72-91c56a61b835.hknfby3hiz.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\855a95bd-5261-4074-9d72-91c56a61b835.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "312828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:19:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hknfby3hiz"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/855a95bd-5261-4074-9d72-91c56a61b835.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/855a95bd-5261-4074-9d72-91c56a61b835.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\855a95bd-5261-4074-9d72-91c56a61b835.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "312828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:19:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EUhMABej/Y4PSfZ3dQU+fGT+miyMLUZGOehLD60M4OE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/a3383566-af68-4a06-ad04-39b73e801b41.7i76mjo0ds.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\a3383566-af68-4a06-ad04-39b73e801b41.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "240539"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f+1osTrxnZFF9Dh+i7v+CNEHF4VgQ4Ui0qGtL+QXJ+I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 07:46:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7i76mjo0ds"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/a3383566-af68-4a06-ad04-39b73e801b41.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-f+1osTrxnZFF9Dh+i7v+CNEHF4VgQ4Ui0qGtL+QXJ+I="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/a3383566-af68-4a06-ad04-39b73e801b41.jpg",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\a3383566-af68-4a06-ad04-39b73e801b41.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "240539"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f+1osTrxnZFF9Dh+i7v+CNEHF4VgQ4Ui0qGtL+QXJ+I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 07:46:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f+1osTrxnZFF9Dh+i7v+CNEHF4VgQ4Ui0qGtL+QXJ+I="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/af556140-4c15-486c-b70b-79e4b4a18bee.d6l3cbqq83.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "153183"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9UVZxAvDcI9suyXGlSqGxj2AUw0PTMq0mUh8NwI5dvw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:25:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d6l3cbqq83"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/af556140-4c15-486c-b70b-79e4b4a18bee.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9UVZxAvDcI9suyXGlSqGxj2AUw0PTMq0mUh8NwI5dvw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/af556140-4c15-486c-b70b-79e4b4a18bee.png",
+      "AssetFile": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "153183"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9UVZxAvDcI9suyXGlSqGxj2AUw0PTMq0mUh8NwI5dvw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 16 Feb 2025 06:25:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9UVZxAvDcI9suyXGlSqGxj2AUw0PTMq0mUh8NwI5dvw="
+        }
+      ]
+    }
+  ]
 }

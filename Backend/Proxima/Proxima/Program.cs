@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Proxima.Data;
 using Proxima.Models;
 using System.Reflection;
@@ -35,17 +36,22 @@ builder.Services.AddScoped<MilestonesRepository>();
 builder.Services.AddScoped<TaskRepository>();
 builder.Services.AddScoped<TaskAssignmentRepository>();
 builder.Services.AddScoped<TaskTypeRepository>();
+builder.Services.AddScoped<ProjectAttachmentsRepository>();
+var corsPolicy = "_myAllowSpecificOrigins";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
-    {
-        // Allow null origin (file://) and other specific origins like localhost
-        policy.SetIsOriginAllowed(origin => origin.StartsWith("https://localhost:7068"))//origin == null || origin.StartsWith("file://")
-              .AllowAnyHeader() // Allow all headers
-              .AllowAnyMethod() // Allow all HTTP methods (GET, POST, PUT, DELETE, PATCH)
-              .AllowCredentials(); // If credentials are required
-    });
+    options.AddPolicy(name: corsPolicy,
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7068") // Allow frontend origin
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
 });
+
+
 
 builder.Services.AddControllers()
     .AddFluentValidation(fv =>
@@ -55,9 +61,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.Cookie.Name = "UserAuthCookie";
-        options.LoginPath = "/Auth/Login";
-        options.AccessDeniedPath = "/Auth/AccessDenied";
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
         options.ExpireTimeSpan = TimeSpan.FromHours(2);
+        options.Cookie.SameSite = SameSiteMode.None; // For cross-origin requests
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Use if using HTTPS
     });
 builder.Services.AddAuthorization();
 
@@ -65,11 +73,26 @@ builder.Services.AddScoped<AuthRepository>();
 
 var app = builder.Build();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "https://localhost:7068");
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+    }
+});
 
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("AllowFrontend");
+app.UseCors(corsPolicy);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

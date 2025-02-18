@@ -13,7 +13,7 @@ namespace Proxima.Data
         }
 
         #region AssignTaskToUser
-        public bool AssignTaskToUser(TaskAssignmentModel taskAssignment)
+        public bool AssignTaskToUser(TaskAssignmentSave taskAssignment)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -23,7 +23,6 @@ namespace Proxima.Data
                 };
                 cmd.Parameters.AddWithValue("@TaskID", taskAssignment.TaskID);
                 cmd.Parameters.AddWithValue("@UserID", taskAssignment.UserID);
-                cmd.Parameters.AddWithValue("@RoleID", taskAssignment.RoleID);
 
                 connection.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -99,18 +98,23 @@ namespace Proxima.Data
         #endregion
 
         #region RemoveTaskFromUser
-        public bool DeleteTaskAssignments(int AssignmentID)
+        public bool DeleteTaskAssignments(int TaskID, int UserID)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand cmd = new SqlCommand("PR_TaskAssignments_DeleteTaskAssignment", connection)
-                {
-                    CommandType = System.Data.CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("@AssignmentID", AssignmentID);
                 connection.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
+
+                using (SqlCommand command = new SqlCommand("PR_TaskAssignments_DeleteTaskAssignment", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter("@TaskID", TaskID));
+                    command.Parameters.Add(new SqlParameter("@UserID", UserID));
+
+                    int result = command.ExecuteNonQuery();
+
+                    return result > 0;
+                }
             }
         }
         #endregion  

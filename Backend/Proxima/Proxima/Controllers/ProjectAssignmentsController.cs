@@ -60,7 +60,7 @@ namespace Proxima.Controllers
 
         #region RemoveTaskFromUser
         [HttpPost("removeUserFromProject")]
-        public IActionResult DeleteTaskAssignment([FromBody] ProjectAssignmentSave projectAssignments)
+        public IActionResult DeleteProjectAssignment([FromBody] ProjectAssignmentSave projectAssignments)
         {
             //if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
             //{

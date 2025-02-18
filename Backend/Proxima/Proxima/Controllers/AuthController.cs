@@ -19,7 +19,7 @@ namespace Proxima.Controllers
         }
         #region Register User
         [HttpPost("Register")]
-        public IActionResult RegisterUser(UserModel user)
+        public IActionResult RegisterUser(RegisterModel user)
         {
             try
             {
@@ -87,7 +87,8 @@ namespace Proxima.Controllers
                     Name = user.Name,
                     Email = user.Email,
                     RoleName = user.RoleName,
-                    Status = user.Status 
+                    Status = user.Status ,
+                    
                 });
             }
             catch (Exception ex)

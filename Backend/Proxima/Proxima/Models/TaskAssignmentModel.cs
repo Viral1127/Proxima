@@ -11,4 +11,10 @@
         public string RoleName { get; set; }
         public DateTime AssignedAt { get; set; }
     }
+    public class TaskAssignmentSave
+    {
+        public int AssignmentID { get; set; }
+        public int TaskID { get; set; }
+        public int UserID { get; set; }
+    }
 }
