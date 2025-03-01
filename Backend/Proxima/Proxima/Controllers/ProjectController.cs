@@ -48,6 +48,19 @@ namespace Proxima.Controllers
         }
         #endregion
 
+        #region GetProjectByUserID
+        [HttpGet("ProjectsByUserID/{userID}")]
+        public IActionResult GetProjectByUserID(int userID)
+        {
+            var projects = _projectRepository.GetProjectByUserID(userID);
+            if (projects == null)
+            {
+                return NotFound(new { Message = "given UserID not found" });
+            }
+            return Ok(projects);
+        }
+        #endregion
+
         #region GetProjectByClientID
         [HttpGet("ProjectsByClientID/{clientID}")]
         public IActionResult GetProjectByClientID(int clientID)

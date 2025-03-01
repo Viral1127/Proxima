@@ -7,6 +7,7 @@ namespace Proxima.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class MilestonesController : ControllerBase
     {
         private readonly MilestonesRepository _milestonesRepository;

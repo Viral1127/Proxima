@@ -7,7 +7,10 @@
                 <h3 class="fw-bold me-3">@Model.Title</h3>
                 <div class="d-flex justify-content-center align-items-center">
                     <div id="projectCircle" class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">P</div>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Project Manageer"))
+                    { 
                     <button class="btn btn-primary ms-3" id="assignButton" style="display:none;" data-bs-toggle="modal" data-bs-target="#assignModal">Assign People</button>
+                    }
                 </div>
             </div>
 

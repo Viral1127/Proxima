@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Proxima.Models;
 
 namespace Proxima.Controllers
 {
+    [Authorize]
     public class TaskController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -19,10 +21,6 @@ namespace Proxima.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
         public async Task<ActionResult> TaskDetails(int id)
         {
             // Check if taskId is coming through
@@ -37,6 +35,23 @@ namespace Proxima.Controllers
             }
             return View(new TaskModel());
         }
+
+        [Authorize]
+        public async Task<ActionResult> MyTasks()
+        {
+            var userId = User.FindFirst("UserID")?.Value;
+            var response = await _httpClient.GetAsync($"api/Task/TasksByUserID/{userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                var tasks = JsonConvert.DeserializeObject<List<TaskModel>>(data); // Deserialize into List<TaskModel>
+                return View(tasks);
+            }
+
+            return View(new List<TaskModel>()); // Return an empty list if API fails
+        }
+
 
     }
 }

@@ -1,0 +1,369 @@
+﻿@model List<Proxima.Models.TaskModel>
+
+@{
+    ViewBag.Title = "Task List";
+}
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-list-box-outline"></i>
+            </span> My Tasks
+        </h3>
+		@if (User.IsInRole("Project Manager"))
+		{
+            <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw" data-bs-toggle="modal" data-bs-target="#taskModal" id="createProjectBtn">+ New Task</button>
+
+		}
+    </div>
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="forms-sample" id="addTaskForm">
+                            <input type="hidden" id="projectID" value="@@Model.ProjectID" />
+                            <div class="mb-2">
+                                <input type="text" class="form-control" id="taskTitle" name="Title" placeholder="Title">
+                            </div>
+                            <div class="mb-2">
+                                <textarea placeholder="Add Description...." id="taskDescription" name="Description" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-2">
+                                <input type="text" onclick="(this.type='date')"
+                                       onblur="(this.type='text')" class="form-control" id="dueDate" name="DueDate" placeholder="Select Due date">
+                            </div>
+                            <div class="mb-2">
+                                <select class="form-control" id="projectDropdown" name="ProjectTitle">
+                                    <option disabled selected>Select Project</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <select class="form-control" id="userDropdown" name="AssignedTo">
+                                    <option disabled selected>Select Users</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <select class="form-control" id="taskTypeDropdown" name="TypeName">
+                                    <option disabled selected>Select Task Type</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-gradient-primary me-2" id="saveTask">Submit</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="task-section">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="font-weight-medium">Delayed</h5>
+            <span class="mdi mdi-dots-horizontal" style="font-size: 20px;"></span>
+        </div>
+
+
+        <div class="">
+            <ul class="">
+                @foreach (var task in Model.Where(t => t.DueDate < DateTime.Now ))
+                {
+                    string iconClass = "mdi mdi-circle-outline"; // Default icon
+
+                    if (task.Status == "In Progress")
+                    {
+                        iconClass = "mdi mdi-circle-slice-4";
+                    }
+                    else if (task.Status == "Under Review")
+                    {
+                        iconClass = "mdi mdi-eye-check";
+                    }
+                    else if (task.Status == "Completed")
+                    {
+                        iconClass = "mdi mdi-check-circle";
+                    }
+                    <li class="list-unstyled">
+                        <div style="max-width:100%; padding:8px; cursor: pointer;"
+                             id="taskCard_@task.TaskID"
+                             class="d-flex justify-content-between align-items-center mb-3 task-card"
+                             data-task-id="@task.TaskID">
+                            <label>
+                                <i id="statusIcon" class="@iconClass status-btn me-2" onclick="toggleDropdown(event)"></i>
+                                <span class="taskTitle" style="font-size:0.9rem;">@task.Title</span>
+                                <div class="dropdown">
+                                    <div id="statusDropdown" class="dropdown-content">
+                                        <span onclick="selectStatus('mdi mdi-circle-slice-4', 'In Progress', @task.TaskID, event)">
+                                            <i class="mdi mdi-circle-slice-4 icon"></i> In Progress
+                                        </span>
+                                        <span onclick="selectStatus('mdi mdi-eye-check', 'Under Review', @task.TaskID, event)">
+                                            <i class="mdi mdi-eye-check icon"></i> Under Review
+                                        </span>
+                                        <span onclick="selectStatus('mdi mdi-check-circle', 'Completed', @task.TaskID, event)">
+                                            <i class="mdi mdi-check-circle icon"></i> Completed
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                            <div class="icon-container">
+                                <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
+                                <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="font-weight-medium">Other</h5>
+            <span class="mdi mdi-dots-horizontal" style="font-size: 20px;"></span>
+        </div>
+        <ul>
+            @foreach (var task in Model.Where(t => t.DueDate >= DateTime.Now))
+            {
+                string iconClass = "mdi mdi-circle-outline"; // Default icon
+
+                if (task.Status == "In Progress")
+                {
+                    iconClass = "mdi mdi-circle-slice-4";
+                }
+                else if (task.Status == "Under Review")
+                {
+                    iconClass = "mdi mdi-eye-check";
+                }
+                else if (task.Status == "Completed")
+                {
+                    iconClass = "mdi mdi-check-circle";
+                }
+                <li class="list-unstyled">
+                    <div style="max-width:100%; padding:8px; cursor: pointer;"
+                         id="taskCard_@task.TaskID"
+                         class="d-flex justify-content-between align-items-center mb-3 task-card"
+                         data-task-id="@task.TaskID">
+                        <label>
+                            <i id="statusIcon" class="@iconClass status-btn me-2" onclick="toggleDropdown(event)"></i>
+                            <span class="taskTitle" style="font-size:0.9rem;">@task.Title</span>
+                            <div class="dropdown">
+                                <div id="statusDropdown" class="dropdown-content">
+                                    <span onclick="selectStatus('mdi mdi-circle-slice-4', 'In Progress', @task.TaskID, event)">
+                                        <i class="mdi mdi-circle-slice-4 icon"></i> In Progress
+                                    </span>
+                                    <span onclick="selectStatus('mdi mdi-eye-check', 'Under Review', @task.TaskID, event)">
+                                        <i class="mdi mdi-eye-check icon"></i> Under Review
+                                    </span>
+                                    <span onclick="selectStatus('mdi mdi-check-circle', 'Completed', @task.TaskID, event)">
+                                        <i class="mdi mdi-check-circle icon"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="icon-container">
+                            <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
+                            <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+    document.addEventListener("click", function (event) {
+        let taskCard = event.target.closest(".task-card");
+        if (!taskCard) return; // Exit if click is outside task card
+
+        // Excluded elements (icons, dropdowns)
+        if (
+            event.target.closest(".status-btn") ||
+            event.target.closest(".mdi-calendar-range") ||
+            event.target.closest(".delete-task") ||
+            event.target.closest(".dropdown-content")
+        ) {
+            event.stopPropagation();
+            return;
+        }
+
+        // Redirect only when clicking the task
+        const taskId = taskCard.getAttribute("data-task-id");
+        console.log("taskid : ",taskId);
+        if (taskId) {
+            window.location.href = `/Task/TaskDetails/${taskId}`;
+        }
+    });
+
+    function fetchDropdownData(url, dropdownId, placeholder, idKey, textKey) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    let dropdown = $(dropdownId);
+                    dropdown.empty().append(`<option disabled selected>${placeholder}</option>`);
+
+                    $.each(data, function (index, item) {
+                        if (item?.[idKey] && item?.[textKey]) {
+                            dropdown.append(`<option value="${item[idKey]}">${item[textKey]}</option>`);
+                        }
+                    });
+                },
+                error: function (error) {
+                    console.error(`Error fetching data from ${url}:`, error);
+                }
+            });
+        }
+
+    fetchDropdownData("https://localhost:7107/api/User/GetAllUsers", "#userDropdown", "Select Users", "userID", "name");
+    fetchDropdownData("https://localhost:7107/api/TaskType", "#taskTypeDropdown", "Select Task Type", "taskTypeID", "typeName");
+    fetchDropdownData("https://localhost:7107/api/Project", "#projectDropdown", "Select Project Name", "projectID", "title");
+
+
+    $("#addTaskForm").submit(function (event) {
+        event.preventDefault
+        let taskData = {
+            title: $("#taskTitle").val(),
+            description: $("#taskDescription").val(),
+            taskTypeID: $("#taskTypeDropdown").val(),
+            dueDate: $("#dueDate").val(),
+            status: $("#taskStatus").val(),
+            assignedTo: $("#userDropdown").val(),
+            projectID: $("#projectDropdown").val()
+        };
+
+        $.ajax({
+            url: "https://localhost:7107/api/Task",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(taskData),
+            success: function () {
+                alert("Task added successfully!");
+                $('#taskModal').modal('hide');
+            },
+            error: function (error) {
+                console.error("Error adding task:", error);
+                alert("Error adding task!");
+            }
+        });
+    });
+
+    function toggleDropdown(event) {
+        event.stopPropagation();
+        let dropdown = event.target.closest("label").querySelector(".dropdown-content");
+        $(".dropdown-content").not(dropdown).removeClass("show");
+        $(dropdown).toggleClass("show");
+    }
+
+    function selectStatus(iconClass, statusText, taskID, event) {
+        let statusIcon = event.target.closest("label").querySelector(".status-btn");
+
+        let requestData = {
+            taskID: taskID,
+            status: statusText,
+            updatedAt: new Date().toISOString()
+        };
+
+        $.ajax({
+            url: `https://localhost:7107/api/Task/UpdateStatus/${taskID}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                console.log("Response:", response);
+                if (response.message === "Task Status Updated succesfully") {
+                    $(statusIcon).attr("class", iconClass + " status-btn");
+                    
+                }
+                else{
+                    alert("Failed to update task status.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Error:", xhr.responseText);
+                alert("Error updating task status. Check console for details.");
+            }
+        });
+    }
+
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.dropdown').length) {
+            $(".dropdown-content").removeClass("show");
+        }
+    });
+</script>
+
+<style>
+    .task-card:hover {
+        background: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 0;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    .icon-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .icon-text {
+        visibility: hidden;
+        position: absolute;
+        right: 100%;
+        margin-right: 8px;
+        color: #888;
+        transition: visibility 0.3s, opacity 0.3s;
+        opacity: 0;
+    }
+
+    .icon-container:hover .icon-text {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 150px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        z-index: 1;
+        padding: 5px;
+        font-size: 12px; /* Decrease font size */
+        padding: 4px 8px;
+    }
+
+    .dropdown-content span {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .dropdown-content span:hover {
+        background-color: #f0f0f0;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .icon {
+        margin-right: 8px;
+    }
+    .mdi{
+		cursor: pointer;
+    }
+</style>
+

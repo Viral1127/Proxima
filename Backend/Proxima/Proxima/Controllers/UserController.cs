@@ -28,6 +28,13 @@ namespace Proxima.Controllers
         }
         #endregion
 
+        [HttpGet("GetUserRoleCounts")]
+        public async Task<ActionResult<List<UserRoleCount>>> GetUserRoleCounts()
+        {
+            var result = await _userRepository.GetUserRoleCountsAsync();
+            return Ok(result);
+        }
+
         #region GetUserByUserID
         [HttpGet("GetUserByID/{userID}")]
         public ActionResult<UserModel> GetUserById(int userID)

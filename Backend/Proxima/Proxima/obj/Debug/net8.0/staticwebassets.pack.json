@@ -21,8 +21,16 @@
       "PackagePath": "staticwebassets\\uploads\\a3383566-af68-4a06-ad04-39b73e801b41.jpg"
     },
     {
+      "Id": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\a5e7ef4a-505e-4a8f-9b04-fa536a1b0ae0.png",
+      "PackagePath": "staticwebassets\\uploads\\a5e7ef4a-505e-4a8f-9b04-fa536a1b0ae0.png"
+    },
+    {
       "Id": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png",
       "PackagePath": "staticwebassets\\uploads\\af556140-4c15-486c-b70b-79e4b4a18bee.png"
+    },
+    {
+      "Id": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png",
+      "PackagePath": "staticwebassets\\uploads\\b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Proxima.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

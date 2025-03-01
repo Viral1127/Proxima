@@ -16,16 +16,9 @@ namespace Proxima.Controllers
                 BaseAddress = new System.Uri(_configuration["WebApiBaseUrl"])
             };
         }
-        public IActionResult Index()
+        public IActionResult UserList()
         {
             return View();
         }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-
     }
 }

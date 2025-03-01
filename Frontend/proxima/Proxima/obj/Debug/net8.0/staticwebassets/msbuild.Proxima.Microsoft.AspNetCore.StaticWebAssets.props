@@ -4998,8 +4998,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vww7kda633</Fingerprint>
-      <Integrity>oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c=</Integrity>
+      <Fingerprint>a5onx4dlpr</Fingerprint>
+      <Integrity>/jodU7WtI199H2pyGjrAW6YdUSXNuKNDLcuAtW5prHM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\dashboard.js'))</OriginalItemSpec>

@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "Proxima.Controllers.AdminDashboardController",
+    "Method": "GetDashboardData",
+    "RelativePath": "api/AdminDashboard/GetAdminDashboardData",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proxima.Controllers.AuthController",
     "Method": "AuthenticateUser",
     "RelativePath": "api/Auth/AuthenticateUser",
@@ -246,6 +256,22 @@
     "Parameters": [
       {
         "Name": "clientID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.ProjectController",
+    "Method": "GetProjectByUserID",
+    "RelativePath": "api/Project/ProjectsByUserID/{userID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userID",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -568,6 +594,22 @@
     "Parameters": [
       {
         "Name": "projectID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "GettasksByUserID",
+    "RelativePath": "api/Task/TasksByUserID/{userID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userID",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -944,6 +986,26 @@
     "ReturnTypes": [
       {
         "Type": "Proxima.Models.UserModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Proxima.Controllers.UserController",
+    "Method": "GetUserRoleCounts",
+    "RelativePath": "api/User/GetUserRoleCounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Proxima.Models.UserRoleCount, Proxima, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -51,6 +51,19 @@ namespace Proxima.Controllers
         }
         #endregion
 
+        #region GetTasksByUserID
+        [HttpGet("TasksByUserID/{userID}")]
+        public IActionResult GettasksByUserID(int userID)
+        {
+            var tasks = _taskRepository.GetTasksByUserID(userID);
+            if (tasks == null)
+            {
+                NotFound();
+            }
+            return Ok(tasks);
+        }
+        #endregion
+
         #region AddTasks
         [HttpPost]
         public IActionResult CreateTasks([FromBody] TaskSaveModel tasks)

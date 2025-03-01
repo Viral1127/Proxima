@@ -3336,17 +3336,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"vww7kda633"},{"Name":"integrity","Value":"sha256-oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c="},{"Name":"label","Value":"_content/Proxima/assets/js/dashboard-dark.js"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8806"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c=\u0022"},{"Name":"Last-Modified","Value":"Sat, 01 Feb 2025 14:59:57 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Proxima/assets/js/dashboard.a5onx4dlpr.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\dashboard.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"a5onx4dlpr"},{"Name":"integrity","Value":"sha256-/jodU7WtI199H2pyGjrAW6YdUSXNuKNDLcuAtW5prHM="},{"Name":"label","Value":"_content/Proxima/assets/js/dashboard.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9216"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022/jodU7WtI199H2pyGjrAW6YdUSXNuKNDLcuAtW5prHM=\u0022"},{"Name":"Last-Modified","Value":"Sat, 22 Feb 2025 07:19:14 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Proxima/assets/js/dashboard.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\dashboard.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8806"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c=\u0022"},{"Name":"Last-Modified","Value":"Sat, 01 Feb 2025 14:59:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Proxima/assets/js/dashboard.vww7kda633.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\dashboard.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"vww7kda633"},{"Name":"integrity","Value":"sha256-oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c="},{"Name":"label","Value":"_content/Proxima/assets/js/dashboard.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8806"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022oVU0vEXEgiy/tBVfRh1g5PY72SlHp4uSBuwviiKQA5c=\u0022"},{"Name":"Last-Modified","Value":"Sat, 01 Feb 2025 14:59:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-/jodU7WtI199H2pyGjrAW6YdUSXNuKNDLcuAtW5prHM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9216"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022/jodU7WtI199H2pyGjrAW6YdUSXNuKNDLcuAtW5prHM=\u0022"},{"Name":"Last-Modified","Value":"Sat, 22 Feb 2025 07:19:14 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Proxima/assets/js/file-upload.bwviieogwz.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\file-upload.js'))</AssetFile>

@@ -127,6 +127,45 @@ namespace Proxima.Data
         }
         #endregion
 
+        #region GettasksByUserID
+        public List<TaskModel> GetTasksByUserID(int UserID)
+        {
+            var tasks = new List<TaskModel>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "PR_Tasks_GetTasksByUserID";
+                cmd.Parameters.AddWithValue("@UserID", UserID);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    tasks.Add(new TaskModel
+                    {
+                        TaskID = Convert.ToInt32(reader["TaskID"]),
+                        Title = reader["Title"].ToString(),
+                        Description = reader["Description"].ToString(),
+                        TaskTypeID = Convert.ToInt32(reader["TaskTypeID"]),
+                        TypeName = reader["TypeName"].ToString(),
+                        DueDate = Convert.ToDateTime(reader["DueDate"]),
+                        Status = reader["Status"].ToString(),
+                        AssignedTo = Convert.ToInt32(reader["AssignedTo"]),
+                        Name = reader["AssignedToUser"].ToString(),
+                        ProjectID = Convert.ToInt32(reader["ProjectID"]),
+                        ProjectName = reader["ProjectName"].ToString(),
+                        CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                        UpdatedAt = reader["UpdatedAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["UpdatedAt"])
+                    });
+                }
+            }
+
+            return tasks;
+        }
+        #endregion
+
         #region CreateTasks
         public bool CreateTasks(TaskSaveModel tasks)
         {
@@ -170,7 +209,8 @@ namespace Proxima.Data
             }
         }
         #endregion
-        #region UpdateTasks
+
+        #region UpdateTasks Status
         public bool UpdateTaskStatus(TaskStatusModel taskStatus)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

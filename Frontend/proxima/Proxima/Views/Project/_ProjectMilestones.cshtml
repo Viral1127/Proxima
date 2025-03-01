@@ -4,8 +4,7 @@
 {
     <div class="text-center mt-4">
         <h5 class="text-muted">No milestones added yet</h5>
-        <p>You can add a new milestone by clicking the button below.</p>
-        <button class="btn btn-gradient-primary btn-rounded btn-fw mt-2">Add New Milestone</button>
+        <p>You can add a new milestone by clicking the Add Milestone button</p>
     </div>
 }
 else
@@ -45,7 +44,10 @@ else
                                 </label>
 
                             </div>
-                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-milestone" data-id="@milestones.MilestoneID" style="font-size: 15px;"></span>
+							@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+							{
+                                <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-milestone" data-id="@milestones.MilestoneID" style="font-size: 15px;"></span>
+							}
                         </div>
                     </div>
                 }

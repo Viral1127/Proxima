@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Proxima.Models;
 
@@ -49,7 +50,44 @@ namespace Proxima.Data
 
         #endregion
 
+        #region GetProjectByUserID
+        public List<ProjectModel> GetProjectByUserID(int? UserID)
+        {
+            var projects = new List<ProjectModel>();
 
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand("PR_Projects_GetProjectsByUserID", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserID", (object)UserID ?? DBNull.Value);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            projects.Add(new ProjectModel
+                            {
+                                ProjectID = reader["ProjectID"] != DBNull.Value ? Convert.ToInt32(reader["ProjectID"]) : 0,
+                                Title = reader["Title"] != DBNull.Value ? reader["Title"].ToString() : string.Empty,
+                                Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : string.Empty,
+                                ClientID = reader["ClientID"] != DBNull.Value ? Convert.ToInt32(reader["ClientID"]) : 0,
+                                StartDate = (DateTime)(reader["StartDate"] != DBNull.Value ? Convert.ToDateTime(reader["StartDate"]) : (DateTime?)null),
+                                EndDate = (DateTime)(reader["EndDate"] != DBNull.Value ? Convert.ToDateTime(reader["EndDate"]) : (DateTime?)null),
+                                Status = reader["Status"] != DBNull.Value ? reader["Status"].ToString() : "Unknown",
+                                CreatedAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.MinValue,
+                                UpdatedAt = reader["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["UpdatedAt"]) : (DateTime?)null
+                            });
+                        }
+                    }
+                }
+            }
+
+            return projects;
+        }
+
+        #endregion
 
         #region GetProjectByID
         public ProjectModel GetProjectByID(int ProjectID)

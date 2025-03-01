@@ -11,7 +11,17 @@
         public Boolean Status {  get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public int ProjectCount { get; set; }
+        public int TaskCount { get; set; }
+
     }
+
+    public class UserRoleCount
+    {
+        public string RoleName { get; set; }
+        public int UserCount { get; set; }
+    }
+
 
     public class LoginModel
     {

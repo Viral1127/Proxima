@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using Proxima.Models;
 
 namespace Proxima.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly IConfiguration _configuration;

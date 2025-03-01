@@ -198,8 +198,12 @@
             </div>
             <div class="d-flex align-items-center gap-4">
                 <i class="mdi mdi-link-variant" style="font-size:20px;"></i>
-                <i class="mdi mdi-circle-edit-outline" style="font-size:20px;" id="actionIcon" title="Edit" data-bs-toggle="modal" data-bs-target="#taskEditModal"></i>
-                <i class="mdi mdi-trash-can-outline delete-task" style="font-size:20px; color:red;" title="Delete"></i>
+				@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+				{
+                    <i class="mdi mdi-circle-edit-outline" style="font-size:20px;" id="actionIcon" title="Edit" data-bs-toggle="modal" data-bs-target="#taskEditModal"></i>
+                    <i class="mdi mdi-trash-can-outline delete-task" style="font-size:20px; color:red;" title="Delete"></i>
+				}
+                
               
             </div>
             <div class="modal fade" id="taskEditModal" tabindex="-1" aria-labelledby="taskEditModalLabel" aria-hidden="true">
@@ -303,19 +307,19 @@
                             <label>
                                 <i id="statusIcon" class="@iconClass status-btn" onclick="toggleDropdown(event)"></i>
                                 <span class="taskStatus" style="font-size:0.9rem;">@Model.Status</span>
-                                <div class="dropdown">
-                                    <div id="statusDropdown" class="dropdown-content">
-                                        <span onclick="selectStatus('mdi mdi-circle-slice-4', 'In Progress', @Model.TaskID, event)">
-                                            <i class="mdi mdi-circle-slice-4 icon"></i> In Progress
-                                        </span>
-                                        <span onclick="selectStatus('mdi mdi-eye-check', 'Under Review', @Model.TaskID, event)">
-                                            <i class="mdi mdi-eye-check icon"></i> Under Review
-                                        </span>
-                                        <span onclick="selectStatus('mdi mdi-check-circle', 'Completed', @Model.TaskID, event)">
-                                            <i class="mdi mdi-check-circle icon"></i> Completed
-                                        </span>
+                                    <div class="dropdown">
+                                        <div id="statusDropdown" class="dropdown-content">
+                                            <span onclick="selectStatus('mdi mdi-circle-slice-4', 'In Progress', @Model.TaskID, event)">
+                                                <i class="mdi mdi-circle-slice-4 icon"></i> In Progress
+                                            </span>
+                                            <span onclick="selectStatus('mdi mdi-eye-check', 'Under Review', @Model.TaskID, event)">
+                                                <i class="mdi mdi-eye-check icon"></i> Under Review
+                                            </span>
+                                            <span onclick="selectStatus('mdi mdi-check-circle', 'Completed', @Model.TaskID, event)">
+                                                <i class="mdi mdi-check-circle icon"></i> Completed
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
                             </label>
                         </div>
                        

@@ -1,0 +1,303 @@
+﻿
+    <style>
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .badge-general {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .badge-admin {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-creator {
+            background-color: #ffeeba;
+            color: #856404;
+        }
+
+        .custom-card {
+            min-height: 5vh !important; /* Reduce min height */
+            height: auto !important; /* Ensure it resizes properly */
+            padding: 20px !important /* Reduce padding inside the card */
+        }
+
+        .custom-card .card-body {
+            padding: 10px !important; /* Reduce card body padding */
+        }
+    </style>
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-home"></i>
+                </span> Users
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    <div class="row">
+        <div class="col-md-3 grid-margin">
+            <div class="card card-img-holder text-dark custom-card border border-1">
+                <div class="card-body">
+                    <h4 class="font-weight-normal mb-3 text-muted d-flex justify-content-center">
+                        Admin
+                    </h4>
+                    <h2 id="adminCount" class="font-weight-medium d-flex justify-content-center">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin">
+            <div class="card card-img-holder text-dark custom-card border border-1">
+                <div class="card-body">
+                    <h4 class="font-weight-normal mb-3 text-muted d-flex justify-content-center">
+                        Project Manager
+                    </h4>
+                    <h2 id="projectManagerCount" class="font-weight-medium d-flex justify-content-center">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin">
+            <div class="card card-img-holder text-dark custom-card border border-1">
+                <div class="card-body">
+                    <h4 class="font-weight-normal mb-3 text-muted d-flex justify-content-center">
+                        Team Member
+                    </h4>
+                    <h2 id="teamMemberCount" class="font-weight-medium d-flex justify-content-center">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin">
+            <div class="card card-img-holder text-dark custom-card border border-1">
+                <div class="card-body">
+                    <h4 class="font-weight-normal mb-3 text-muted d-flex justify-content-center">
+                        Client
+                    </h4>
+                    <h2 id="clientCount" class="font-weight-medium d-flex justify-content-center">1</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="my-4">
+            <h4 class="mb-4">All Users</h4>
+            <div class="d-flex justify-content-between mb-3">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active text-dark" href="#">View All</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Admin</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Project Manager</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Team Member</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">Client</a></li>
+                </ul>
+            <input type="text" id="searchInput" class="form-control w-25" placeholder="Search by name or email">
+            </div>
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive mb-5">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input id="selectAll" type="checkbox"></th>
+                                        <th>UserName</th>
+                                        <th>Role</th>
+                                        <th>Projects</th>
+                                        <th>Tasks</th>
+                                        <th>Status</th>
+                                        <th>Enrolled</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customerTable"></tbody>
+                            </table>
+                        </div>
+                        <div class="text-center controller">
+                            <ul class="pagination justify-content-center">
+                                <!-- Previous Button -->
+                                <li class="page-item disabled" id="prevPage">
+                                    <a class="page-link" href="javascript:void(0)">Previous</a>
+                                </li>
+
+                                <!-- Next Button -->
+                                <li class="page-item" id="nextPage">
+                                    <a class="page-link" href="javascript:void(0)">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        let currentPage = 1;
+        const recordsPerPage = 5;
+        let usersData = [];
+        let filteredData = []; // Stores filtered user data
+
+        function loadTableData() {
+            $.ajax({
+                url: 'https://localhost:7107/api/User/GetAllUsers', // Update with your API
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    usersData = data;
+                    filteredData = usersData; // Initially, show all users
+                    updatePagination();
+                    displayPage(currentPage);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data: ", error);
+                }
+            });
+        }
+
+        function displayPage(page) {
+            let tableBody = $("#customerTable");
+            tableBody.empty();
+            let start = (page - 1) * recordsPerPage;
+            let end = start + recordsPerPage;
+            let paginatedData = filteredData.slice(start, end);
+
+            $.each(paginatedData, function (index, user) {
+                let status = user.status ? "Active" : "Inactive";
+                let row = `
+                    <tr>
+                        <td><input type="checkbox" class="select-user" data-id="${user.userID}"></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div>${user.name}</div>
+                                    <small class="text-muted">${user.email}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${user.roleName}</td>
+                        <td>${user.projectCount}</td>
+                        <td>${user.taskCount}</td>
+                        <td>${status}</td>
+                        <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                `;
+                tableBody.append(row);
+            });
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            let totalPages = Math.ceil(filteredData.length / recordsPerPage);
+            let paginationNumbers = $("#paginationNumbers");
+            paginationNumbers.empty();
+
+            for (let i = 1; i <= totalPages; i++) {
+                let activeClass = i === currentPage ? "active" : "";
+                paginationNumbers.append(`
+                    <li class="page-item ${activeClass}">
+                        <a class="page-link" href="javascript:void(0)" data-page="${i}">${i}</a>
+                    </li>
+                `);
+            }
+
+            $("#prevPage").toggleClass("disabled", currentPage === 1);
+            $("#nextPage").toggleClass("disabled", currentPage >= totalPages);
+        }
+
+        // **Search functionality by name or email**
+        $("#searchInput").on("keyup", function () {
+            let searchTerm = $(this).val().toLowerCase();
+            filteredData = usersData.filter(user =>
+                user.name.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1; // Reset to first page after filtering
+            updatePagination();
+            displayPage(currentPage);
+        });
+
+        // Filter users by role
+        $(".nav-link").click(function () {
+            let role = $(this).text();
+            $(".nav-link").removeClass("active");
+            $(this).addClass("active");
+
+            if (role === "View All") {
+                filteredData = usersData;
+            } else {
+                filteredData = usersData.filter(user => user.roleName === role);
+            }
+
+            currentPage = 1; // Reset to first page
+            updatePagination();
+            displayPage(currentPage);
+        });
+
+        // Handle pagination clicks
+        $(document).on("click", ".page-link", function () {
+            let page = $(this).data("page");
+
+            if ($(this).parent().hasClass("disabled")) return;
+
+            if ($(this).text() === "Previous") {
+                if (currentPage > 1) currentPage--;
+            } else if ($(this).text() === "Next") {
+                let totalPages = Math.ceil(filteredData.length / recordsPerPage);
+                if (currentPage < totalPages) currentPage++;
+            } else {
+                currentPage = parseInt(page);
+            }
+
+            displayPage(currentPage);
+        });
+
+        loadTableData();
+
+        $("#selectAll").on("click", function () {
+            $(".select-user").prop("checked", this.checked);
+        });
+
+       $.ajax({
+        url: "https://localhost:7107/api/User/GetUserRoleCounts",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            console.log("User Role Counts:", response);
+
+            $("#adminCount").text(0);
+            $("#projectManagerCount").text(0);
+            $("#teamMemberCount").text(0);
+            $("#clientCount").text(1);
+
+            response.forEach(role => {
+                if (role.roleName === "Admin") {
+                    $("#adminCount").text(role.userCount);
+                } else if (role.roleName === "Project Manager") {
+                    $("#projectManagerCount").text(role.userCount);
+                } else if (role.roleName === "Team Member") {
+                    $("#teamMemberCount").text(role.userCount);
+                } else if (role.roleName === "Client") {
+                    $("#clientCount").text(role.userCount);
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching user role counts:", error);
+        }
+    });
+    });
+
+
+
+</script>

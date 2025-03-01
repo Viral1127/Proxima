@@ -1,4 +1,5 @@
-﻿@* @model Proxima.Models.ProjectModel
+﻿
+@* @model Proxima.Models.ProjectModel
 @{
     ViewBag.Title = "Project Details";
 }
@@ -16,15 +17,6 @@
 <div class="content-wrapper">
     <div class="d-flex justify-content-between align-items-center flex-wrap">
         <div class="d-flex align-items-center flex-wrap">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
             <i class="mdi mdi-chevron-left mt-1 cursor-pointer" style="font-size:20px;"></i>
             <ul class="nav nav-tabs" id="projectTabs" style="flex-wrap: wrap;">
                 <li class="nav-item">
@@ -40,23 +32,37 @@
                     <a class="nav-link text-dark" data-view="ProjectFiles">Files</a>
                 </li>
             </ul>
-            <a class="text-dark mdi mdi-dots-horizontal ms-4" style="font-size: 20px;" data-view="ProjectMessages" id="actionIcon"></a>
-
-            <div class="dropdown">
-                <div id="statusDropdown" class="dropdown-content">
-                    <span class="" data-bs-toggle="modal" data-bs-target="#projectEditModal">
-                        <i class="mdi mdi-progress-check"></i> Edit
-                    </span>
-                    <span class="archive" onclick="archiveProject('@Model.Project.ProjectID')">
-                        <i class="mdi mdi-eye-check"></i> Archive
-                    </span>
+			@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+			{
+                <div class="dropdown">
+                    <a class="text-dark mdi mdi-dots-horizontal ms-4"
+                       style="font-size: 20px;"
+                       id="actionIcon"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="actionIcon">
+                        <li>
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#projectEditModal">
+                                <i class="mdi mdi-progress-check"></i> Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item archive text-danger" href="javascript:void(0);" onclick="archiveProject('@Model.Project.ProjectID')">
+                                <i class="mdi mdi-eye-check"></i> Archive
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-
+			}
+            
             
         </div>
-
-        <button type="button" id="actionButton" class="mt-2 d-none btn btn-gradient-primary btn-rounded btn-fw">Action</button>
+		@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+		{
+            <button type="button" id="actionButton" class="mt-2 d-none btn btn-gradient-primary btn-rounded btn-fw">Action</button>
+		}
+        
     </div>
 
     <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
@@ -183,91 +189,96 @@
         const actionButton = document.getElementById("actionButton");
         const fileInput = document.getElementById("fileInput");
         const projectId = @Model.Project.ProjectID;
-        const uploadedBy = 2;
-        let dropdownVisible = false;
+        const uploadedBy = @User.FindFirst("UserID")?.Value;
 
-        if (actionIcon) {
-            actionIcon.addEventListener("click", function () {
-                statusDropdown.classList.toggle("show");
-                dropdownVisible = statusDropdown.classList.contains("show");
-            });
-        }
+            function updateActionButton(selectedView) {
+        if (!actionButton) return;
 
-        window.onclick = function (event) {
-            if (!event.target.matches('#actionIcon') && !event.target.closest(".dropdown-content")) {
-                document.querySelectorAll(".dropdown-content").forEach(dropdown => {
-                    dropdown.classList.remove("show");
-                });
-                dropdownVisible = false;
-            }
-        };
+        if (["ProjectOverview", "ProjectMessages"].includes(selectedView)) {
+            actionButton.classList.add("d-none");
+        } else {
+            actionButton.classList.remove("d-none");
 
-        function updateActionButton(selectedView) {
-            if (!actionButton) return;
+            const buttonConfig = {
+                ProjectTasks: { text: "+ Add Task", target: "#taskModal" },
+                ProjectMilestones: { text: "+ Create", target: "#milestoneModal" },
+                ProjectFiles: { text: "+ Add Files", target: null },
+            };
 
-            if (["ProjectOverview", "ProjectMessages"].includes(selectedView)) {
-                actionButton.classList.add("d-none");
-            }
-            else {
-                actionButton.classList.remove("d-none");
+            if (buttonConfig[selectedView]) {
+                actionButton.textContent = buttonConfig[selectedView].text;
 
-                const buttonConfig = {
-                    ProjectTasks: { text: "+ Add Task", target: "#taskModal" },
-                    ProjectMilestones: { text: "+ Create", target: "#milestoneModal" },
-                    ProjectFiles: { text: "+ Add Files", target: null },
-                };
-
-                if (buttonConfig[selectedView]) {
-                    actionButton.textContent = buttonConfig[selectedView].text;
-
-                    if (buttonConfig[selectedView].target) {
-                        actionButton.setAttribute("data-bs-toggle", "modal");
-                        actionButton.setAttribute("data-bs-target", buttonConfig[selectedView].target);
-                    }
-                    else {
+                if (buttonConfig[selectedView].target) {
+                    actionButton.setAttribute("data-bs-toggle", "modal");
+                    actionButton.setAttribute("data-bs-target", buttonConfig[selectedView].target);
+                    actionButton.onclick = null; // Remove the onclick event if not in ProjectFiles view
+                } else {
                     actionButton.removeAttribute("data-bs-toggle");
                     actionButton.removeAttribute("data-bs-target");
 
-                    actionButton.onclick = () => fileInput.click();
+                    // Set the onclick event only for the ProjectFiles view
+                    if (selectedView === "ProjectFiles") {
+                        actionButton.onclick = () => fileInput.click();
+                    } else {
+                        actionButton.onclick = null; // Remove the onclick event for other views
                     }
                 }
             }
         }
+    }
 
-        $("#fileInput").change(function () {
+    $("#fileInput").change(function () {
         let file = this.files[0];
 
         if (!file) {
-            alert("Please select a file.");
+            Swal.fire({
+                icon: 'warning',
+                title: 'No File Selected',
+                text: 'Please select a file before uploading.'
+            });
             return;
         }
 
         let formData = new FormData();
         formData.append("file", file);
         formData.append("ProjectID", projectId);
-        formData.append("UploadedBy", 1); // Replace with actual user ID
+        formData.append("UploadedBy", uploadedBy); // Ensure 'uploadedBy' is correctly assigned
 
         $.ajax({
-            url:`https://localhost:7107/api/ProjectAttachment/upload?projectId=${projectId}&uploadedBy=${uploadedBy}`, // Replace with your actual API endpoint
+            url: `https://localhost:7107/api/ProjectAttachment/upload?projectId=${projectId}&uploadedBy=${uploadedBy}`,
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
-				console.log("File Uploaded : ",response);
+                console.log("File Uploaded:", response);
                 if (response.filePath) {
-                    alert("File uploaded successfully!");
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Upload Successful',
+                        text: 'File uploaded successfully!',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                    location.reload();
+                });
                 } else {
-                    alert("File upload failed.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Upload Failed',
+                        text: 'File upload failed. Please try again.'
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 console.error("Error uploading file:", error);
-                alert("An error occurred while uploading the file.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Error',
+                    text: 'An error occurred while uploading the file. Please try again.'
+                });
             }
         });
     });
-
 
 
         document.querySelectorAll("#projectTabs .nav-link").forEach(tab => {
@@ -329,58 +340,82 @@
         fetchDropdownData("https://localhost:7107/api/TaskType", "#taskTypeDropdown", "Select Task Type", "taskTypeID", "typeName");
 
         $("#addTaskForm").submit(function (event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            let taskData = {
-                title: $("#taskTitle").val(),
-                description: $("#taskDescription").val(),
-                taskTypeID: $("#taskTypeDropdown").val(),
-                dueDate: $("#dueDate").val(),
-                status: $("#taskStatus").val(),
-                assignedTo: $("#userDropdown").val(),
-                projectID: $("#projectID").val()
-            };
+        let taskData = {
+            title: $("#taskTitle").val(),
+            description: $("#taskDescription").val(),
+            taskTypeID: $("#taskTypeDropdown").val(),
+            dueDate: $("#dueDate").val(),
+            status: $("#taskStatus").val(),
+            assignedTo: $("#userDropdown").val(),
+            projectID: $("#projectID").val()
+        };
 
-            $.ajax({
-                url: "https://localhost:7107/api/Task",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(taskData),
-                success: function () {
-                    alert("Task added successfully!");
+        $.ajax({
+            url: "https://localhost:7107/api/Task",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(taskData),
+            success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Task Added',
+                    text: 'Task added successfully!',
+                    confirmButtonText: 'OK'
+                }).then(() => {
                     $('#taskModal').modal('hide');
-                },
-                error: function (error) {
-                    console.error("Error adding task:", error);
-                    alert("Error adding task!");
-                }
-            });
+                    location.reload();
+                });
+            },
+            error: function (error) {
+                console.error("Error adding task:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error adding task!'
+                });
+            }
         });
+    });
+
 
         $("#milestoneForm").submit(function (event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            let milestoneData = {
-                title: $("#milestoneTitle").val(),
-                dueDate: $("#milestoneDueDate").val(),
-                projectID: $("#projectID").val()
-            };
+        let milestoneData = {
+            title: $("#milestoneTitle").val(),
+            dueDate: $("#milestoneDueDate").val(),
+            projectID: $("#projectID").val()
+        };
 
-            $.ajax({
-                url: "https://localhost:7107/api/Milestones",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(milestoneData),
-                success: function () {
-                    alert("Milestone added successfully!");
+        $.ajax({
+            url: "https://localhost:7107/api/Milestones",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(milestoneData),
+            success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Milestone Added',
+                    text: 'Milestone added successfully!',
+                    confirmButtonText: 'OK'
+                }).then(() => {
                     $('#milestoneModal').modal('hide');
-                },
-                error: function (error) {
-                    console.error("Error adding milestone:", error);
-                    alert("Error adding milestone!");
-                }
-            });
+                    location.reload();
+                });
+            },
+            error: function (error) {
+                console.error("Error adding milestone:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error adding milestone!'
+                });
+            }
         });
+    });
+
 
         $("#projectEditModal").on('show.bs.modal', function (event) {
             var modal = $(this);
@@ -466,45 +501,15 @@
     .mdi {
         cursor: pointer !important;
     }
-    .dropdown {
-        position: relative;
-        display: inline-block;
+    
+    .dropdown-menu {
+        min-width: 12px !important;
+        padding: 5px;
+        font-size: 12px;
     }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background: #fff;
-        min-width: 160px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        border-radius: 5px;
-        padding: 5px 0;
-    }
-
-        .dropdown-content span {
-            display: flex;
-            align-items: center;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s ease;
-        }
-
-            .dropdown-content span:hover {
-                background: #f1f1f1;
-            }
-
-            .dropdown-content span i {
-                margin-right: 10px;
-                font-size: 18px;
-            }
-
-        .dropdown-content .archive {
-            color: red;
-        }
-
-    .show {
-        display: block;
+    .dropdown-item:hover {
+        background-color: #f8f9fa !important;
+        color: black !important;
     }
 </style>

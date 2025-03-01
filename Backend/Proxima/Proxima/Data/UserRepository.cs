@@ -37,6 +37,8 @@ namespace Proxima.Data
                         RoleID = Convert.ToInt32(reader["RoleID"]),
                         RoleName = reader["RoleName"].ToString(),
                         Status = Convert.ToBoolean(reader["Status"]),
+                        ProjectCount = Convert.ToInt32(reader["ProjectCount"]),
+                        TaskCount = Convert.ToInt32(reader["TaskCount"]),
                         CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                         UpdatedAt = reader["UpdatedAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["UpdatedAt"])
                     });
@@ -46,6 +48,34 @@ namespace Proxima.Data
             }
         }
         #endregion
+
+        public async Task<List<UserRoleCount>> GetUserRoleCountsAsync()
+        {
+            var roleCounts = new List<UserRoleCount>();
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("PR_Users_GetUserRoleCounts", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    await conn.OpenAsync();
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            roleCounts.Add(new UserRoleCount
+                            {
+                                RoleName = reader["RoleName"].ToString(),
+                                UserCount = Convert.ToInt32(reader["UserCount"])
+                            });
+                        }
+                    }
+                }
+            }
+
+            return roleCounts;
+        }
 
         #region GetUserByID
         public UserModel GetUserByID(int UserID)

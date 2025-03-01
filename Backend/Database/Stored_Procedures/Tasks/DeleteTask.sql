@@ -12,9 +12,11 @@ BEGIN
 END;
 
 
-[PR_Tasks_DeleteTask] 14
+[PR_Tasks_DeleteTask] 17
 
 select * from Tasks
 select * from TaskAssignments
 select * from TaskComments
 select * from TaskAttachments
+select * from SprintTasks
+delete from TaskAttachments

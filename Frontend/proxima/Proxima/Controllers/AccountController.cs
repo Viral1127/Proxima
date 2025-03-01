@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Proxima.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proxima.Controllers
 {
@@ -51,6 +52,10 @@ namespace Proxima.Controllers
 
         public IActionResult Login()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -72,7 +77,8 @@ namespace Proxima.Controllers
                     {
                         new Claim(ClaimTypes.Name, user.Name),
                         new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.RoleName)
+                        new Claim(ClaimTypes.Role, user.RoleName),
+                        new Claim("UserID", user.UserID.ToString())
                     };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -80,6 +86,10 @@ namespace Proxima.Controllers
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     Console.WriteLine(claims);
+                    if(user.RoleName == "Admin")
+                    {
+                        return RedirectToAction("Index", "AdminDashboard");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -90,6 +100,14 @@ namespace Proxima.Controllers
             }
             return View("Login",login);
         }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
+        }
+
 
 
     }

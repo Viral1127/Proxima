@@ -44,8 +44,12 @@
                         <div class="icon-container">
                             <span class="icon-text">@task.DueDate</span>
                             <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
-                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
-                                  data-id="@task.TaskID" style="font-size: 15px;"></span>
+							@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+							{
+                                <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
+                                      data-id="@task.TaskID" style="font-size: 15px;"></span>
+							}
+                            
                         </div>
                     </div>
 
@@ -88,9 +92,13 @@
                         </div>
                     </label>
                     <div class="icon-container">
-                        <span class="icon-text">@task.DueDate</span>
+                        <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
                         <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
-                        <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task" data-id="@task.TaskID" style="font-size: 15px;"></span>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                        {
+                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
+                                  data-id="@task.TaskID" style="font-size: 15px;"></span>
+                        }
                     </div>
                 </div>
             </li>
@@ -132,9 +140,13 @@
                         </div>
                     </label>
                     <div class="icon-container">
-                        <span class="icon-text">@task.DueDate</span>
+                        <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
                         <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
-                        <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task" data-id="@task.TaskID" style="font-size: 15px;"></span>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                        {
+                            <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
+                                  data-id="@task.TaskID" style="font-size: 15px;"></span>
+                        }
                     </div>
                 </div>
             </li>
@@ -248,7 +260,7 @@
 </script>
 
 <style>
-    #taskCard:hover{
+    .task-card:hover{
         background:white;
         border: 1px solid #d3d3d3;
         border-radius: 0;

@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Stored_Procedures",
+    "\\Stored_Procedures\\Projects",
+    "\\Stored_Procedures\\Tasks",
     "\\Stored_Procedures\\User"
   ],
-  "SelectedNode": "\\Stored_Procedures\\User\\RegisterUser.sql",
+  "SelectedNode": "\\Stored_Procedures\\User\\GetUserCounts.sql",
   "PreviewInSolutionExplorer": false
 }

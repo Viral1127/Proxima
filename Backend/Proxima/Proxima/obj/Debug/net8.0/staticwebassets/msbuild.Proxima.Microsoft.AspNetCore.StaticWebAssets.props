@@ -90,6 +90,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\a3383566-af68-4a06-ad04-39b73e801b41.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\a5e7ef4a-505e-4a8f-9b04-fa536a1b0ae0.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Proxima</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Proxima</BasePath>
+      <RelativePath>uploads/a5e7ef4a-505e-4a8f-9b04-fa536a1b0ae0.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>vgq70tgffe</Fingerprint>
+      <Integrity>QSq4iaD5sJC4SKWepY5I1GOpROY6mB6j6D57ZRntrwE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\a5e7ef4a-505e-4a8f-9b04-fa536a1b0ae0.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\af556140-4c15-486c-b70b-79e4b4a18bee.png'))">
       <SourceType>Package</SourceType>
       <SourceId>Proxima</SourceId>
@@ -107,6 +125,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\af556140-4c15-486c-b70b-79e4b4a18bee.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Proxima</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Proxima</BasePath>
+      <RelativePath>uploads/b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>56wcc9oidf</Fingerprint>
+      <Integrity>3X1f/OIPSIxZTvPROl4JwLAs09wga3ORvo3I6tMvi1w=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>
