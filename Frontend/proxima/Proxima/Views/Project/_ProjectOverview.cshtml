@@ -5,13 +5,24 @@
         <div class="tab-pane fade show active" id="overview">
             <div class="d-flex align-items-center mb-4 flex-column flex-sm-row">
                 <h3 class="fw-bold me-3">@Model.Title</h3>
-                <div class="d-flex justify-content-center align-items-center">
+                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager")){
+                    <div class="avatar-container">
+                        <div class="avatar main-avatar">
+                            <span>V</span>
+                        </div>
+                        <div class="avatar plus-avatar" id="assignButton" data-bs-toggle="modal" data-bs-target="#assignModal">
+                            <span>+</span>
+                        </div>
+                    </div>
+                }
+                
+               @*  <div class="d-flex justify-content-center align-items-center">
                     <div id="projectCircle" class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">P</div>
                     @if (User.IsInRole("Admin") || User.IsInRole("Project Manageer"))
                     { 
                     <button class="btn btn-primary ms-3" id="assignButton" style="display:none;" data-bs-toggle="modal" data-bs-target="#assignModal">Assign People</button>
                     }
-                </div>
+                </div> *@
             </div>
 
             <div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignModalLabel" aria-hidden="true">
@@ -68,34 +79,23 @@
                 </div>
             </div>
 
-            <div class="border rounded shadow-sm bg-white p-3 my-3" style="height:50vh;">
+            <div class="border rounded shadow-sm bg-white p-3 pb-5 my-3" style="height:50vh;">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="m-0">Time-logs</h6>
+                    <h6 class="m-0">Task-logs</h6>
                     <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Last 7 days
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="filterDropdown">
+                            Last 30 days
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Last 7 days</a></li>
-                            <li><a class="dropdown-item" href="#">Last 30 days</a></li>
-                            <li><a class="dropdown-item" href="#">This month</a></li>
+                            <li><a class="dropdown-item filter-option" data-days="30" href="#">Last 30 days</a></li>
+                            <li><a class="dropdown-item filter-option" data-days="7" href="#">Last 7 days</a></li> 
+                            <li><a class="dropdown-item filter-option" data-days="month" href="#">This month</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="text-center text-muted py-4">
-                    <h6>0:00</h6>
-                    <hr>
-                    <div class="d-flex justify-content-around align-content-end text-muted">
-                        <span>01 Feb</span>
-                        <span>02 Feb</span>
-                        <span>03 Feb</span>
-                        <span>04 Feb</span>
-                        <span>05 Feb</span>
-                        <span>06 Feb</span>
-                        <span>07 Feb</span>
-                        <span>08 Feb</span>
-                    </div>
-                </div>
+
+                <!-- Bar Chart Canvas -->
+                <canvas id="taskChart"></canvas>
             </div>
 
             <div class="border rounded shadow-sm bg-white p-3">
@@ -118,6 +118,42 @@
 
 
 <style>
+    .avatar-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        background-color: #f97316;
+        color: white;
+        font-size: 12px;
+        position: relative;
+        /* transition: transform 0.3s ease-in-out; */
+    }
+
+    .plus-avatar {
+        position: absolute;
+        top: 0;
+        left: 29px; /* Adjust overlap */
+        background-color: lightgray;
+        color: white;
+        cursor: pointer;
+        visibility: hidden;
+        opacity: 0;
+        /* transition: visibility 0s linear 0.3s, opacity 0.3s; */
+    }
+
+    .avatar-container:hover .plus-avatar {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(-10px); /* Move on hover */
+    }
     #projectCircle:hover {
         cursor: pointer;
     }
@@ -186,7 +222,7 @@
         });
     }
 
-    function assignUserToProject(userID) {
+        function assignUserToProject(userID) {
         $.ajax({
             url: 'https://localhost:7107/api/ProjectAssignments',
             type: 'POST',
@@ -198,7 +234,7 @@
         });
     }
 
-    function removeUserFromProject(userID) {
+        function removeUserFromProject(userID) {
         $.ajax({
             url: 'https://localhost:7107/api/ProjectAssignments/removeUserFromProject',
             type: 'POST',
@@ -209,7 +245,7 @@
             }
         });
     }
-    $(document).on('change', '.user-checkbox', function () {
+        $(document).on('change', '.user-checkbox', function () {
         const userID = $(this).data('user-id');
         if ($(this).is(':checked')) {
             assignUserToProject(userID);
@@ -312,5 +348,100 @@
         }
         fetchTaskCounts();
         fetchMilestones();
+
+        fetchChartData(30, projectID); // Load default data for Last 7 Days
+
+        $(".filter-option").click(function (event) {
+        event.preventDefault();
+        let days = $(this).data("days");
+        $("#filterDropdown").text($(this).text());
+        console.log("Filtering for:", days, "Project ID:", projectID);
+        fetchChartData(days, projectID);
     });
+
+
+    });
+
+	
+
+    function fetchChartData(filter, projectID) {
+        $.ajax({
+            url: `https://localhost:7107/api/Task/TaskCountByDate/${filter}/${projectID}`, // API with filter & projectID
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                console.log("API Response:", response);
+                const labels = response.map(item => item.taskDate);
+                const taskCounts = response.map(item => item.taskCount);
+                renderChart(labels, taskCounts);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching data:", error);
+            }
+        });
+    }
+
+    function renderChart(labels, data) {
+        let taskChart = null;
+        const ctx = document.getElementById("taskChart").getContext("2d");
+            
+        if (taskChart) {
+            taskChart.destroy(); // Destroy previous chart instance
+        }
+
+       var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
+            gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
+            gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
+            var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
+
+            const bgColor1 = ["rgba(218, 140, 255, 1)"];
+
+        taskChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Task Count",
+                    borderColor: gradientStrokeViolet,
+                    backgroundColor: gradientStrokeViolet,
+                    fillColor: bgColor1,
+                    hoverBackgroundColor: gradientStrokeViolet,
+                    borderWidth: 1,
+                    data: data,
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.5
+                }]
+            },
+            options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    elements: {
+                        line: {
+                            tension: 0.4,
+                        },
+                    },
+                    scales: {
+                        y: {
+                            display: false,
+                            grid: {
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                            },
+                        },
+                        x: {
+                            display: true,
+                            grid: {
+                                display: false,
+                            },
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    }
+                },
+        });
+    }
 </script>

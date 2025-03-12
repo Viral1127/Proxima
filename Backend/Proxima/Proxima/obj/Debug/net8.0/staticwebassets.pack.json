@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\uploads\\b8a2bdd3-74ee-4b67-8934-7f17ace7153c.png"
     },
     {
+      "Id": "D:\\Darshan University\\Projects\\Proxima\\Backend\\Proxima\\Proxima\\wwwroot\\uploads\\fc889e8b-1ac5-44d6-9efd-db6cc91729df.png",
+      "PackagePath": "staticwebassets\\uploads\\fc889e8b-1ac5-44d6-9efd-db6cc91729df.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Proxima.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

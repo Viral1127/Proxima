@@ -64,6 +64,20 @@ namespace Proxima.Controllers
         }
         #endregion
 
+        #region GetTaskCountByDate
+        [HttpGet("TaskCountByDate/{filter}/{projectId}")]
+        public IActionResult GetCountTaskByDate(string filter, int projectId)
+        {
+            var taskCount = _taskRepository.GetTaskCountByDate(filter, projectId);
+            if (taskCount == null || !taskCount.Any()) // Ensure it handles empty results
+            {
+                NotFound();
+            }
+            return Ok(taskCount);
+        }
+        #endregion
+
+
         #region AddTasks
         [HttpPost]
         public IActionResult CreateTasks([FromBody] TaskSaveModel tasks)

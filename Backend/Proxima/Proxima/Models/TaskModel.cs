@@ -46,4 +46,9 @@ namespace Proxima.Models
         public DateTime DueDate { get; set; }
         public string Status { get; set; }
     }
+    public class TaskCountDto
+    {
+        public string TaskDate { get; set; }
+        public int TaskCount { get; set; }
+    }
 }

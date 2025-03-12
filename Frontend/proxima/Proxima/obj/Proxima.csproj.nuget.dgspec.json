@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Darshan University\\Projects\\Proxima\\Frontend\\Proxima\\Proxima\\Proxima.csproj": {}
+    "D:\\Darshan University\\Projects\\Proxima\\Frontend\\proxima\\Proxima\\Proxima.csproj": {}
   },
   "projects": {
-    "D:\\Darshan University\\Projects\\Proxima\\Frontend\\Proxima\\Proxima\\Proxima.csproj": {
+    "D:\\Darshan University\\Projects\\Proxima\\Frontend\\proxima\\Proxima\\Proxima.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\Proxima\\Proxima\\Proxima.csproj",
+        "projectUniqueName": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\proxima\\Proxima\\Proxima.csproj",
         "projectName": "Proxima",
-        "projectPath": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\Proxima\\Proxima\\Proxima.csproj",
+        "projectPath": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\proxima\\Proxima\\Proxima.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
         "outputPath": "D:\\Darshan University\\Projects\\Proxima\\Frontend\\Proxima\\Proxima\\obj\\",
         "projectStyle": "PackageReference",

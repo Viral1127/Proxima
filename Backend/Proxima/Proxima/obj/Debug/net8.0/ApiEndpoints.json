@@ -168,6 +168,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Proxima.Controllers.PmDashboardController",
+    "Method": "GetPmDashboardData",
+    "RelativePath": "api/PmDashboard/GetProjectManagerDashboardData/{userID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proxima.Controllers.ProjectController",
     "Method": "GetAllProjects",
     "RelativePath": "api/Project",
@@ -578,6 +594,27 @@
     "Parameters": [
       {
         "Name": "taskID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Proxima.Controllers.TaskController",
+    "Method": "GetCountTaskByDate",
+    "RelativePath": "api/Task/TaskCountByDate/{filter}/{projectId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "projectId",
         "Type": "System.Int32",
         "IsRequired": true
       }

@@ -140,7 +140,7 @@
                                         <i class="mdi mdi-dots-vertical dots-icon" data-bs-toggle="dropdown"></i>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="${fullPath}" download>View</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="downloadFile('${fullPath}', '${file.fileName}')">Download</a></li>
+                                            @* <li><a class="dropdown-item" href="#" onclick="downloadFile('${fullPath}', '${file.fileName}')">Download</a></li> *@
                                             <li>
                                                 <a class="dropdown-item text-danger delete-file" href="#" data-attachment-id="${file.attachmentID}">
                                                     Delete
@@ -150,7 +150,7 @@
                                         </ul>
                                     </div>
                                 </div>
-
+                                    
                                 <div class="card-body mt-2">
                                     <p class="card-title  fw-medium">${file.fileName}</p>
                                     <p class="card-text text-muted">Uploaded by ${file.uploadedByUser}</p>

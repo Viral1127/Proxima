@@ -6,7 +6,11 @@
 <div class="content-wrapper">
     <!-- Page Title & Button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="page-title">Projects</h1>
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-folder-file"></i>
+            </span>Projects
+        </h3>
 		@if (User.IsInRole("Admin"))
 		{
             <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw" data-bs-toggle="modal" data-bs-target="#createProjectModal" id="createProjectBtn">+ New Project</button>
@@ -74,28 +78,31 @@
         </div>
 
         <!-- Archived Section -->
-        <div class="my-3">
-            <div class="d-flex justify-content-between align-items-center my-2">
-                <h5 class="font-weight-medium">Archived</h5>
-            </div>
-            <div class="border rounded shadow-sm bg-white p-3 project-section" style="opacity: 0.5;pointer-events: none;">
-                <div class="d-flex align-items-center mt-2">
-                    <div id="projectList" style="width:100%;">
-                        <table class="table table-hover">
-                            <tbody id="archivedTableBody">
-                                @foreach (var project in Model.Where(p => p.Status == "Archived"))
-                                {
-                                    <tr onclick="location.href='@Url.Action("ProjectDetails", "Project", new { id = project.ProjectID })'" style="cursor: not-allowed;">
-                                        <td>@project.Title</td>
-                                        <td>@project.Status</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+        @if(User.IsInRole("Admin")){
+            <div class="my-3">
+                <div class="d-flex justify-content-between align-items-center my-2">
+                    <h5 class="font-weight-medium">Archived</h5>
+                </div>
+                <div class="border rounded shadow-sm bg-white p-3 project-section" style="opacity: 0.5;pointer-events: none;">
+                    <div class="d-flex align-items-center mt-2">
+                        <div id="projectList" style="width:100%;">
+                            <table class="table table-hover">
+                                <tbody id="archivedTableBody">
+                                    @foreach (var project in Model.Where(p => p.Status == "Archived"))
+                                    {
+                                        <tr onclick="location.href='@Url.Action("ProjectDetails", "Project", new { id = project.ProjectID })'" style="cursor: not-allowed;">
+                                            <td>@project.Title</td>
+                                            <td>@project.Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+       
     </div>
 </div>
 
@@ -179,6 +186,15 @@
                 icon: 'warning',
                 title: 'Missing Fields',
                 text: 'Please enter all fields.'
+            });
+            return;
+        }
+
+        if (new Date(project.EndDate) < new Date(project.StartDate)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Date',
+                text: 'End Date cannot be earlier than Start Date.'
             });
             return;
         }

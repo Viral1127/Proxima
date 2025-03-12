@@ -166,6 +166,38 @@ namespace Proxima.Data
         }
         #endregion
 
+        #region GetTaskCountByDate
+        public List<TaskCountDto> GetTaskCountByDate(string filter, int projectId)
+        {
+            List<TaskCountDto> taskCounts = new List<TaskCountDto>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("GetTaskCountByDate", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@FilterType", filter);
+                cmd.Parameters.AddWithValue("@ProjectID", projectId); // Pass project ID
+                connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        taskCounts.Add(new TaskCountDto
+                        {
+                            TaskDate = reader["TaskDate"].ToString(),
+                            TaskCount = Convert.ToInt32(reader["TaskCount"])
+                        });
+                    }
+                }
+            }
+            return taskCounts;
+        }
+        #endregion
+
+
         #region CreateTasks
         public bool CreateTasks(TaskSaveModel tasks)
         {

@@ -44,14 +44,18 @@
                     <ul class="dropdown-menu" aria-labelledby="actionIcon">
                         <li>
                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#projectEditModal">
-                                <i class="mdi mdi-progress-check"></i> Edit
+                                <i class="mdi mdi-pencil"></i> Edit
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item archive text-danger" href="javascript:void(0);" onclick="archiveProject('@Model.Project.ProjectID')">
-                                <i class="mdi mdi-eye-check"></i> Archive
-                            </a>
-                        </li>
+						@if (User.IsInRole("Admin"))
+						{
+                            <li>
+                                <a class="dropdown-item archive text-danger" href="javascript:void(0);" onclick="archiveProject('@Model.Project.ProjectID')">
+                                    <i class="mdi mdi-eye-check"></i> Archive
+                                </a>
+                            </li>
+						}
+                        
                     </ul>
                 </div>
 			}
@@ -109,11 +113,14 @@
                     <div class="card-body">
                         <h4 class="card-title">Create Milestone</h4>
                         <form class="forms-sample" id="milestoneForm">
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Title</label>
+                            <div class="mb-2">
                                 <input type="text" class="form-control" id="milestoneTitle" name="Title" placeholder="Title">
                             </div>
-                            <input type="date" class="form-control" id="milestoneDueDate" name="DueDate" placeholder="Select Due date">
+                            <div class="mb-2">
+                                <input type="text" onclick="(this.type='date')"
+                                       onblur="(this.type='text')" class="form-control" id="milestoneDueDate" name="DueDate" placeholder="Select Due date">
+                            </div>
+                            @* <input type="date" class="form-control" id="milestoneDueDate" name="DueDate" placeholder="Select Due date"> *@
                             <input type="hidden" id="projectID" value="@Model.Project.ProjectID" />
                             <button type="submit" class="btn btn-gradient-primary me-2" id="saveMilestone">Submit</button>
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
@@ -196,6 +203,7 @@
 
         if (["ProjectOverview", "ProjectMessages"].includes(selectedView)) {
             actionButton.classList.add("d-none");
+            
         } else {
             actionButton.classList.remove("d-none");
 
@@ -293,13 +301,18 @@
             });
         });
 
-        function loadPartial(viewName) {
-            $("#partialContainer").load(`/Project/${viewName}?id=${projectId}`, function () {
-                if (dropdownVisible) {
-                    statusDropdown.classList.add("show");
-                }
-            });
-        }
+            function loadPartial(viewName) {
+        console.log("Loading partial:", viewName, "Project ID:", projectId);
+
+        $("#partialContainer").load(`/Project/${viewName}?id=${projectId}`, function (response, status, xhr) {
+            if (status === "error") {
+                console.error("Error loading partial view:", xhr.status, xhr.statusText);
+            } else {
+                console.log("Partial loaded successfully");
+            }
+        });
+    }
+
 
         const activeTab = sessionStorage.getItem("activeTab") || "ProjectOverview";
 
@@ -347,10 +360,18 @@
             description: $("#taskDescription").val(),
             taskTypeID: $("#taskTypeDropdown").val(),
             dueDate: $("#dueDate").val(),
-            status: $("#taskStatus").val(),
             assignedTo: $("#userDropdown").val(),
             projectID: $("#projectID").val()
         };
+
+        if (!taskData.title || !taskData.description || !taskData.taskTypeID || !taskData.dueDate || !taskData.assignedTo) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Missing Fields',
+                text: 'Please enter all fields.'
+            });
+            return;
+        }
 
         $.ajax({
             url: "https://localhost:7107/api/Task",

@@ -42,8 +42,8 @@
                         </label>
 
                         <div class="icon-container">
-                            <span class="icon-text">@task.DueDate</span>
-                            <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
+                            <span class="text-muted">@task.DueDate.ToString("d MMMM")</span>
+                            
 							@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
 							{
                                 <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
@@ -92,8 +92,7 @@
                         </div>
                     </label>
                     <div class="icon-container">
-                        <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
-                        <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
+                        <span class="text-muted">@task.DueDate.ToString("d MMMM")</span>
                         @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
                         {
                             <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
@@ -140,8 +139,7 @@
                         </div>
                     </label>
                     <div class="icon-container">
-                        <span class="icon-text">@task.DueDate.ToString("d MMMM")</span>
-                        <i class="mdi mdi-calendar-range text-muted" style="font-size: 15px;"></i>
+                        <span class="text-muted">@task.DueDate.ToString("d MMMM")</span>
                         @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
                         {
                             <span class="mdi mdi-trash-can-outline text-danger mx-3 font-weight-medium delete-task"
@@ -270,25 +268,25 @@
         border-bottom-right-radius: 0.5rem;
     }
 
-    .icon-container {
-        position: relative;
-        display: inline-block;
-    }
+    /* .icon-container { */
+    /*     position: relative; */
+    /*     display: inline-block; */
+    /* } */
 
-    .icon-text {
-        visibility: hidden;
-        position: absolute;
-        right: 100%;
-        margin-right: 8px;
-        color: #888;
-        transition: visibility 0.3s, opacity 0.3s;
-        opacity: 0;
-    }
+    /* .icon-text { */
+    /*     visibility: hidden; */
+    /*     position: absolute; */
+    /*     right: 100%; */
+    /*     margin-right: 8px; */
+    /*     color: #888; */
+    /*     transition: visibility 0.3s, opacity 0.3s; */
+    /*     opacity: 0; */
+    /* } */
 
-    .icon-container:hover .icon-text {
-        visibility: visible;
-        opacity: 1;
-    }
+    /* .icon-container:hover .icon-text { */
+    /*     visibility: visible; */
+    /*     opacity: 1; */
+    /* } */
 
     .dropdown {
         position: relative;

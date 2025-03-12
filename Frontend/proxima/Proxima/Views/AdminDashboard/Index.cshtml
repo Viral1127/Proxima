@@ -17,7 +17,7 @@
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white me-2">
                 <i class="mdi mdi-home"></i>
-            </span> Admin Dashboard
+            </span>Dashboard
         </h3>
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
@@ -146,16 +146,17 @@
                     <h4 class="card-title">Quick Links</h4>
                     <div class="row m-5">
                         <div class="col-6 d-flex justify-content-center">
-                            <a>All Projects</a>
+                            <a asp-controller="Project" asp-action="ProjectList">All Projects</a>
                         </div>
                         <div class="col-6 d-flex justify-content-center">
-                            <a>All Tasks</a>
+                            <a asp-controller="User" asp-action="UserList">Users</a>
                         </div>
                     </div>
-                    <div class="row m-5">
+                    @* <div class="row m-5">
                         <div class="col-6 d-flex justify-content-center">
-                            <a>Users</a>
+                            <a asp-controller="Task" asp-action="TaskList">All Tasks</a>
                         </div>
+                        
                         <div class="col-6 d-flex justify-content-center">
                             <a>Files</a>
                         </div>
@@ -167,7 +168,7 @@
                         <div class="col-6 d-flex justify-content-center">
                             <a>Activity Log</a>
                         </div>
-                    </div>
+                    </div> *@
                 </div>
             </div>
         </div>

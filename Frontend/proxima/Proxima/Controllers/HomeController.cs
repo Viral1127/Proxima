@@ -12,7 +12,22 @@ namespace Proxima.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "AdminDashboard");
+            }
+            else if (User.IsInRole("Project Manager"))
+            {
+                return RedirectToAction("Index", "PmDashboard");
+            }
+            else if (User.IsInRole("Team Member"))
+            {
+                return RedirectToAction("Index", "PmDashboard");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

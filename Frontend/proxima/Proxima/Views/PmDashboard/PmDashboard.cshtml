@@ -1,0 +1,265 @@
+﻿@model PmDashboardModel.PmDashboardData;
+<style>
+    .custom-card {
+        min-height: 5vh !important; /* Reduce min height */
+        height: auto !important; /* Ensure it resizes properly */
+        padding: 20px !important /* Reduce padding inside the card */
+    }
+
+        .custom-card .card-body {
+            padding: 10px !important; /* Reduce card body padding */
+        }
+
+</style>
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+            </span>Dashboard
+        </h3>
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        @if(User.IsInRole("Project Manager")){
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white custom-card">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            My Projects<i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                        </h4>
+                        <h2>@Model.Counts.FirstOrDefault(c => c.Metric == "AssignedProjects")?.Value</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white custom-card">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            My Tasks <i class="mdi mdi-format-list-bulleted mdi-24px float-end"></i>
+                        </h4>
+                        <h2>@Model.Counts.FirstOrDefault(c => c.Metric == "AssignedTasks")?.Value</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white custom-card">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Total TeamMembers<i class="mdi mdi-account-outline mdi-24px float-end"></i>
+                        </h4>
+                        <h2>@Model.Counts.FirstOrDefault(c => c.Metric == "TeamMembers")?.Value</h2>
+                    </div>
+                </div>
+            </div>
+        }
+        else{
+            <div class="col-md-6 grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white custom-card">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            My Projects<i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                        </h4>
+                        <h2>@Model.Counts.FirstOrDefault(c => c.Metric == "AssignedProjects")?.Value</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white custom-card">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.png" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            My Tasks <i class="mdi mdi-format-list-bulleted mdi-24px float-end"></i>
+                        </h4>
+                        <h2>@Model.Counts.FirstOrDefault(c => c.Metric == "AssignedTasks")?.Value</h2>
+                    </div>
+                </div>
+            </div>
+        }
+       
+    </div>
+    <div class="row">
+        <div class="col-lg-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-0 d-flex">
+                    <div id="inline-datepicker" class="datepicker datepicker-custom"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Project Status</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th> Name </th>
+                                    <th> Due Date </th>
+                                    <th> Progress </th>
+                                    <th>Assigned At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var project in Model.RecentProjects)
+                                {
+                                    <tr>
+                                        <td> @project.Title </td>
+                                        <td> @project.StartDate.ToString("MMM dd,yyyy") </td>
+                                        <td>
+                                            <div class="progress">
+                                                @if (project.Status == "Upcoming")
+                                                {
+                                                    <div class="progress-bar bg-gradient-success" role="progressbar" style="width:0%" aria-valuenow="@project.Status" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else if (project.Status == "Ongoing")
+                                                {
+                                                    <div class="progress-bar bg-gradient-warning" role="progressbar" style="width:50%" aria-valuenow="@project.Status" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="progress-bar bg-gradient-success" role="progressbar" style="width:100%" aria-valuenow="@project.Status" aria-valuemin="0" aria-valuemax="100"></div>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td>@project.AssignedAt.ToString("MMM dd,yyyy")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Recent Tasks</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> Title </th>
+                                    <th> Status </th>
+                                    <th> Due Date </th>
+                                    <th> Project Name </th>
+                                    <th>AssignedAt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in Model.RecentTasks){
+                                    <tr>
+                                        <td>@task.Title</td>
+                                        <td>
+                                            @if (task.Status == "Completed")
+                                            {
+                                                <label class="badge badge-gradient-success">@task.Status</label>
+                                            }
+                                            else if (task.Status == "In Progress")
+                                            {
+                                                <label class="badge badge-gradient-warning">@task.Status</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="badge badge-gradient-danger">@task.Status</label>
+                                            }
+                                        </td>
+                                        <td> @task.DueDate.ToString("MMM dd,yyyy")</td>
+                                        <td>@task.ProjectName</td>
+                                        <td>
+											@task.AssignedAt.ToString("MMM dd,yyyy")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Quick Links</h4>
+                    <div class="row m-5">
+                        <div class="col-6 d-flex justify-content-center">
+                            <a asp-controller="Project" asp-action="ProjectList">Projects</a>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <a asp-controller="Task" asp-action="MyTasks">Tasks</a>
+                        </div>
+                    </div>
+                    @* <div class="row m-5">
+                        <div class="col-6 d-flex justify-content-center">
+                            <a asp-controller="Task" asp-action="TaskList">All Tasks</a>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <a>Files</a>
+                        </div>
+                    </div>
+                    <div class="row m-5">
+                        <div class="col-6 d-flex justify-content-center">
+                            <a>Clients</a>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <a>Activity Log</a>
+                        </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+       @*  <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-dark">Recent Employees</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int count = 1; // Initialize counter
+                                }
+                                @foreach (var users in Model.RecentUsers)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@users.Name</td>
+                                        <td>@users.Role</td>
+                                    </tr>
+                                    count++; // Increment counter
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> *@
+
+    </div>
+</div>
+

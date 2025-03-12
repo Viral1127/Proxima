@@ -38,6 +38,7 @@ builder.Services.AddScoped<TaskAssignmentRepository>();
 builder.Services.AddScoped<TaskTypeRepository>();
 builder.Services.AddScoped<ProjectAttachmentsRepository>();
 builder.Services.AddScoped<AdminDashboardRepository>();
+builder.Services.AddScoped<PmDashboardRepository>();
 var corsPolicy = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
